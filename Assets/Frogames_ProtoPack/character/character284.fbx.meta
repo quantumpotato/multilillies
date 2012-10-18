@@ -1,0 +1,269 @@
+fileFormatVersion: 2
+guid: 5c7a8ef318afa974cb3ce64f05c0faee
+ModelImporter:
+  fileIDToRecycleName:
+    4300000: character
+    4300002: sword
+    4300004: shield
+    7400000: Take 001 //// character284
+    7400002: idle //// character284
+    7400004: run //// character284
+    7400006: jump //// character284
+    7400008: sideR //// character284
+    7400010: sideL //// character284
+    7400012: back //// character284
+    7400014: zombiWalk //// character284
+    7400016: salute //// character284
+    7400018: weapon //// character284
+    7400020: SwordFight_idle //// character284
+    7400022: SwordFight_attack //// character284
+    7400024: SwordFight_hit //// character284
+    7400026: mounted //// character284
+    7400028: idle1 //// character284
+    7400030: idle2 //// character284
+    7400032: walk //// character284
+    7400034: zombi_walk //// character284
+    7400036: TopBlendWave //// character284
+    7400038: TopBlendWeapon //// character284
+    100100000: DataTemplate __Singleton__
+  serializedVersion: 10
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    generateAnimations: 3
+    bakeSimulation: 0
+    splitAnimations: 1
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: idle1
+      firstFrame: 1
+      lastFrame: 40
+      wrapMode: 0
+      loop: 1
+    - name: run
+      firstFrame: 41
+      lastFrame: 60
+      wrapMode: 0
+      loop: 1
+    - name: sideR
+      firstFrame: 66
+      lastFrame: 75
+      wrapMode: 0
+      loop: 1
+    - name: sideL
+      firstFrame: 76
+      lastFrame: 85
+      wrapMode: 0
+      loop: 1
+    - name: back
+      firstFrame: 86
+      lastFrame: 105
+      wrapMode: 0
+      loop: 1
+    - name: zombi_walk
+      firstFrame: 106
+      lastFrame: 145
+      wrapMode: 0
+      loop: 1
+    - name: TopBlendWave
+      firstFrame: 147
+      lastFrame: 163
+      wrapMode: 0
+      loop: 1
+    - name: TopBlendWeapon
+      firstFrame: 165
+      lastFrame: 170
+      wrapMode: 0
+      loop: 1
+    - name: SwordFight_idle
+      firstFrame: 180
+      lastFrame: 220
+      wrapMode: 0
+      loop: 1
+    - name: SwordFight_attack
+      firstFrame: 231
+      lastFrame: 235
+      wrapMode: 0
+      loop: 0
+    - name: SwordFight_hit
+      firstFrame: 240
+      lastFrame: 245
+      wrapMode: 0
+      loop: 0
+    - name: mounted
+      firstFrame: 250
+      lastFrame: 270
+      wrapMode: 0
+      loop: 1
+    - name: idle2
+      firstFrame: 280
+      lastFrame: 320
+      wrapMode: 0
+      loop: 1
+    - name: walk
+      firstFrame: 321
+      lastFrame: 360
+      wrapMode: 0
+      loop: 1
+    - name: jump
+      firstFrame: 380
+      lastFrame: 400
+      wrapMode: 2
+      loop: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .0149999997
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMesh: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 0
+    normalImportMode: 0
+    tangentImportMode: 1
+  textMetaNamesToFileIDs:
+    //RootNode:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+      data:
+        first: 111
+        second: 605fa900
+    character:
+      data:
+        first: 1
+        second: a0860100
+      data:
+        first: 4
+        second: 801a0600
+      data:
+        first: 137
+        second: a00bd100
+    head:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+    left_calf:
+      data:
+        first: 1
+        second: a6860100
+      data:
+        first: 4
+        second: 861a0600
+    left_foot:
+      data:
+        first: 1
+        second: a8860100
+      data:
+        first: 4
+        second: 881a0600
+    left_forearm:
+      data:
+        first: 1
+        second: aa860100
+      data:
+        first: 4
+        second: 8a1a0600
+    left_hand:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+    left_shoulder:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+    left_thigh:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+    right_calf:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+    right_foot:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600
+    right_forearm:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+    right_hand:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+    right_shoulder:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600
+    right_thigh:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+    root:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+    spineA:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+    spineB:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
