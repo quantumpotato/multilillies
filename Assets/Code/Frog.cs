@@ -29,7 +29,7 @@ public class Frog : MonoBehaviour {
 		get {
 			switch (moveState) {
 			case MoveState.Boosting:
-				return 15;
+				return 20;
 			case MoveState.Floating:
 				return 5;
 			case MoveState.Charging:
