@@ -6,6 +6,7 @@ public class Frog : MonoBehaviour {
 	public float _speed;
 	private Vector3 startPosition;
 	
+	#region MonoBehaviour
 	void Awake() {
 		startPosition = transform.localPosition;
 	}
@@ -13,16 +14,6 @@ public class Frog : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		FrogBoundary.Instance.Hit += HandleFrogBoundaryHit;
-	}
-	
-	void ResetPosition() {
-		transform.position = startPosition;
-	}
-	
-	void HandleFrogBoundaryHit (GameObject other) {
-		if (other == gameObject) {
-			ResetPosition();
-		}
 	}
 	
 	// Update is called once per frame
@@ -33,4 +24,16 @@ public class Frog : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
     	ResetPosition();    
     }
+	#endregion
+	
+	
+	void ResetPosition() {
+		transform.position = startPosition;
+	}
+	
+	void HandleFrogBoundaryHit (GameObject other) {
+		if (other == gameObject) {
+			ResetPosition();
+		}
+	}
 }
