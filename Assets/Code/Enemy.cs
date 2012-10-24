@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
 	#region MonoBehaviour
 	void Awake() {
 		_speed = Random.Range(1,5);
+		Physics.IgnoreLayerCollision(8,8, true);
 	}
 
 	// Use this for initialization

@@ -14,7 +14,6 @@ public class EnemyBoundary : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		Debug.Log("BOOM");
 		EnemySpawner.Instance.DestroyEnemy(other.gameObject);
 	}
 }
