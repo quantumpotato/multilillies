@@ -1,23 +1,28 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Frog : MonoBehaviour {
 	
 	public float speed;
+	public int playerNumber;
+	private int charge;
 	
 	private Vector3 startPosition;
-	private float startSpeed;
 	
 	private Rect upperLeftBounds;
 	private Rect lowerLeftBounds;
 	private Rect upperRightBounds;
 	private Rect lowerRightBounds;
 	
+	private IList<Rect> inputQuadrants;
+	
 	private enum MoveState {
 		Floating,
 		Charging,
 		Boosting
 	}
+	
 	private MoveState moveState;
 	
 	private float Speed {
@@ -35,15 +40,19 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	private int maxCharge;
+	
 	#region MonoBehaviour
 	void Awake() {
 		startPosition = transform.localPosition;
-		startSpeed = speed;
 		
-		lowerLeftBounds = new Rect(0, 0, Screen.width/2, Screen.height/2);
-		upperLeftBounds = new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2);
-		lowerRightBounds = new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2);
-		upperRightBounds = new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2);
+		inputQuadrants = new List<Rect>();
+		inputQuadrants.Add(new Rect(0, 0, Screen.width/2, Screen.height/2));
+		inputQuadrants.Add(new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2));
+		inputQuadrants.Add(new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2));
+		inputQuadrants.Add(new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2));
+		
+		maxCharge = 110;
 	}
 
 	// Use this for initialization
@@ -55,6 +64,40 @@ public class Frog : MonoBehaviour {
 	void Update () {
 		MoveForward();
 		HandleInput();
+		HandleState();
+	}
+		
+	void BeginCharging() {
+		if (moveState == MoveState.Floating) {
+			moveState = MoveState.Charging;
+			charge = 0;
+		}
+	}
+	
+	void BeginBoosting() {
+		if (moveState == MoveState.Charging) {
+			moveState = MoveState.Boosting;	
+		}
+	}
+
+	void BeginFloating() {
+		moveState = MoveState.Floating;
+		charge = 0;
+	}
+	
+	void HandleState() {
+		if (moveState == MoveState.Charging) {
+			charge+= 2;
+			if (charge >= maxCharge) {
+				charge = maxCharge;
+				BeginBoosting();
+			}
+		} else if(moveState == MoveState.Boosting) {
+			charge-= 5;
+			if (charge <= 0) {
+				BeginFloating();
+			}
+		}
 	}
 	
 	void OnCollisionEnter(Collision collision) {
@@ -68,15 +111,12 @@ public class Frog : MonoBehaviour {
 	
 	void HandleInput() {
 		if (Input.GetButtonDown("Fire1")) {
-	        if (upperLeftBounds.Contains(Input.mousePosition)) {
-//	            Debug.Log("upper Left!");
-				
-	        } else if (lowerLeftBounds.Contains(Input.mousePosition)) {
-//				Debug.Log("lower Left!");
-			} else if (upperRightBounds.Contains(Input.mousePosition)) {
-//				Debug.Log("upper Right!");
-			} else if (lowerRightBounds.Contains(Input.mousePosition)) {
-//				Debug.Log("lower Right!");
+	        if (inputQuadrants[playerNumber].Contains(Input.mousePosition)) {
+				BeginCharging();
+			}
+		} else if (Input.GetButtonUp("Fire1")) {
+			if (inputQuadrants[playerNumber].Contains(Input.mousePosition)) {
+				BeginBoosting();
 			}
 		}
 	}
