@@ -504,7 +504,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
@@ -531,7 +531,7 @@ Animation:
   - {fileID: 7400032, guid: 5c7a8ef318afa974cb3ce64f05c0faee, type: 3}
   - {fileID: 7400006, guid: 5c7a8ef318afa974cb3ce64f05c0faee, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
   m_UserAABB:
@@ -547,7 +547,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19f3161d200b54dfaacad6c7e97cf84d, type: 1}
   m_Name: 
-  _speed: 5
+  speed: 0
+  playerNumber: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
