@@ -8,7 +8,9 @@ public class Enemy : MonoBehaviour {
 	
 	#region MonoBehaviour
 	void Awake() {
-		_speed = Random.Range(1,5);
+		int speedMod = Random.Range(1,100);
+		_speed = speedMod * .05f;
+		_speed+= 3;
 		Physics.IgnoreLayerCollision(8,8, true);
 	}
 
