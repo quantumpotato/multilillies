@@ -7,6 +7,7 @@ public class Frog : MonoBehaviour {
 	public float speed;
 	public int playerNumber;
 	private int charge;
+	private bool wantsToBoost;
 	
 	private Vector3 startPosition;
 	
@@ -71,6 +72,9 @@ public class Frog : MonoBehaviour {
 		if (moveState == MoveState.Floating) {
 			moveState = MoveState.Charging;
 			charge = 0;
+			wantsToBoost = false;
+		} else if (moveState == MoveState.Boosting) {
+			wantsToBoost = true;	
 		}
 	}
 	
@@ -96,6 +100,10 @@ public class Frog : MonoBehaviour {
 			charge-= 5;
 			if (charge <= 0) {
 				BeginFloating();
+			}
+		} else if (moveState == MoveState.Floating) {
+			if (wantsToBoost == true) {
+				BeginCharging();	
 			}
 		}
 	}
