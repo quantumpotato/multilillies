@@ -133,9 +133,16 @@ public class Frog : MonoBehaviour {
 		transform.position = startPosition;
 	}
 	
+	void ResetState() {
+		wantsToBoost = false;
+		charge = 0;
+		moveState = MoveState.Floating;
+	}
+	
 	void HandleFrogBoundaryHit (GameObject other) {
 		if (other == gameObject) {
 			ResetPosition();
+			ResetState();
 		}
 	}
 }
