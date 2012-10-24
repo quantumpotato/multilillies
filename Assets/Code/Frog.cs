@@ -29,4 +29,8 @@ public class Frog : MonoBehaviour {
 	void Update () {
 		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + _speed * Time.deltaTime);
 	}
+	
+	void OnCollisionEnter(Collision collision) {
+    	ResetPosition();    
+    }
 }
