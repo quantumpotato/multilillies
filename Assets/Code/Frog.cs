@@ -47,7 +47,7 @@ public class Frog : MonoBehaviour {
 	
 	#region MonoBehaviour
 	void Awake() {
-		startPosition = transform.localPosition;
+		startPosition = transform.position;
 		
 		inputQuadrants = new List<Rect>();
 		inputQuadrants.Add(new Rect(0, 0, Screen.width/2, Screen.height/2));
