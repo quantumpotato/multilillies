@@ -113,8 +113,15 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-    	ResetPosition();    
-		mistakes++;
+		if (other.gameObject.GetComponent<Enemy>() != null) {
+	    	ResetPosition();    
+			score-= mistakes;
+			mistakes++;
+			if (score <= 0) {
+				score = 0;
+				mistakes = 0;
+			}
+		}
     }
 	#endregion
 	
