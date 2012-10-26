@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 61193305}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 22.4784775, z: -9.99999905}
+  m_LocalPosition: {x: -.900642395, y: 20.2840691, z: 16.8695793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3221,7 +3221,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2051165622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.4545679, y: -10.7526026, z: 14.4759731}
+  m_LocalPosition: {x: -15.4545679, y: -10.7526026, z: 9.21251583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 884028530}
@@ -3262,7 +3262,7 @@ MonoBehaviour:
   m_Name: 
   desiredEnemyCount: 8
   enemyPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
-  maximumZ: 16
+  maximumZ: 29
 --- !u!1 &2055275262
 GameObject:
   m_ObjectHideFlags: 0
