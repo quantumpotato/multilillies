@@ -34,7 +34,8 @@ public class EnemySpawner : MonoBehaviour {
 	
 	void SpawnEnemy() {
 		GameObject enemy = (GameObject)Instantiate(enemyPrefab);
-		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(1, maximumZ));
+		int xMod = Random.Range(10,100);
+		enemy.transform.position = new Vector3(transform.position.x - xMod, transform.position.y, transform.position.z + Random.Range(1, maximumZ));
 		actualEnemyCount++;
 	}
 }
