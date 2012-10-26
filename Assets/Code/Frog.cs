@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Frog : MonoBehaviour {
-	
 	public float speed;
 	public int playerNumber;
 	private int charge;
@@ -17,6 +16,8 @@ public class Frog : MonoBehaviour {
 	private Rect lowerRightBounds;
 	
 	private IList<Rect> inputQuadrants;
+	
+	public int score;
 	
 	private enum MoveState {
 		Floating,
@@ -54,6 +55,8 @@ public class Frog : MonoBehaviour {
 		inputQuadrants.Add(new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2));
 		
 		maxCharge = 110;
+		
+		score = 0;
 	}
 
 	// Use this for initialization
