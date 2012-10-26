@@ -270,7 +270,7 @@ GameObject:
   - 136: {fileID: 13600000}
   m_Layer: 9
   m_Name: Frog
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -484,7 +484,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.14946604, y: .475241423, z: -24.9348049}
+  m_LocalPosition: {x: 4.79250002, y: .475241423, z: -24.9348049}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400032}
@@ -548,7 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3161d200b54dfaacad6c7e97cf84d, type: 1}
   m_Name: 
   speed: 0
-  playerNumber: 2
+  playerNumber: 0
+  score: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
