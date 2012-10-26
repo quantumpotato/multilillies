@@ -146,6 +146,7 @@ public class Frog : MonoBehaviour {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
+			score++;	
 		}
 	}
 }
