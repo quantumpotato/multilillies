@@ -18,6 +18,7 @@ public class Frog : MonoBehaviour {
 	private IList<Rect> inputQuadrants;
 	
 	public int score;
+	public int mistakes;
 	
 	private enum MoveState {
 		Floating,
@@ -113,6 +114,7 @@ public class Frog : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
     	ResetPosition();    
+		mistakes++;
     }
 	#endregion
 	
