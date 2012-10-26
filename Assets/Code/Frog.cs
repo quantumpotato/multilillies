@@ -28,6 +28,8 @@ public class Frog : MonoBehaviour {
 	
 	private IList<Rect> inputQuadrants;
 	
+	private GameObject pad;
+	
 	public int score;
 	public int mistakes;
 	
@@ -74,6 +76,7 @@ public class Frog : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		FrogBoundary.Instance.Hit += HandleFrogBoundaryHit;
+		pad = transform.FindChild("pad").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -81,8 +84,29 @@ public class Frog : MonoBehaviour {
 		MoveForward();
 		HandleInput();
 		HandleState();
+		AnimatePad();
 	}
-		
+	
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.GetComponent<Enemy>() != null) {
+	    	ResetPosition();    
+			score-= mistakes;
+			mistakes++;
+			if (score <= 0) {
+				score = 0;
+				mistakes = 0;
+			}
+		}
+    }
+	#endregion
+	
+	void AnimatePad() {
+		Vector3 scale = pad.transform.localScale;
+		scale.x = 2.0f - (float)charge / (float)maxCharge;
+		scale.z = 2.0f - (float)charge / (float)maxCharge;
+		pad.transform.localScale = scale;
+	}
+	
 	void BeginCharging() {
 		if (moveState == MoveState.Floating) {
 			moveState = MoveState.Charging;
@@ -91,12 +115,15 @@ public class Frog : MonoBehaviour {
 		} else if (moveState == MoveState.Boosting) {
 			wantsToBoost = true;	
 		}
+		
+		
 	}
 	
 	void BeginBoosting() {
 		if (moveState == MoveState.Charging) {
 			moveState = MoveState.Boosting;	
 		}
+		
 	}
 
 	void BeginFloating() {
@@ -122,19 +149,6 @@ public class Frog : MonoBehaviour {
 			}
 		}
 	}
-	
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.GetComponent<Enemy>() != null) {
-	    	ResetPosition();    
-			score-= mistakes;
-			mistakes++;
-			if (score <= 0) {
-				score = 0;
-				mistakes = 0;
-			}
-		}
-    }
-	#endregion
 	
 	void MoveForward() {
 		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Speed * Time.deltaTime);
