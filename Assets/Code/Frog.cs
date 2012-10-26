@@ -18,6 +18,7 @@ public class Frog : MonoBehaviour {
 	private IList<Rect> inputQuadrants;
 	
 	public int score;
+	public int mistakes;
 	
 	private enum MoveState {
 		Floating,
@@ -112,7 +113,15 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-    	ResetPosition();    
+		if (other.gameObject.GetComponent<Enemy>() != null) {
+	    	ResetPosition();    
+			score-= mistakes;
+			mistakes++;
+			if (score <= 0) {
+				score = 0;
+				mistakes = 0;
+			}
+		}
     }
 	#endregion
 	
@@ -146,6 +155,7 @@ public class Frog : MonoBehaviour {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
+			score++;	
 		}
 	}
 }
