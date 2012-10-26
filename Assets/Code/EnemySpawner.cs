@@ -6,6 +6,8 @@ public class EnemySpawner : MonoBehaviour {
 	public int desiredEnemyCount;
 	public GameObject enemyPrefab;
 	public int maximumZ;
+	private int playerIndex;
+	private int spawnTimer;
 	
 	private int actualEnemyCount;
 	
@@ -17,13 +19,16 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+				
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {	
 		if (actualEnemyCount < desiredEnemyCount) {
-			SpawnEnemy();
+			spawnTimer--;
+			if (spawnTimer <= 0) {
+				SpawnEnemy();
+			}
 		}
 	}
 	
@@ -33,9 +38,19 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void SpawnEnemy() {
-		GameObject enemy = (GameObject)Instantiate(enemyPrefab);
-		int xMod = Random.Range(10,100);
-		enemy.transform.position = new Vector3(transform.position.x - xMod, transform.position.y, transform.position.z + Random.Range(4, maximumZ));
+		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
+		Enemy enemy = enemyObject.GetComponent<Enemy>();
+		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(4, maximumZ));
 		actualEnemyCount++;
+		
+		playerIndex++;
+		if (playerIndex > 3) {
+			playerIndex = 0;
+		}
+		
+		Frog frog = Frog.Players[playerIndex];
+		enemy.SetSpeedForFrog(frog);
+		
+		spawnTimer = Random.Range(20,70);
 	}
 }

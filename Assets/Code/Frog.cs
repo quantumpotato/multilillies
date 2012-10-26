@@ -3,6 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Frog : MonoBehaviour {
+	public static Frog[] players;
+	public static Frog[] Players{
+		get {
+			if (players == null) {
+				players = (Frog[])GameObject.FindObjectsOfType(typeof(Frog));
+			}	
+			return players;
+		}
+	}
+	
+	
 	public float speed;
 	public int playerNumber;
 	private int charge;
