@@ -2,16 +2,17 @@ using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
+	public int minSpeed;
+	public int maxSpeed;
 	
 	private float _speed;
 	private Vector3 _startPosition;
 	
 	#region MonoBehaviour
 	void Awake() {
-		int speedMod = Random.Range(1,100);
+		int speedMod = Random.Range(minSpeed,maxSpeed);
 		_speed = speedMod * .05f;
 		_speed+= 3;
-		Physics.IgnoreLayerCollision(8,8, true);
 	}
 
 	// Use this for initialization

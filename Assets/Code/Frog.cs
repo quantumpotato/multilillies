@@ -108,7 +108,7 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	void OnCollisionEnter(Collision collision) {
+	void OnTriggerEnter(Collider other) {
     	ResetPosition();    
     }
 	#endregion
