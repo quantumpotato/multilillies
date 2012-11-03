@@ -23,11 +23,11 @@ public class Enemy : MonoBehaviour {
 		_speed = speedMod * .05f;
 		_speed+= 3;
 	}
-
-	// Use this for initialization
-	void Start () {
-		
+	
+	virtual protected void Update () {
+		UpdatePosition ();
 	}
+	#endregion
 	
 	public void SetSpeedForFrog(Frog frog) {
 		int scoreMod = frog.score + 10;
@@ -42,9 +42,8 @@ public class Enemy : MonoBehaviour {
 		//print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void UpdatePosition ()
+	{
 		transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z);
 	}
-	#endregion
 }
