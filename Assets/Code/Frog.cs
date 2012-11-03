@@ -3,6 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Frog : MonoBehaviour {
+	public float speed;
+	public int playerNumber;
+	public int score;
+	public int mistakes;
+
+
+	public delegate void ScoreChangedHandler(GameObject other);
+	
 	public static Frog[] players;
 	public static Frog[] Players{
 		get {
@@ -11,11 +19,8 @@ public class Frog : MonoBehaviour {
 			}	
 			return players;
 		}
-	}
+	}	
 	
-	
-	public float speed;
-	public int playerNumber;
 	private int charge;
 	private bool wantsToBoost;
 	
@@ -30,8 +35,6 @@ public class Frog : MonoBehaviour {
 	
 	private GameObject pad;
 	
-	public int score;
-	public int mistakes;
 	
 	private enum MoveState {
 		Floating,
