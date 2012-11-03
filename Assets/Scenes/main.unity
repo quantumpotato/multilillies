@@ -3477,7 +3477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfbc3d9a6d74401eac80b9f21eda847, type: 1}
   m_Name: 
   desiredEnemyCount: 12
-  enemyPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
+  logPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
   maximumZ: 29
 --- !u!1 &2055275262
 GameObject:

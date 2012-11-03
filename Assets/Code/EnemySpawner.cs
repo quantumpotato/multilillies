@@ -4,7 +4,8 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 	
 	public int desiredEnemyCount;
-	public GameObject enemyPrefab;
+	
+	public GameObject logPrefab;
 	public int maximumZ;
 	private int playerIndex;
 	private int spawnTimer;
@@ -13,13 +14,17 @@ public class EnemySpawner : MonoBehaviour {
 	
 	public static EnemySpawner Instance;
 	
+	private int logWeight;
+	private int fishWeight;
+	
 	void Awake() {
 		Instance = this;
 	}
 
 	// Use this for initialization
 	void Start () {
-				
+		logWeight = 5;
+		fishWeight = 0;
 	}
 	
 	// Update is called once per frame
@@ -38,7 +43,21 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void SpawnEnemy() {
+		int weightTotal = logWeight + fishWeight;
+		int spawnPossibility = Random.Range(0, weightTotal);
+		int logRequired = logWeight;
+		int fishRequired = logWeight + fishWeight;
+		
+		GameObject enemyPrefab = logPrefab;
+		if (spawnPossibility < logRequired) {
+			enemyPrefab = logPrefab;
+			print("chose log " + spawnPossibility + "which is under " + logRequired);
+		} else {
+			print("choose something else!");
+		}
+		
 		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
+		
 		Enemy enemy = enemyObject.GetComponent<Enemy>();
 		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, maximumZ));
 		actualEnemyCount++;
@@ -49,8 +68,7 @@ public class EnemySpawner : MonoBehaviour {
 		}
 		
 		Frog frog = Frog.Players[playerIndex];
-		enemy.SetSpeedForFrog(frog);
-		
+		enemy.SetSpeedForFrog(frog);		
 		spawnTimer = Random.Range(5,70);
 	}
 }

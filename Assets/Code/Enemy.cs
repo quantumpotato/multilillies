@@ -35,11 +35,11 @@ public class Enemy : MonoBehaviour {
 			scoreMod = 50;
 		}
 		
-		print ("scoreMod:" + scoreMod);
+//		print ("scoreMod:" + scoreMod);
 		int speedMod = Random.Range (scoreMod / 2, scoreMod);
 		_speed = speedMod / 2;
 		_speed+= 4;
-		print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
+		//print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
 	}
 	
 	// Update is called once per frame
