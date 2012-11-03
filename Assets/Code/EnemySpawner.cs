@@ -4,9 +4,11 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 	
 	public int desiredEnemyCount;
-	
 	public GameObject logPrefab;
 	public int maximumZ;
+	public int logWeight;
+	public int fishWeight;
+	
 	private int playerIndex;
 	private int spawnTimer;
 	
@@ -14,17 +16,13 @@ public class EnemySpawner : MonoBehaviour {
 	
 	public static EnemySpawner Instance;
 	
-	private int logWeight;
-	private int fishWeight;
-	
 	void Awake() {
 		Instance = this;
 	}
 
 	// Use this for initialization
 	void Start () {
-		logWeight = 5;
-		fishWeight = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -51,9 +49,9 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject enemyPrefab = logPrefab;
 		if (spawnPossibility < logRequired) {
 			enemyPrefab = logPrefab;
-			print("chose log " + spawnPossibility + "which is under " + logRequired);
-		} else {
-			print("choose something else!");
+			print("chose log " + spawnPossibility + " which is under " + logRequired);
+		} else if (spawnPossibility < fishRequired) {
+			print("chose fish " + spawnPossibility + " which is under " + fishRequired);
 		}
 		
 		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
