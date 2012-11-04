@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour {
 	
 	private int actualEnemyCount;
 	
+	private int score;
+	
 	void Awake() {
 		Instance = this;
 	}
@@ -28,8 +30,11 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	void HandleFrogScoreChanged(Frog frog) {
-		int score = Frog.TotalScore;
-		print("totalscore: " + score);
+		int newScore = Frog.TotalScore;
+		int fives = newScore / 5;
+		int fifteens = newScore / 15;
+		logWeight = 5;
+		fishWeight = fives;
 	}
 	
 	// Update is called once per frame

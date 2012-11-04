@@ -7,9 +7,19 @@ public class Frog : MonoBehaviour {
 	public int playerNumber;
 	public int score;
 	public int mistakes;
-
+		
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
+	
+	private static bool surpassing;
+	public static bool Surpassing {
+		get {
+			return surpassing;
+		}
+		set {
+			surpassing = value;
+		}
+	}
 	
 	public static int TotalScore {
 		get {
@@ -18,6 +28,16 @@ public class Frog : MonoBehaviour {
 				sum += f.score;
 			}
 			return sum;
+		}
+	}
+	
+	private static int highScore;
+	public static int HighScore {
+		get {
+			return highScore;
+		}
+		set {
+			highScore = value;
 		}
 	}
 	
@@ -103,6 +123,12 @@ public class Frog : MonoBehaviour {
 	void FireScoreChangedNotification() {
 		if (ScoreChanged != null) {
 			ScoreChanged(this);
+		}
+		if (Frog.TotalScore > Frog.HighScore) {
+			Frog.HighScore = Frog.TotalScore;
+			surpassing = true;
+		} else {
+			surpassing = false;
 		}
 	}
 	
