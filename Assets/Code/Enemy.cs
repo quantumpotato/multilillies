@@ -5,8 +5,9 @@ public class Enemy : MonoBehaviour {
 	public int minSpeed;
 	public int maxSpeed;
 	
-	private float _speed;
-	private Vector3 _startPosition;
+	protected float _speed;
+	protected Vector3 _startPosition;
+	protected float _startTime;
 	
 	public float Speed {
 		get {
@@ -18,13 +19,18 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	#region MonoBehaviour
-	void Awake() {
+	protected virtual void Awake() {
 		int speedMod = Random.Range(minSpeed,maxSpeed);
 		_speed = speedMod * .05f;
 		_speed+= 3;
+		_startTime = Time.time;
 	}
 	
-	virtual protected void Update () {
+	protected virtual void Start() {
+		
+	}
+	
+	protected virtual void Update () {
 		UpdatePosition ();
 	}
 	#endregion
@@ -42,8 +48,8 @@ public class Enemy : MonoBehaviour {
 		//print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
 	}
 	
-	void UpdatePosition ()
+	protected virtual void UpdatePosition ()
 	{
-		transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z);
+		// go nowhere by default
 	}
 }
