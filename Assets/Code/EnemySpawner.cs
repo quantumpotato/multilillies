@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour {
 	
 	public int desiredEnemyCount;
 	public GameObject logPrefab;
+	public GameObject fishPrefab;
 	public int maximumZ;
 	public int logWeight;
 	public int fishWeight;
@@ -63,6 +64,7 @@ public class EnemySpawner : MonoBehaviour {
 			enemyPrefab = logPrefab;
 			print("chose log " + spawnPossibility + " which is under " + logRequired);
 		} else if (spawnPossibility < fishRequired) {
+			enemyPrefab = fishPrefab;
 			print("chose fish " + spawnPossibility + " which is under " + fishRequired);
 		}
 		
