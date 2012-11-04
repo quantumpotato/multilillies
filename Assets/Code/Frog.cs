@@ -11,6 +11,16 @@ public class Frog : MonoBehaviour {
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
 	
+	private static bool surpassing;
+	public static bool Surpassing {
+		get {
+			return surpassing;
+		}
+		set {
+			surpassing = value;
+		}
+	}
+	
 	public static int TotalScore {
 		get {
 			int sum = 0;
@@ -116,6 +126,9 @@ public class Frog : MonoBehaviour {
 		}
 		if (Frog.TotalScore > Frog.HighScore) {
 			Frog.HighScore = Frog.TotalScore;
+			surpassing = true;
+		} else {
+			surpassing = false;
 		}
 	}
 	
