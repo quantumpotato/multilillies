@@ -11,6 +11,9 @@ public class Frog : MonoBehaviour {
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
 	
+	public delegate void HitHandler(Frog frog, GameObject other);
+	public event HitHandler Hit;
+	
 	private static bool surpassing;
 	public static bool Surpassing {
 		get {
@@ -93,31 +96,60 @@ public class Frog : MonoBehaviour {
 	
 	#region MonoBehaviour
 	void Awake() {
+		SetUpInputQuadrants();
+		
 		startPosition = transform.position;
-		
-		inputQuadrants = new List<Rect>();
-		inputQuadrants.Add(new Rect(0, 0, Screen.width/2, Screen.height/2));
-		inputQuadrants.Add(new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2));
-		inputQuadrants.Add(new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2));
-		inputQuadrants.Add(new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2));
-		
 		maxCharge = 110;
-		
 		score = 0;
 	}
 
-	// Use this for initialization
 	void Start () {
 		FrogBoundary.Instance.Hit += HandleFrogBoundaryHit;
 		pad = transform.FindChild("pad").gameObject;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		MoveForward();
 		HandleInput();
 		HandleState();
 		AnimatePad();
+	}
+	
+	void OnTriggerEnter(Collider other) {
+		if (IsEnemy(other.gameObject)) {
+	    	ResetPosition();    
+			DecreaseScore();
+			FireHitNotification(other.gameObject);
+			FireScoreChangedNotification();
+		}
+    }
+	#endregion
+	
+	void SetUpInputQuadrants() {
+		inputQuadrants = new List<Rect>();
+		inputQuadrants.Add(new Rect(0, 0, Screen.width/2, Screen.height/2));
+		inputQuadrants.Add(new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2));
+		inputQuadrants.Add(new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2));
+		inputQuadrants.Add(new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2));
+	}
+	
+	bool IsEnemy(GameObject other) {
+		return other.GetComponent<Enemy>() != null;
+	}
+	
+	void DecreaseScore() {
+		score-= mistakes;
+		mistakes++;
+		if (score <= 0) {
+			score = 0;
+			mistakes = 0;
+		}
+	}
+	
+	void FireHitNotification(GameObject other) {
+		if (Hit != null) {
+			Hit(this, other);
+		}
 	}
 	
 	void FireScoreChangedNotification() {
@@ -131,20 +163,6 @@ public class Frog : MonoBehaviour {
 			surpassing = false;
 		}
 	}
-	
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.GetComponent<Enemy>() != null) {
-	    	ResetPosition();    
-			score-= mistakes;
-			FireScoreChangedNotification();
-			mistakes++;
-			if (score <= 0) {
-				score = 0;
-				mistakes = 0;
-			}
-		}
-    }
-	#endregion
 	
 	void AnimatePad() {
 		Vector3 scale = pad.transform.localScale;
