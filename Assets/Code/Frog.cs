@@ -11,7 +11,7 @@ public class Frog : MonoBehaviour {
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
 	
-	public delegate void HitHandler(Frog frog, GameObject other);
+	public delegate void HitHandler(Frog frog, Enemy other);
 	public event HitHandler Hit;
 	
 	private static bool surpassing;
@@ -117,13 +117,16 @@ public class Frog : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		if (IsEnemy(other.gameObject)) {
-	    	ResetPosition();    
-			DecreaseScore();
 			FireHitNotification(other.gameObject);
-			FireScoreChangedNotification();
 		}
     }
 	#endregion
+	
+	public void Die() {
+		ResetPosition();
+		DecreaseScore();
+		FireScoreChangedNotification();
+	}
 	
 	void SetUpInputQuadrants() {
 		inputQuadrants = new List<Rect>();
@@ -148,7 +151,7 @@ public class Frog : MonoBehaviour {
 	
 	void FireHitNotification(GameObject other) {
 		if (Hit != null) {
-			Hit(this, other);
+			Hit(this, other.GetComponent<Enemy>());
 		}
 	}
 	

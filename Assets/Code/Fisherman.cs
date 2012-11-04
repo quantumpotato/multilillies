@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Fisherman : MonoBehaviour {
 	public GameObject activePosition;
-	public int timesToSave;
+	public int enemiesToCatch;
 	
 	public static Fisherman Instance;
 	public enum State {
@@ -26,7 +26,7 @@ public class Fisherman : MonoBehaviour {
 	public delegate void StateChangedHandler(State oldState, State newState);
 	public event StateChangedHandler StateChanged;
 	
-	int timesSaved;
+	int enemiesCaught;
 	Vector3 startPosition;
 	
 	#region MonoBehaviour
@@ -37,13 +37,33 @@ public class Fisherman : MonoBehaviour {
 	
 	void OnGUI() {
 		DrawFishermanPickupButton();
+		if (IsActive()) {
+			DrawEnemiesCaught();
+		}
 	}
 	#endregion
 	
-	public void MakeActive() {
+	public void StartSequence() {
 		if (CurrentState == State.Inactive) {
 			MoveIntoPosition();
 		}
+	}
+	
+	public void EndSequence() {
+		enemiesCaught = 0;
+		MoveBackToStartPosition();
+	}
+	
+	public void SetInactive() {
+		ChangeState(State.Inactive);
+	}
+	
+	public bool IsActive() {
+		return CurrentState != State.Inactive;
+	}
+	
+	public bool CanCatchEnemies() {
+		return CurrentState == State.WaitingForCollision && enemiesCaught != enemiesToCatch;
 	}
 	
 	void DrawFishermanPickupButton() {
@@ -54,8 +74,12 @@ public class Fisherman : MonoBehaviour {
 		}
 	}
 	
+	void DrawEnemiesCaught() {
+		GUI.Box(new Rect(470, 60, 100, 23), enemiesCaught + " / " + enemiesToCatch);
+	}
+	
 	void OnFishermanButtonClick() {
-		MakeActive();
+		StartSequence();
 	}
 	
 	void MoveBackToStartPosition() {
@@ -63,7 +87,8 @@ public class Fisherman : MonoBehaviour {
 		iTween.MoveTo(gameObject, iTween.Hash(
 			"position", startPosition,
 			"easetype", iTween.EaseType.linear,
-			"time", 2
+			"time", 2,
+			"oncomplete", "SetInactive"
 		));
 	}
 	
@@ -85,21 +110,30 @@ public class Fisherman : MonoBehaviour {
 	IEnumerator WaitThenCast() {
 		yield return new WaitForSeconds(1.0f);
 		
-		// do casting stuff here...
+		// TODO: do casting stuff here...
 		
 		StartWaitingForCollision();
 	}
 	
 	void StartWaitingForCollision() {
+		FrogHitManager.Instance.FrogHit += CatchEnemy;
 		ChangeState(State.WaitingForCollision);
-		
-		//TODO
-		StartCoroutine(WaitThenMoveBackToStartPosition());
 	}
 	
-	IEnumerator WaitThenMoveBackToStartPosition() {
-		yield return new WaitForSeconds(3.0f);
-		MoveBackToStartPosition();
+	void CatchEnemy(Frog frog, Enemy enemy) {
+		if (enemiesCaught == enemiesToCatch) return;
+		enemiesCaught++;
+		FrogHitManager.Instance.FrogHit -= CatchEnemy;
+		enemy.GetCaughtBy(this);
+		CheckIfFinished();
+	}
+	
+	void CheckIfFinished() {
+		if (enemiesCaught == enemiesToCatch) {
+			EndSequence();
+		} else {
+			StartCasting();
+		}
 	}
 	
 	void ChangeState(State newState) {

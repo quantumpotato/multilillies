@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ce5060f75594521ab41599d244b16c, type: 1}
   m_Name: 
   activePosition: {fileID: 0}
-  timesToSave: 5
+  enemiesToCatch: 3
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
 	protected float _speed;
 	protected Vector3 _startPosition;
 	protected float _startTime;
+	protected GameObject _core;
 	
 	public float Speed {
 		get {
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	protected virtual void Start() {
-		
+		_core = transform.FindChild("core").gameObject;
 	}
 	
 	protected virtual void Update () {
@@ -46,6 +47,33 @@ public class Enemy : MonoBehaviour {
 		_speed = speedMod / 2;
 		_speed+= 4;
 		//print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
+	}
+	
+	public void GetCaughtBy(Fisherman fisherman) {
+		float caughtHeight = 8.0f;
+		float caughtTime = 2.0f;
+		
+		iTween.MoveBy(_core, iTween.Hash(
+			"y", caughtHeight,
+			"time", caughtTime / 2,
+			"easeType", iTween.EaseType.easeOutQuad
+		));
+		iTween.MoveBy(_core, iTween.Hash(
+			"y", -caughtHeight,
+			"time", caughtTime / 2,
+			"delay", caughtTime / 2,
+			"easeType", iTween.EaseType.easeInCubic
+		));     
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", fisherman.transform,
+			"time", caughtTime,
+			"easeType", iTween.EaseType.linear,
+			"oncomplete", "Die"
+		));
+	}
+	
+	void Die() {
+		Destroy(gameObject);
 	}
 	
 	protected virtual void UpdatePosition ()
