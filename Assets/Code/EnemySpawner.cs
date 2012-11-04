@@ -34,14 +34,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	void HandleFrogScoreChanged(Frog frog) {
-		int newScore = Frog.TotalScore;
-		int fives = newScore / 5;
-		int tens = newScore / 10;
-		//int fifteens = newScore / 15;
-		logWeight = 5 + fives;
-		sharkWeight = fives;
-		fishWeight = tens;
-		
+		CalculateEnemyWeights();	
 	}
 	
 	// Update is called once per frame
@@ -60,6 +53,8 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void SpawnEnemy() {
+		CalculateEnemyWeights();
+			
 		int weightTotal = logWeight + fishWeight + sharkWeight;
 		int spawnPossibility = Random.Range(0, weightTotal);
 		int logRequired = logWeight;
@@ -92,5 +87,15 @@ public class EnemySpawner : MonoBehaviour {
 		Frog frog = Frog.Players[playerIndex];
 		enemy.SetSpeedForFrog(frog);		
 		spawnTimer = Random.Range(5,70);
+	}
+	
+	void CalculateEnemyWeights() {
+		int newScore = Frog.TotalScore;
+		int fives = newScore / 5;
+		int tens = newScore / 10;
+		//int fifteens = newScore / 15;
+		logWeight = 5 + fives;
+		sharkWeight = fives;
+		fishWeight = tens;
 	}
 }
