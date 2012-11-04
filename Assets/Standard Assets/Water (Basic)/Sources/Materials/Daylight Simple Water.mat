@@ -75,7 +75,7 @@ Material:
       data:
         first:
           name: _WaveScale
-        second: .0702830181
+        second: .0392382406
       data:
         first:
           name: _Highlight
@@ -124,7 +124,7 @@ Material:
       data:
         first:
           name: _horizonColor
-        second: {r: .165530786, g: .241492584, b: .381818175, a: 0}
+        second: {r: .805970132, g: .874114931, b: 1, a: 0}
       data:
         first:
           name: _ColorControl_ST

@@ -433,7 +433,7 @@ MonoBehaviour:
   maxSpeed: 0
   pointCountMin: 5
   pointCountMax: 8
-  pathLength: 40
+  pathLength: 60
   pointDeviation: 2
 --- !u!136 &13600000
 CapsuleCollider:
