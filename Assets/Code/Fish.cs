@@ -2,10 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class Fish : Enemy {
-	public int pointCountMin = 5;
-	public int pointCountMax = 20;
-	public int pathLength = 40;
-	public float pointDeviation = 4.0f;
+	public int pointCountMin;
+	public int pointCountMax;
+	public int pathLength;
+	public float pointDeviation;
 	
 	private Vector3[] path;
 	private Vector3 rootPosition;
