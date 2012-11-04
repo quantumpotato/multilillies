@@ -348,7 +348,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
-  m_LocalRotation: {x: -.70614773, y: .0368119515, z: .706148088, w: -.0368119515}
+  m_LocalRotation: {x: -.70614779, y: .0368119553, z: .706148148, w: -.0368119553}
   m_LocalPosition: {x: -2.3431145e-08, y: 1.58748674, z: -.536042035}
   m_LocalScale: {x: .99999994, y: 1.00000012, z: 1.00000024}
   m_Children:
@@ -433,8 +433,8 @@ MonoBehaviour:
   maxSpeed: 0
   pointCountMin: 5
   pointCountMax: 8
-  pathLength: 40
-  pointDeviation: 3
+  pathLength: 100
+  pointDeviation: 4
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

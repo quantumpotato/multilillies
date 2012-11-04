@@ -36,10 +36,12 @@ public class EnemySpawner : MonoBehaviour {
 	void HandleFrogScoreChanged(Frog frog) {
 		int newScore = Frog.TotalScore;
 		int fives = newScore / 5;
-		int fifteens = newScore / 15;
-		logWeight = 5;
-		fishWeight = fives;
-		sharkWeight = fifteens;
+		int tens = newScore / 10;
+		//int fifteens = newScore / 15;
+		logWeight = 5 + fives;
+		sharkWeight = fives;
+		fishWeight = tens;
+		
 	}
 	
 	// Update is called once per frame
@@ -61,19 +63,19 @@ public class EnemySpawner : MonoBehaviour {
 		int weightTotal = logWeight + fishWeight + sharkWeight;
 		int spawnPossibility = Random.Range(0, weightTotal);
 		int logRequired = logWeight;
-		int fishRequired = logRequired + fishWeight;
-		int sharkRequired = fishRequired + sharkWeight;
+		int sharkRequired = logRequired + sharkWeight;
+		int fishRequired = sharkRequired + fishWeight;
 		
 		GameObject enemyPrefab = logPrefab;
-		if (spawnPossibility < logRequired) {
+		if (spawnPossibility <= logRequired) {
 			enemyPrefab = logPrefab;
-			print("chose log " + spawnPossibility + " which is under " + logRequired);
-		} else if (spawnPossibility < fishRequired) {
-			enemyPrefab = fishPrefab;
-			print("chose fish " + spawnPossibility + " which is under " + fishRequired);
+			//print("chose log " + spawnPossibility + " which is under " + logRequired);
 		} else if (spawnPossibility < sharkRequired) {
 			enemyPrefab = sharkPrefab;
 			print("chose shark " + spawnPossibility + " which is under " + sharkRequired);
+		} else if (spawnPossibility < fishRequired) {
+			enemyPrefab = fishPrefab;
+			print("chose fish " + spawnPossibility + " which is under " + fishRequired);
 		}
 		
 		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
