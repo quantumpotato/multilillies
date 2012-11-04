@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
 	
+	public static EnemySpawner Instance;
+	
 	public int desiredEnemyCount;
 	public GameObject logPrefab;
 	public int maximumZ;
@@ -14,15 +16,20 @@ public class EnemySpawner : MonoBehaviour {
 	
 	private int actualEnemyCount;
 	
-	public static EnemySpawner Instance;
-	
 	void Awake() {
 		Instance = this;
 	}
 
 	// Use this for initialization
 	void Start () {
+		foreach (Frog f in Frog.Players) {
+			f.ScoreChanged += HandleFrogScoreChanged;
+		}
+	}
 
+	void HandleFrogScoreChanged(Frog frog) {
+		int score = Frog.TotalScore;
+		print("totalscore: " + score);
 	}
 	
 	// Update is called once per frame

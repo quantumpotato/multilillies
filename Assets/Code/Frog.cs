@@ -8,8 +8,18 @@ public class Frog : MonoBehaviour {
 	public int score;
 	public int mistakes;
 
-
-	public delegate void ScoreChangedHandler(GameObject other);
+	public delegate void ScoreChangedHandler(Frog frog);
+	public event ScoreChangedHandler ScoreChanged;
+	
+	public static int TotalScore {
+		get {
+			int sum = 0;
+			foreach (Frog f in Players) {
+				sum += f.score;
+			}
+			return sum;
+		}
+	}
 	
 	public static Frog[] players;
 	public static Frog[] Players{
@@ -90,10 +100,17 @@ public class Frog : MonoBehaviour {
 		AnimatePad();
 	}
 	
+	void FireScoreChangedNotification() {
+		if (ScoreChanged != null) {
+			ScoreChanged(this);
+		}
+	}
+	
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.GetComponent<Enemy>() != null) {
 	    	ResetPosition();    
 			score-= mistakes;
+			FireScoreChangedNotification();
 			mistakes++;
 			if (score <= 0) {
 				score = 0;
@@ -184,6 +201,7 @@ public class Frog : MonoBehaviour {
 			ResetPosition();
 			ResetState();
 			score++;	
+			FireScoreChangedNotification();
 		}
 	}
 }
