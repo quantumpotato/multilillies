@@ -4022,9 +4022,11 @@ MonoBehaviour:
   desiredEnemyCount: 12
   logPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
   fishPrefab: {fileID: 100026, guid: 069777823c59148e0ac7bd360b1e2bd2, type: 2}
+  sharkPrefab: {fileID: 100026, guid: 9267ea8669b694ce28f6ffdc1e411bfa, type: 2}
   maximumZ: 29
   logWeight: 5
   fishWeight: 3
+  sharkWeight: 0
 --- !u!1 &2055275262
 GameObject:
   m_ObjectHideFlags: 0
