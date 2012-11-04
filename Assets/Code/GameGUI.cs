@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class GameGUI : MonoBehaviour {
 	void OnGUI () {
+		DrawScore ();
+	}
+	
+	void DrawScore() {
 		int width = 80;
 		int height = 23;
 		if (Frog.Surpassing) {
