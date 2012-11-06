@@ -50,6 +50,8 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	public void GetCaughtBy(Fisherman fisherman) {
+		_speed = 0;
+		
 		float caughtHeight = 8.0f;
 		float caughtTime = 2.0f;
 		
@@ -68,12 +70,17 @@ public class Enemy : MonoBehaviour {
 			"position", fisherman.transform,
 			"time", caughtTime,
 			"easeType", iTween.EaseType.linear,
-			"oncomplete", "Die"
+			"oncomplete", "OnCaught",
+			"oncompleteparams", fisherman
 		));
 	}
 	
-	void Die() {
+	public void Die() {
 		Destroy(gameObject);
+	}
+	
+	void OnCaught(Fisherman fisherman) {
+		fisherman.FinishCatching(this);
 	}
 	
 	protected virtual void UpdatePosition ()

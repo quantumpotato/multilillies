@@ -66,6 +66,11 @@ public class Fisherman : MonoBehaviour {
 		return CurrentState == State.WaitingForCollision && enemiesCaught != enemiesToCatch;
 	}
 	
+	public void FinishCatching(Enemy enemy) {
+		enemy.Die();
+		CheckIfFinished();
+	}
+	
 	void DrawFishermanPickupButton() {
 		int width = 200;
 		int height = 50;
@@ -122,10 +127,10 @@ public class Fisherman : MonoBehaviour {
 	
 	void CatchEnemy(Frog frog, Enemy enemy) {
 		if (enemiesCaught == enemiesToCatch) return;
+		ChangeState(State.Catching);
 		enemiesCaught++;
 		FrogHitManager.Instance.FrogHit -= CatchEnemy;
 		enemy.GetCaughtBy(this);
-		CheckIfFinished();
 	}
 	
 	void CheckIfFinished() {
