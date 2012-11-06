@@ -74,13 +74,13 @@ public class Fisherman : MonoBehaviour {
 	void DrawFishermanPickupButton() {
 		int width = 200;
 		int height = 50;
-		if (GUI.Button (new Rect(470, 5, width, height), "Fisherman\n" + CurrentState)) {
+		if (GUI.Button (new Rect(Screen.width - width - 5, 5, width, height), "Fisherman\n" + CurrentState)) {
 			OnFishermanButtonClick();
 		}
 	}
 	
 	void DrawEnemiesCaught() {
-		GUI.Box(new Rect(470, 60, 100, 23), enemiesCaught + " / " + enemiesToCatch);
+		GUI.Box(new Rect(Screen.width - 105, 60, 100, 23), enemiesCaught + " / " + enemiesToCatch);
 	}
 	
 	void OnFishermanButtonClick() {
