@@ -223,6 +223,7 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void HandleInput() {
+#if UNITY_EDITOR
 		if (Input.GetButtonDown("Fire1")) {
 	        if (inputQuadrants[playerNumber].Contains(Input.mousePosition)) {
 				BeginCharging();
@@ -232,6 +233,15 @@ public class Frog : MonoBehaviour {
 				BeginBoosting();
 			}
 		}
+#elif UNITY_IPHONE
+		foreach (Touch touch in Input.touches) {
+			if (touch.phase == TouchPhase.Began && inputQuadrants[playerNumber].Contains(touch.position)) {
+				BeginCharging();
+			} else if (touch.phase == TouchPhase.Ended && inputQuadrants[playerNumber].Contains(touch.position)) {
+				BeginBoosting();
+			}
+		}
+#endif
 	}
 	
 	void ResetPosition() {
