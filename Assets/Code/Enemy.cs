@@ -2,14 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	public int minSpeed;
-	public int maxSpeed;
-	
-	protected float _speed;
-	protected Vector3 _startPosition;
-	protected float _startTime;
 	protected GameObject _core;
 	
+	protected float _speed;
 	public float Speed {
 		get {
 			return _speed;
@@ -21,36 +16,18 @@ public class Enemy : MonoBehaviour {
 	
 	#region MonoBehaviour
 	protected virtual void Awake() {
-		int speedMod = Random.Range(minSpeed,maxSpeed);
-		_speed = speedMod * .05f;
-		_speed+= 3;
-		_startTime = Time.time;
 	}
 	
 	protected virtual void Start() {
 		_core = transform.FindChild("core").gameObject;
 	}
-	
-	protected virtual void Update () {
-		UpdatePosition ();
-	}
 	#endregion
 	
-	public void SetSpeedForFrog(Frog frog) {
-		int scoreMod = frog.score + 10;
-		if (scoreMod > 50) {
-			scoreMod = 50;
-		}
-		
-		int speedMod = Random.Range (scoreMod, scoreMod * 2);
-		_speed = speedMod;
-		//_speed = speedMod / 2;
-		//_speed+= 6;
+	public virtual void SetSpeedForFrog(Frog frog) {
+		// up to sub-class
 	}
 	
-	public void GetCaughtBy(Fisherman fisherman) {
-		_speed = 0;
-		
+	public virtual void GetCaughtBy(Fisherman fisherman) {
 		float caughtHeight = 8.0f;
 		float caughtTime = 2.0f;
 		
@@ -75,15 +52,18 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	public void Die() {
-		EnemySpawner.Instance.DestroyEnemy(this.gameObject);
+		EnemySpawner.Instance.DestroyEnemy(gameObject);
 	}
 	
-	void OnCaught(Fisherman fisherman) {
+	protected int ScoreMod(Frog frog) {
+		int scoreMod = frog.score + 10;
+		if (scoreMod > 50) {
+			scoreMod = 50;
+		}
+		return scoreMod;
+	}
+	
+	protected void OnCaught(Fisherman fisherman) {
 		fisherman.FinishCatching(this);
-	}
-	
-	protected virtual void UpdatePosition ()
-	{
-		// go nowhere by default
 	}
 }

@@ -230,12 +230,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36c7ba1cf16e4411a977ee2c35274a0c, type: 1}
   m_Name: 
-  minSpeed: 0
-  maxSpeed: 0
   pointCountMin: 5
   pointCountMax: 8
-  pathLength: 100
+  pathLength: 70
   pointDeviation: 2
+  speed: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

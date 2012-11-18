@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Fish : Enemy {
+public class Fish : TweenedEnemy {
 	public int pointCountMin;
 	public int pointCountMax;
 	public int pathLength;
@@ -44,6 +44,6 @@ public class Fish : Enemy {
 	}
 	
 	void Move() {
-		iTween.MoveTo(gameObject, iTween.Hash("path", path, "time", Speed, "easetype", iTween.EaseType.linear));
+		iTween.MoveTo(gameObject, iTween.Hash("path", path, "time", 1/Speed, "easetype", iTween.EaseType.linear));
 	}
 }

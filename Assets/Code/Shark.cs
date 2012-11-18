@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Shark : Enemy {
+public class Shark : ManuallyMovedEnemy {
 	
 	public float attackRange;
 	

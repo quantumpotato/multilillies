@@ -87,7 +87,7 @@ public class EnemySpawner : MonoBehaviour {
 		}
 		
 		Frog frog = Frog.Players[playerIndex];
-		enemy.SetSpeedForFrog(frog);		
+		enemy.SetSpeedForFrog(frog);
 		spawnTimer = Random.Range(5,20);
 	}
 	
