@@ -9,8 +9,27 @@ public class Shark : ManuallyMovedEnemy {
 	
 	private int direction;
 	
+	private int stallBeforeBoosting;
+	
+	private enum SharkState {
+		Swimming,
+		Preparing,
+		Charging
+	}
+	
+	private SharkState state;
+	
 	#region monodevelop	
 	#endregion monodevelop
+	
+	override public void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+		_speed = Random.Range((lowest / 2) + 2, (total / 2) + 3);
+		int maxDelay = 60;
+		stallBeforeBoosting = maxDelay - lowest;
+		if (stallBeforeBoosting < 5) {
+			stallBeforeBoosting = 5;
+		}
+	}
 	
 	protected override void UpdatePosition() {
 		if (!attacking) {
@@ -19,7 +38,16 @@ public class Shark : ManuallyMovedEnemy {
 		
 		float zDelta = attacking ? (direction / 2) * Time.deltaTime : 0;
 		
-		transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z + zDelta);
+		if (state == SharkState.Preparing) {
+			stallBeforeBoosting--;
+			if (stallBeforeBoosting <= 0) {
+				state = SharkState.Charging;
+				_speed = 30;
+			}
+		} else {
+			transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z + zDelta);
+		}
+			
 	}
 	
 	void ScanForFrogs() {
@@ -37,8 +65,9 @@ public class Shark : ManuallyMovedEnemy {
 					if (Y == 2) {
 						direction = -direction;
 					}
-					
-					_speed += 6;
+						
+					//stall state delay
+					state = SharkState.Preparing;
 				}
 			}
 		}

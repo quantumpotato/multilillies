@@ -52,6 +52,14 @@ public class EnemySpawner : MonoBehaviour {
 		actualEnemyCount--;
 	}
 	
+	private void cyclePlayerIndex() {
+		//will need to check which players are active and if not increment and call itself
+		playerIndex++;
+		if (playerIndex > 3) { 
+			playerIndex = 0;
+		}
+	}
+	
 	void SpawnEnemy() {
 		CalculateEnemyWeights();
 			
@@ -64,13 +72,13 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject enemyPrefab = logPrefab;
 		if (spawnPossibility <= logRequired) {
 			enemyPrefab = logPrefab;
-			print("chose log " + spawnPossibility + " which is under " + logRequired);
+			//print("chose log " + spawnPossibility + " which is under " + logRequired);
 		} else if (spawnPossibility < sharkRequired) {
 			enemyPrefab = sharkPrefab;
-			print("chose shark " + spawnPossibility + " which is under " + sharkRequired);
+		//	print("chose shark " + spawnPossibility + " which is under " + sharkRequired);
 		} else if (spawnPossibility < fishRequired) {
 			enemyPrefab = fishPrefab;
-			print("chose fish " + spawnPossibility + " which is under " + fishRequired);
+		//	print("chose fish " + spawnPossibility + " which is under " + fishRequired);
 		} else {
 			print ("chose none " + spawnPossibility + " which is over" + fishRequired + "and over" + weightTotal);
 		}
@@ -81,23 +89,26 @@ public class EnemySpawner : MonoBehaviour {
 		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, maximumZ));
 		actualEnemyCount++;
 		
-		playerIndex++;
-		if (playerIndex > 3) {
-			playerIndex = 0;
-		}
+		cyclePlayerIndex();
 		
-		Frog frog = Frog.Players[playerIndex];
-		enemy.SetSpeedForFrog(frog);
-		spawnTimer = Random.Range(5,20);
+
+		enemy.SetSpeedForLowestAndTeamScores(Frog.MinScore, Frog.TotalScore);
+		int lowestSpawnDelay = 15 - Frog.TotalScore;
+		if (lowestSpawnDelay < 5) {
+			lowestSpawnDelay = 5;
+		}
+		spawnTimer = Random.Range(lowestSpawnDelay,15);
 	}
 	
 	void CalculateEnemyWeights() {
-		int newScore = Frog.TotalScore;
-		int fives = newScore / 5;
-		int tens = newScore / 10;
+		print (playerIndex + "playerIndex");	
+		int newScore = Frog.Players[playerIndex].score;
+		int heavyWeight = newScore / 2;
+		int lightWeight = newScore / 3;
+		int featherWeight = newScore / 10;
 		
-		logWeight = 5 + fives;
-		sharkWeight = fives;
-		fishWeight = tens;
+		logWeight = 3 + featherWeight;
+		sharkWeight = lightWeight;
+		fishWeight = heavyWeight;
 	}
 }
