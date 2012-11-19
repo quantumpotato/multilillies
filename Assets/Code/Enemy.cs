@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour {
 	}
 	#endregion
 	
+	public virtual void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+		// subclass implements
+	}
+	
 	public virtual void SetSpeedForFrog(Frog frog) {
 		// up to sub-class
 	}
@@ -55,12 +59,16 @@ public class Enemy : MonoBehaviour {
 		EnemySpawner.Instance.DestroyEnemy(gameObject);
 	}
 	
-	protected int ScoreMod(Frog frog) {
-		int scoreMod = frog.score + 10;
-		if (scoreMod > 50) {
-			scoreMod = 50;
+	protected int SpeedModForScore(int score) {
+		int speed = score + 10;
+		if (speed > 50) {
+			speed = 50;
 		}
-		return scoreMod;
+		return speed;
+	}
+	
+	protected int ScoreMod(Frog frog) {
+		return SpeedModForScore(frog.score);
 	}
 	
 	protected void OnCaught(Fisherman fisherman) {

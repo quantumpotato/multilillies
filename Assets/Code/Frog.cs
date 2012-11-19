@@ -14,6 +14,8 @@ public class Frog : MonoBehaviour {
 	public delegate void HitHandler(Frog frog, Enemy other);
 	public event HitHandler Hit;
 	
+	
+	
 	private static bool surpassing;
 	public static bool Surpassing {
 		get {
@@ -31,6 +33,20 @@ public class Frog : MonoBehaviour {
 				sum += f.score;
 			}
 			return sum;
+		}
+	}
+	
+	public static int MinScore {
+		get {
+			int minScore = Frog.HighScore * 4;
+
+	
+			foreach (Frog f in Frog.Players) {
+				if (f.score < minScore) {
+					minScore = f.score;
+				}
+			}
+			return minScore;	
 		}
 	}
 	
@@ -81,9 +97,9 @@ public class Frog : MonoBehaviour {
 		get {
 			switch (moveState) {
 			case MoveState.Boosting:
-				return 20;
+				return 24;
 			case MoveState.Floating:
-				return 5;
+				return 2;
 			case MoveState.Charging:
 				return 0;
 			default:
@@ -99,7 +115,7 @@ public class Frog : MonoBehaviour {
 		SetUpInputQuadrants();
 		
 		startPosition = transform.position;
-		maxCharge = 110;
+		maxCharge = 50;
 		score = 0;
 	}
 
