@@ -7,14 +7,16 @@ public class Frog : MonoBehaviour {
 	public int playerNumber;
 	public int score;
 	public int mistakes;
+	public float floatModifier;
+	public int floatExperience;
+	public int floatLevelThreshhold;
+	public int potentialFloatExperience;
 		
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
 	
 	public delegate void HitHandler(Frog frog, Enemy other);
-	public event HitHandler Hit;
-	
-	
+	public event HitHandler Hit;	
 	
 	private static bool surpassing;
 	public static bool Surpassing {
@@ -39,7 +41,6 @@ public class Frog : MonoBehaviour {
 	public static int MinScore {
 		get {
 			int minScore = Frog.HighScore * 4;
-
 	
 			foreach (Frog f in Frog.Players) {
 				if (f.score < minScore) {
@@ -97,9 +98,9 @@ public class Frog : MonoBehaviour {
 		get {
 			switch (moveState) {
 			case MoveState.Boosting:
-				return 24;
+				return 30;
 			case MoveState.Floating:
-				return 2;
+				return 4;
 			case MoveState.Charging:
 				return 0;
 			default:
@@ -110,12 +111,19 @@ public class Frog : MonoBehaviour {
 	
 	private int maxCharge;
 	
+	void SetupBoosting() {
+		floatModifier = 1;
+		floatExperience = 0;
+		potentialFloatExperience = 0;
+		floatLevelThreshhold = 100;
+	}
+		
 	#region MonoBehaviour
 	void Awake() {
 		SetUpInputQuadrants();
-		
+		SetupBoosting();
 		startPosition = transform.position;
-		maxCharge = 50;
+		maxCharge = 70;
 		score = 0;
 	}
 
@@ -140,9 +148,10 @@ public class Frog : MonoBehaviour {
 	
 	public void Die() {
 		ResetPosition();
-		ResetState();		
+		ResetState();	
 		DecreaseScore();
 		FireScoreChangedNotification();
+		DownGradeBoost();
 	}
 	
 	void SetUpInputQuadrants() {
@@ -206,13 +215,40 @@ public class Frog : MonoBehaviour {
 	void BeginBoosting() {
 		if (moveState == MoveState.Charging) {
 			moveState = MoveState.Boosting;	
-		}
-		
+		}	
 	}
+	
+	float FloatExperiencePercentage() {
+	 	return (float)floatExperience / (float)floatLevelThreshhold;	
+	}
+		
 
 	void BeginFloating() {
 		moveState = MoveState.Floating;
 		charge = 0;
+	}
+	
+	void UpgradeFloating() {
+		potentialFloatExperience = 0;
+		floatExperience = 0;
+		floatLevelThreshhold *= 2;	
+		floatModifier *= 2;
+	}
+	
+	void DownGradeFloating() {
+		boostExperience = 0;
+		if (floatModifier > 1) {
+			boostLevelThreshhold /= 2;
+			floatModifier /= 2;
+		}
+	}
+		
+	
+	void GainFloatExperience() {
+		floatExperience += potentialFloatExperience;
+		if (floatExperience > floatLevelThreshhold) {
+			UpgradeFloating();
+		}
 	}
 	
 	void HandleState() {
@@ -224,8 +260,10 @@ public class Frog : MonoBehaviour {
 			}
 		} else if(moveState == MoveState.Boosting) {
 			charge-= 5;
+			potentialFloatExperience++;
 			if (charge <= 0) {
 				BeginFloating();
+				GainFloatExperience();
 			}
 		} else if (moveState == MoveState.Floating) {
 			if (wantsToBoost == true) {
@@ -234,8 +272,16 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	float CurrentSpeed() {
+		float currentSpeed = Speed * Time.deltaTime;
+		if (moveState == MoveState.Floating) {
+			currentSpeed *= floatModifier;
+		}
+		return currentSpeed;
+	}
+	
 	void MoveForward() {
-		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Speed * Time.deltaTime);
+		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + CurrentSpeed());
 	}
 	
 	void HandleInput() {
@@ -268,6 +314,7 @@ public class Frog : MonoBehaviour {
 		wantsToBoost = false;
 		charge = 0;
 		moveState = MoveState.Floating;
+		potentialBoostExperience = 0;
 	}
 	
 	void HandleFrogBoundaryHit (GameObject other) {
