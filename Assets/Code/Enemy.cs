@@ -42,11 +42,10 @@ public class Enemy : MonoBehaviour {
 			scoreMod = 50;
 		}
 		
-//		print ("scoreMod:" + scoreMod);
 		int speedMod = Random.Range (scoreMod, scoreMod * 2);
-		_speed = speedMod / 2;
-		_speed+= 6;
-		//print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
+		_speed = speedMod;
+		//_speed = speedMod / 2;
+		//_speed+= 6;
 	}
 	
 	public void GetCaughtBy(Fisherman fisherman) {
@@ -76,7 +75,7 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	public void Die() {
-		Destroy(gameObject);
+		EnemySpawner.Instance.DestroyEnemy(this.gameObject);
 	}
 	
 	void OnCaught(Fisherman fisherman) {
