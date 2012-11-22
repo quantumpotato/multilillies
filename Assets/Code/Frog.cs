@@ -161,7 +161,7 @@ public class Frog : MonoBehaviour {
 	void SetUpFloating() {
 		floatExperience = 0;
 		potentialFloatExperience = 0;
-		floatLevelThreshhold = 100;
+		floatLevelThreshhold = 210;
 	}
 	
 	public void Die() {
@@ -287,11 +287,14 @@ public class Frog : MonoBehaviour {
 			floatLevel--;
 		}
 	}
-		
+	
+	int ExpThreshhold() {
+		return maxCharge / 2;
+	}
 	
 	void GainFloatExperience() {
-		if (floatExperience > .5 * maxCharge) {
-			floatExperience += potentialFloatExperience - .5 * maxCharge;
+		if (potentialFloatExperience > ExpThreshhold()) {
+			floatExperience += potentialFloatExperience - ExpThreshhold();
 		}
 		if (floatExperience > floatLevelThreshhold) {
 			UpgradeFloating();
