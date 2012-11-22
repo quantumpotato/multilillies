@@ -79,7 +79,7 @@ public class Frog : MonoBehaviour {
 	
 	private int PotentialExperienceThreshhold {
 		get {
-			return maxCharge / 4;
+			return 5;
 		}
 	}
 	
@@ -315,9 +315,9 @@ public class Frog : MonoBehaviour {
 	
 	void HandleState() {
 		if (moveState == MoveState.Charging) {
-			charge+= 2;
+			charge+= 3;
 			potentialFloatExperience++;			
-			if (charge >= maxCharge) {
+			if (charge >= maxCharge + 17) {
 				charge = maxCharge;
 				BeginBoosting();
 			}
