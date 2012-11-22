@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: 2.258008, y: -1.35004568, z: 16.5666637}
+  m_LocalPosition: {x: -4.55254984, y: -10.5948191, z: 17.5388126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -149,8 +149,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ac5bd6696b5c44eb967c009f1f45082, type: 1}
   m_Name: 
-  minSpeed: 0
-  maxSpeed: 0
   attackRange: 5
 --- !u!136 &13600000
 CapsuleCollider:
@@ -161,10 +159,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .800000012
-  m_Height: 3
+  m_Radius: .5
+  m_Height: 0
   m_Direction: 1
-  m_Center: {x: .0900000036, y: 1.49000001, z: .310000002}
+  m_Center: {x: 0, y: .730000019, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
