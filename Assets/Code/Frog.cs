@@ -290,7 +290,9 @@ public class Frog : MonoBehaviour {
 		
 	
 	void GainFloatExperience() {
-		floatExperience += potentialFloatExperience;
+		if (floatExperience > .5 * maxCharge) {
+			floatExperience += potentialFloatExperience - .5 * maxCharge;
+		}
 		if (floatExperience > floatLevelThreshhold) {
 			UpgradeFloating();
 		}
