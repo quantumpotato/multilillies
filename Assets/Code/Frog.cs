@@ -151,7 +151,7 @@ public class Frog : MonoBehaviour {
 		ResetState();	
 		DecreaseScore();
 		FireScoreChangedNotification();
-		DownGradeBoost();
+		DownGradeFloating();
 	}
 	
 	void SetUpInputQuadrants() {
@@ -236,9 +236,9 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void DownGradeFloating() {
-		boostExperience = 0;
+		floatExperience = 0;
 		if (floatModifier > 1) {
-			boostLevelThreshhold /= 2;
+			floatLevelThreshhold /= 2;
 			floatModifier /= 2;
 		}
 	}
@@ -314,7 +314,7 @@ public class Frog : MonoBehaviour {
 		wantsToBoost = false;
 		charge = 0;
 		moveState = MoveState.Floating;
-		potentialBoostExperience = 0;
+		potentialFloatExperience = 0;
 	}
 	
 	void HandleFrogBoundaryHit (GameObject other) {
