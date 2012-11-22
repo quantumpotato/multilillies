@@ -144,7 +144,7 @@ public class Frog : MonoBehaviour {
 		MoveForward();
 		HandleInput();
 		HandleState();
-//		SetPadScale();
+		SetPadScale();
 		SetFloatExperienceCircleScale();
 	}
 	
