@@ -320,7 +320,7 @@ public class Frog : MonoBehaviour {
 	float CurrentSpeed() {
 		float currentSpeed = Speed * Time.deltaTime;
 		if (moveState == MoveState.Floating) {
-			currentSpeed *= ModifiedFloatSpeed * Time.deltaTime;
+			currentSpeed = ModifiedFloatSpeed * Time.deltaTime;
 		} else if (moveState == MoveState.Boosting) {
 			if (ChargePercentage() < 0.5f) {
 				currentSpeed = (1 - ((float)charge / (float)chargeReached)) * currentSpeed;
