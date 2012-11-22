@@ -535,7 +535,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.9977932, y: -12.1015892, z: 24.0248585}
+  m_LocalPosition: {x: 11.0771046, y: -12.1015892, z: 24.0248585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400032}
@@ -713,10 +713,13 @@ MonoBehaviour:
   playerNumber: 3
   score: 0
   mistakes: 0
-  floatModifier: 0
   floatExperience: 0
+  floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
+  baseFloatingSpeed: 2
+  baseBoostingSpeed: 30
+  floatModifier: .5
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

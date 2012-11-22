@@ -7,8 +7,8 @@ public class Frog : MonoBehaviour {
 	public int playerNumber;
 	public int score;
 	public int mistakes;
-	public float floatModifier;
 	public int floatExperience;
+	public int floatLevel;
 	public int floatLevelThreshhold;
 	public int potentialFloatExperience;	
 	
@@ -71,7 +71,16 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	private readonly float fullPadRadius = 2.0f;
+	private float ModifiedFloatSpeed {
+		get {
+			return baseFloatingSpeed + floatLevel * floatModifier;
+		}
+	}
+	
+	private float fullPadRadius = 2.0f;
+	private float baseFloatingSpeed = 2.0f;
+	private float baseBoostingSpeed = 30.0f;
+	private float floatModifier = 1.5f;
 	
 	private int charge;
 	private int chargeReached;
@@ -102,9 +111,9 @@ public class Frog : MonoBehaviour {
 		get {
 			switch (moveState) {
 			case MoveState.Boosting:
-				return 30;
+				return baseBoostingSpeed;
 			case MoveState.Floating:
-				return 4;
+				return baseFloatingSpeed;
 			case MoveState.Charging:
 				return 0;
 			default:
@@ -114,18 +123,11 @@ public class Frog : MonoBehaviour {
 	}
 	
 	private int maxCharge;
-	
-	void SetupBoosting() {
-		floatModifier = 1;
-		floatExperience = 0;
-		potentialFloatExperience = 0;
-		floatLevelThreshhold = 100;
-	}
 		
 	#region MonoBehaviour
 	void Awake() {
 		SetUpInputQuadrants();
-		SetupBoosting();
+		SetUpFloating();
 		startPosition = transform.position;
 		maxCharge = 70;
 		score = 0;
@@ -146,6 +148,7 @@ public class Frog : MonoBehaviour {
 		HandleState();
 		SetPadScale();
 		SetFloatExperienceCircleScale();
+		SetPadColor();
 	}
 	
 	void OnTriggerEnter(Collider other) {
@@ -154,6 +157,12 @@ public class Frog : MonoBehaviour {
 		}
     }
 	#endregion
+	
+	void SetUpFloating() {
+		floatExperience = 0;
+		potentialFloatExperience = 0;
+		floatLevelThreshhold = 100;
+	}
 	
 	public void Die() {
 		ResetPosition();
@@ -268,14 +277,14 @@ public class Frog : MonoBehaviour {
 		potentialFloatExperience = 0;
 		floatExperience = 0;
 		floatLevelThreshhold *= 2;	
-		floatModifier *= 2;
+		floatLevel += 1;
 	}
 	
 	void DownGradeFloating() {
 		floatExperience = 0;
-		if (floatModifier > 1) {
+		if (floatLevel > 0) {
 			floatLevelThreshhold /= 2;
-			floatModifier /= 2;
+			floatLevel--;
 		}
 	}
 		
@@ -311,12 +320,11 @@ public class Frog : MonoBehaviour {
 	float CurrentSpeed() {
 		float currentSpeed = Speed * Time.deltaTime;
 		if (moveState == MoveState.Floating) {
-			currentSpeed *= floatModifier;
+			currentSpeed *= ModifiedFloatSpeed * Time.deltaTime;
 		} else if (moveState == MoveState.Boosting) {
 			if (ChargePercentage() < 0.5f) {
 				currentSpeed = (1 - ((float)charge / (float)chargeReached)) * currentSpeed;
 			}
-				
 		}
 		
 		return currentSpeed;
@@ -368,25 +376,25 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	void ChangePadColor(int boostLevel) {
-		switch (boostLevel) {
-		case 1:
+	void SetPadColor() {
+		switch (floatLevel) {
+		case 0:
 			pad.renderer.material.color = Color.blue;
 			break;
-		case 2:
+		case 1:
 			pad.renderer.material.color = Color.magenta;
 			break;
-		case 3:
+		case 2:
 			pad.renderer.material.color = Color.yellow;
 			break;
-		case 4:
+		case 3:
 			pad.renderer.material.color = Color.red;
 			break;
-		case 5:
+		case 4:
 			pad.renderer.material.color = Color.black;
 			break;
 		default:
-			pad.renderer.material.color = Color.clear;
+			pad.renderer.material.color = Color.black;
 			break;
 		}
 	}
