@@ -77,6 +77,13 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	private int PotentialExperienceThreshhold {
+		get {
+			return maxCharge / 4;
+		}
+	}
+	
+	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
 	private float baseBoostingSpeed = 30.0f;
@@ -166,7 +173,7 @@ public class Frog : MonoBehaviour {
 	void SetUpFloating() {
 		floatExperience = 0;
 		potentialFloatExperience = 0;
-		floatLevelThreshhold = 100;
+		floatLevelThreshhold = 50;
 	}
 	
 	public void Die() {
@@ -253,6 +260,7 @@ public class Frog : MonoBehaviour {
 		if (moveState == MoveState.Floating) {
 			moveState = MoveState.Charging;
 			charge = 0;
+			potentialFloatExperience = 0;				
 			wantsToBoost = false;
 		} else if (moveState == MoveState.Boosting) {
 			wantsToBoost = true;	
@@ -264,7 +272,7 @@ public class Frog : MonoBehaviour {
 	void BeginBoosting() {
 		if (moveState == MoveState.Charging) {
 			chargeReached = charge;
-			moveState = MoveState.Boosting;	
+			moveState = MoveState.Boosting;		
 		}	
 	}
 	
@@ -292,10 +300,14 @@ public class Frog : MonoBehaviour {
 			floatLevel--;
 		}
 	}
-		
 	
 	void GainFloatExperience() {
-		floatExperience += potentialFloatExperience;
+		if (potentialFloatExperience >= PotentialExperienceThreshhold) {
+			floatExperience += potentialFloatExperience - PotentialExperienceThreshhold;
+			print ("gained" + (potentialFloatExperience - PotentialExperienceThreshhold));
+		} else {
+			print("potential float exp" + potentialFloatExperience + "/" + PotentialExperienceThreshhold);	
+		}
 		if (floatExperience > floatLevelThreshhold) {
 			UpgradeFloating();
 		}
@@ -304,13 +316,13 @@ public class Frog : MonoBehaviour {
 	void HandleState() {
 		if (moveState == MoveState.Charging) {
 			charge+= 2;
+			potentialFloatExperience++;			
 			if (charge >= maxCharge) {
 				charge = maxCharge;
 				BeginBoosting();
 			}
 		} else if(moveState == MoveState.Boosting) {
 			charge-= 5;
-			potentialFloatExperience++;
 			if (charge <= 0) {
 				BeginFloating();
 				GainFloatExperience();
