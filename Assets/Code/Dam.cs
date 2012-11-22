@@ -25,7 +25,7 @@ public class Dam : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		Enemy enemy = other.gameObject.GetComponent<Enemy>();
 		if (enemy != null) {
-			enemy.Die();
+			EnemySpawner.Instance.DestroyEnemy(enemy.gameObject);
 		}
 	}
 	#endregion

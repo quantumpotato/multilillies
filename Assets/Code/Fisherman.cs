@@ -67,7 +67,7 @@ public class Fisherman : MonoBehaviour {
 	}
 	
 	public void FinishCatching(Enemy enemy) {
-		enemy.Die();
+		EnemySpawner.Instance.DestroyEnemy(enemy.gameObject);
 		CheckIfFinished();
 	}
 	
