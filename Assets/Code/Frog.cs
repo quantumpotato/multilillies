@@ -71,6 +71,8 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	private readonly float fullPadRadius = 2.0f;
+	
 	private int charge;
 	private bool wantsToBoost;
 	
@@ -84,6 +86,8 @@ public class Frog : MonoBehaviour {
 	private IList<Rect> inputQuadrants;
 	
 	private GameObject pad;
+	private GameObject floatExperienceCircle;
+	private GameObject fullFloatExperienceCircle;
 	
 	
 	private enum MoveState {
@@ -130,13 +134,18 @@ public class Frog : MonoBehaviour {
 	void Start () {
 		FrogBoundary.Instance.Hit += HandleFrogBoundaryHit;
 		pad = transform.FindChild("pad").gameObject;
+		floatExperienceCircle = transform.FindChild("floatExperienceCircle").gameObject;
+		fullFloatExperienceCircle = transform.FindChild("fullFloatExperienceCircle").gameObject;
+		
+		SetFullFloatExperienceCircleScale();
 	}
 	
 	void Update () {
 		MoveForward();
 		HandleInput();
 		HandleState();
-		AnimatePad();
+//		SetPadScale();
+		SetFloatExperienceCircleScale();
 	}
 	
 	void OnTriggerEnter(Collider other) {
@@ -193,11 +202,37 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	void AnimatePad() {
+	void SetPadScale() {
 		Vector3 scale = pad.transform.localScale;
-		scale.x = 2.0f - (float)charge / (float)maxCharge;
-		scale.z = 2.0f - (float)charge / (float)maxCharge;
+		scale.x = PadRadius();
+		scale.z = PadRadius();
 		pad.transform.localScale = scale;
+	}
+	
+	float PadRadius() {
+		return fullPadRadius - ChargePercentage();
+	}
+	
+	float ChargePercentage() {
+		return (float)charge / (float)maxCharge;
+	}
+	
+	void SetFloatExperienceCircleScale() {
+		Vector3 scale = floatExperienceCircle.transform.localScale;
+		scale.x = FloatExperienceRadius();
+		scale.z = FloatExperienceRadius();
+		floatExperienceCircle.transform.localScale = scale;
+	}
+	
+	void SetFullFloatExperienceCircleScale() {
+		Vector3 scale = fullFloatExperienceCircle.transform.localScale;
+		scale.x = fullPadRadius + (fullPadRadius/2);
+		scale.z = fullPadRadius + (fullPadRadius/2);
+		fullFloatExperienceCircle.transform.localScale = scale;
+	}
+	
+	float FloatExperienceRadius() {
+		return fullPadRadius + FloatExperiencePercentage() * (fullPadRadius/2);
 	}
 	
 	void BeginCharging() {
