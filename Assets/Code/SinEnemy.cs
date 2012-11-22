@@ -33,8 +33,6 @@ public class SinEnemy : ManuallyMovedEnemy {
 			float oscillationPercentage = ((float)stateDuration - (float)stateDurationLeft) / (float)stateDuration;
 			oscillationPercentage = Mathf.Abs(oscillationPercentage - 0.5f);
 			float sinSpeed = ySpeed - (oscillationPercentage * ySpeed);
-//	
-		//ZZZZZZZ	float sinSpeed = 5;
 			transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z + (sinSpeed * yDirection) * Time.deltaTime);
 		} else {
 			//stay still	

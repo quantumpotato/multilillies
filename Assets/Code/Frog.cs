@@ -10,8 +10,8 @@ public class Frog : MonoBehaviour {
 	public float floatModifier;
 	public int floatExperience;
 	public int floatLevelThreshhold;
-	public int potentialFloatExperience;
-		
+	public int potentialFloatExperience;	
+	
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
 	
@@ -74,6 +74,7 @@ public class Frog : MonoBehaviour {
 	private readonly float fullPadRadius = 2.0f;
 	
 	private int charge;
+	private int chargeReached;
 	private bool wantsToBoost;
 	
 	private Vector3 startPosition;
@@ -88,7 +89,6 @@ public class Frog : MonoBehaviour {
 	private GameObject pad;
 	private GameObject floatExperienceCircle;
 	private GameObject fullFloatExperienceCircle;
-	
 	
 	private enum MoveState {
 		Floating,
@@ -249,6 +249,7 @@ public class Frog : MonoBehaviour {
 	
 	void BeginBoosting() {
 		if (moveState == MoveState.Charging) {
+			chargeReached = charge;
 			moveState = MoveState.Boosting;	
 		}	
 	}
@@ -311,7 +312,13 @@ public class Frog : MonoBehaviour {
 		float currentSpeed = Speed * Time.deltaTime;
 		if (moveState == MoveState.Floating) {
 			currentSpeed *= floatModifier;
+		} else if (moveState == MoveState.Boosting) {
+			if (ChargePercentage() < 0.5f) {
+				currentSpeed = (1 - ((float)charge / (float)chargeReached)) * currentSpeed;
+			}
+				
 		}
+		
 		return currentSpeed;
 	}
 	
