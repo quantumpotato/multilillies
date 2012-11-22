@@ -95,6 +95,7 @@ public class Frog : MonoBehaviour {
 	
 	private IList<Rect> inputQuadrants;
 	
+	private GameObject character;
 	private GameObject pad;
 	private GameObject floatExperienceCircle;
 	private GameObject fullFloatExperienceCircle;
@@ -135,11 +136,15 @@ public class Frog : MonoBehaviour {
 
 	void Start () {
 		FrogBoundary.Instance.Hit += HandleFrogBoundaryHit;
+		
+		character = transform.FindChild("character").gameObject;
 		pad = transform.FindChild("pad").gameObject;
 		floatExperienceCircle = transform.FindChild("floatExperienceCircle").gameObject;
 		fullFloatExperienceCircle = transform.FindChild("fullFloatExperienceCircle").gameObject;
 		
 		SetFullFloatExperienceCircleScale();
+		
+		SetCharacterColor();
 	}
 	
 	void Update () {
@@ -395,6 +400,25 @@ public class Frog : MonoBehaviour {
 			break;
 		default:
 			pad.renderer.material.color = Color.black;
+			break;
+		}
+	}
+	
+	void SetCharacterColor() {
+		switch (playerNumber) {
+		case 0:
+			character.renderer.material.color = Color.yellow;
+			break;
+		case 1:
+			character.renderer.material.color = Color.red;
+			break;
+		case 2:
+			character.renderer.material.color = Color.green;
+			break;
+		case 3:
+			character.renderer.material.color = Color.white;
+			break;
+		default:
 			break;
 		}
 	}

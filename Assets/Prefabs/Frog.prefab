@@ -535,7 +535,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.0771046, y: -12.1015892, z: 24.0248585}
+  m_LocalPosition: {x: 4.87150383, y: -12.1015892, z: 24.0248585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400032}
@@ -710,16 +710,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3161d200b54dfaacad6c7e97cf84d, type: 1}
   m_Name: 
   speed: 0
-  playerNumber: 3
+  playerNumber: 0
   score: 0
   mistakes: 0
   floatExperience: 0
   floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
-  baseFloatingSpeed: 2
-  baseBoostingSpeed: 30
-  floatModifier: .5
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -745,7 +742,7 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cd2ce70d974d82247aa6398234ed9845, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
