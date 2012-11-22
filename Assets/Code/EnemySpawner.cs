@@ -101,7 +101,6 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void CalculateEnemyWeights() {
-		print (playerIndex + "playerIndex");	
 		int newScore = Frog.Players[playerIndex].score;
 		int heavyWeight = newScore / 2;
 		int lightWeight = newScore / 3;

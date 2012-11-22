@@ -9,9 +9,7 @@ public class ManuallyMovedEnemy : Enemy {
 	#endregion
 	
 	public override void SetSpeedForLowestAndTeamScores(int lowest, int total) {
-		print ("lowest: " + lowest + "total" + total);
 		_speed = Random.Range (SpeedModForScore (lowest), SpeedModForScore (total));	
-		print  ("_speed:" + _speed);
 	}
 	
 	public override void SetSpeedForFrog(Frog frog) {
