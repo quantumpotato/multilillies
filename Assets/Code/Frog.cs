@@ -219,7 +219,6 @@ public class Frog : MonoBehaviour {
 			if (charge >= maxCharge) {
 				charge = maxCharge;
 				BeginBoosting();
-				boostLevel++;
 			}
 		} else if(moveState == MoveState.Boosting) {
 			charge-= 5;
