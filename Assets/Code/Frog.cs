@@ -124,6 +124,7 @@ public class Frog : MonoBehaviour {
 	
 	public void Die() {
 		ResetPosition();
+		ResetState();		
 		DecreaseScore();
 		FireScoreChangedNotification();
 	}
@@ -247,8 +248,8 @@ public class Frog : MonoBehaviour {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
-			//score++;	
-			//FireScoreChangedNotification();
+			score++;	
+			FireScoreChangedNotification();
 		}
 	}
 }
