@@ -64,13 +64,15 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject enemyPrefab = logPrefab;
 		if (spawnPossibility <= logRequired) {
 			enemyPrefab = logPrefab;
-			//print("chose log " + spawnPossibility + " which is under " + logRequired);
+			print("chose log " + spawnPossibility + " which is under " + logRequired);
 		} else if (spawnPossibility < sharkRequired) {
 			enemyPrefab = sharkPrefab;
 			print("chose shark " + spawnPossibility + " which is under " + sharkRequired);
 		} else if (spawnPossibility < fishRequired) {
 			enemyPrefab = fishPrefab;
 			print("chose fish " + spawnPossibility + " which is under " + fishRequired);
+		} else {
+			print ("chose none " + spawnPossibility + " which is over" + fishRequired + "and over" + weightTotal);
 		}
 		
 		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
@@ -86,14 +88,14 @@ public class EnemySpawner : MonoBehaviour {
 		
 		Frog frog = Frog.Players[playerIndex];
 		enemy.SetSpeedForFrog(frog);		
-		spawnTimer = Random.Range(5,70);
+		spawnTimer = Random.Range(5,20);
 	}
 	
 	void CalculateEnemyWeights() {
 		int newScore = Frog.TotalScore;
 		int fives = newScore / 5;
 		int tens = newScore / 10;
-		//int fifteens = newScore / 15;
+		
 		logWeight = 5 + fives;
 		sharkWeight = fives;
 		fishWeight = tens;

@@ -4378,7 +4378,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dfbc3d9a6d74401eac80b9f21eda847, type: 1}
   m_Name: 
-  desiredEnemyCount: 12
+  desiredEnemyCount: 20
   logPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
   fishPrefab: {fileID: 100026, guid: 069777823c59148e0ac7bd360b1e2bd2, type: 2}
   sharkPrefab: {fileID: 100026, guid: 9267ea8669b694ce28f6ffdc1e411bfa, type: 2}

@@ -43,9 +43,9 @@ public class Enemy : MonoBehaviour {
 		}
 		
 //		print ("scoreMod:" + scoreMod);
-		int speedMod = Random.Range (scoreMod / 2, scoreMod);
+		int speedMod = Random.Range (scoreMod, scoreMod * 2);
 		_speed = speedMod / 2;
-		_speed+= 4;
+		_speed+= 6;
 		//print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
 	}
 	
