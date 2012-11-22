@@ -16,7 +16,7 @@ public class Frog : MonoBehaviour {
 	public event ScoreChangedHandler ScoreChanged;
 	
 	public delegate void HitHandler(Frog frog, Enemy other);
-	public event HitHandler Hit;	
+	public event HitHandler Hit;
 	
 	private static bool surpassing;
 	public static bool Surpassing {
@@ -69,7 +69,7 @@ public class Frog : MonoBehaviour {
 			}	
 			return players;
 		}
-	}	
+	}
 	
 	private int charge;
 	private bool wantsToBoost;
@@ -325,4 +325,29 @@ public class Frog : MonoBehaviour {
 			FireScoreChangedNotification();
 		}
 	}
+	
+	void ChangePadColor(int boostLevel) {
+		switch (boostLevel) {
+		case 1:
+			pad.renderer.material.color = Color.blue;
+			break;
+		case 2:
+			pad.renderer.material.color = Color.magenta;
+			break;
+		case 3:
+			pad.renderer.material.color = Color.yellow;
+			break;
+		case 4:
+			pad.renderer.material.color = Color.red;
+			break;
+		case 5:
+			pad.renderer.material.color = Color.black;
+			break;
+		default:
+			pad.renderer.material.color = Color.clear;
+			break;
+		}
+	}
+	
+	
 }
