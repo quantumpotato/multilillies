@@ -117,7 +117,7 @@ public class Frog : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		if (IsEnemy(other.gameObject)) {
-			FireHitNotification(other.gameObject);
+			//FireHitNotification(other.gameObject);
 		}
     }
 	#endregion
