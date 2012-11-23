@@ -54,6 +54,7 @@ public class EnemySpawner : MonoBehaviour {
 	
 	private void cyclePlayerIndex() {
 		//will need to check which players are active and if not increment and call itself
+		playerIndex++;
 		if (playerIndex > 3) { 
 			playerIndex = 0;
 		}
@@ -71,7 +72,7 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject enemyPrefab = logPrefab;
 		if (spawnPossibility <= logRequired) {
 			enemyPrefab = logPrefab;
-			print("chose log " + spawnPossibility + " which is under " + logRequired);
+			//print("chose log " + spawnPossibility + " which is under " + logRequired);
 		} else if (spawnPossibility < sharkRequired) {
 			enemyPrefab = sharkPrefab;
 		//	print("chose shark " + spawnPossibility + " which is under " + sharkRequired);
@@ -90,28 +91,24 @@ public class EnemySpawner : MonoBehaviour {
 		
 		cyclePlayerIndex();
 		
-		int minScore = Frog.HighScore * 4;
 
-	
-		foreach (Frog f in Frog.Players) {
-			if (f.score < minScore) {
-				minScore = f.score;
-			}
+		enemy.SetSpeedForLowestAndTeamScores(Frog.MinScore, Frog.TotalScore);
+		int lowestSpawnDelay = 15 - Frog.TotalScore;
+		if (lowestSpawnDelay < 5) {
+			lowestSpawnDelay = 5;
 		}
-		print("setting speed");
-		enemy.SetSpeedForLowestAndTeamScores(minScore, Frog.TotalScore);
-		spawnTimer = Random.Range(5,40);
+		spawnTimer = Random.Range(lowestSpawnDelay,15);
 	}
 	
 	void CalculateEnemyWeights() {
+		print (playerIndex + "playerIndex");	
 		int newScore = Frog.Players[playerIndex].score;
 		int heavyWeight = newScore / 2;
 		int lightWeight = newScore / 3;
 		int featherWeight = newScore / 10;
 		
-		logWeight = 5 + featherWeight;
-		sharkWeight = heavyWeight;
-		fishWeight = lightWeight;
-		sharkWeight = 50;
+		logWeight = 3 + featherWeight;
+		sharkWeight = lightWeight;
+		fishWeight = heavyWeight;
 	}
 }

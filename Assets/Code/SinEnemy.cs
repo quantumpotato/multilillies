@@ -19,9 +19,7 @@ public class SinEnemy : ManuallyMovedEnemy {
 	}
 	
 	public override void SetSpeedForLowestAndTeamScores(int lowest, int total) {
-		print ("lowest: " + lowest + "total" + total);
 		_speed = Random.Range (SpeedModForScore (lowest) / 2 + 2, SpeedModForScore(total) / 2 + 3);	
-		print  ("_speed:" + _speed);
 		yDirection = 1;
 		ySpeed = Random.Range (1,6);
 		stateDuration = Random.Range (20, 40+lowest);
@@ -33,7 +31,6 @@ public class SinEnemy : ManuallyMovedEnemy {
 	{
 		if (state == SinState.Oscilatting) {
 			float oscillationPercentage = ((float)stateDuration - (float)stateDurationLeft) / (float)stateDuration;
-			print (oscillationPercentage + ": duration: " + stateDuration + " left" + stateDurationLeft);
 			oscillationPercentage = Mathf.Abs(oscillationPercentage - 0.5f);
 			float sinSpeed = ySpeed - (oscillationPercentage * ySpeed);
 //	

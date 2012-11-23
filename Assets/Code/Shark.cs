@@ -23,7 +23,7 @@ public class Shark : ManuallyMovedEnemy {
 	#endregion monodevelop
 	
 	override public void SetSpeedForLowestAndTeamScores(int lowest, int total) {
-		_speed = Random.Range((lowest / 2) + 1, (total / 2) + 3);
+		_speed = Random.Range((lowest / 2) + 2, (total / 2) + 3);
 		int maxDelay = 60;
 		stallBeforeBoosting = maxDelay - lowest;
 		if (stallBeforeBoosting < 5) {
@@ -42,7 +42,7 @@ public class Shark : ManuallyMovedEnemy {
 			stallBeforeBoosting--;
 			if (stallBeforeBoosting <= 0) {
 				state = SharkState.Charging;
-				_speed += 7;
+				_speed = 30;
 			}
 		} else {
 			transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z + zDelta);
