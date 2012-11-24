@@ -74,7 +74,7 @@ public class Fisherman : MonoBehaviour {
 	void DrawFishermanPickupButton() {
 		int width = 200;
 		int height = 50;
-		if (GUI.Button (new Rect(Screen.width - width - 5, 5, width, height), "Fisherman\n" + CurrentState)) {
+		if (GUI.Button (new Rect(Screen.width - width - 5, 240, width, height), "Fisherman\n" + CurrentState)) {
 			OnFishermanButtonClick();
 		}
 	}
