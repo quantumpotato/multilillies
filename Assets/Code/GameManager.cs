@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 		if (Playing) return;
 		
 		EnemySpawner.Play();
+		FrogHitManager.Instance.Play();
 		
 		Playing = true;
 	}

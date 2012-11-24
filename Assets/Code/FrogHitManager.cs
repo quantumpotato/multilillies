@@ -12,7 +12,7 @@ public class FrogHitManager : MonoBehaviour {
 		Instance = this;
 	}
 	
-	void Start() {
+	public void Play() {
 		foreach (Frog frog in PlayerManager.Instance.Frogs) {
 			frog.Hit += HandleFrogHit;
 		}
