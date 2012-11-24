@@ -2,12 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	public int minSpeed;
-	public int maxSpeed;
+	protected GameObject _core;
 	
-	private float _speed;
-	private Vector3 _startPosition;
-	
+	protected float _speed;
 	public float Speed {
 		get {
 			return _speed;
@@ -18,33 +15,63 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	#region MonoBehaviour
-	void Awake() {
-		int speedMod = Random.Range(minSpeed,maxSpeed);
-		_speed = speedMod * .05f;
-		_speed+= 3;
-	}
-
-	// Use this for initialization
-	void Start () {
-		
+	protected virtual void Awake() {
 	}
 	
-	public void SetSpeedForFrog(Frog frog) {
-		int scoreMod = frog.score + 10;
-		if (scoreMod > 50) {
-			scoreMod = 50;
-		}
-		
-		print ("scoreMod:" + scoreMod);
-		int speedMod = Random.Range (scoreMod / 2, scoreMod);
-		_speed = speedMod / 2;
-		_speed+= 4;
-		print ("spawned with speed: " + _speed + "   with speedMod: " + speedMod);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		transform.position = new Vector3(transform.position.x + _speed * Time.deltaTime, transform.position.y, transform.position.z);
+	protected virtual void Start() {
+		_core = transform.FindChild("core").gameObject;
 	}
 	#endregion
+	
+	public virtual void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+		// subclass implements
+	}
+	
+	public virtual void SetSpeedForFrog(Frog frog) {
+		// up to sub-class
+	}
+	
+	public virtual void GetCaughtBy(Fisherman fisherman) {
+		float caughtHeight = 8.0f;
+		float caughtTime = 2.0f;
+		
+		iTween.MoveBy(_core, iTween.Hash(
+			"y", caughtHeight,
+			"time", caughtTime / 2,
+			"easeType", iTween.EaseType.easeOutQuad
+		));
+		iTween.MoveBy(_core, iTween.Hash(
+			"y", -caughtHeight,
+			"time", caughtTime / 2,
+			"delay", caughtTime / 2,
+			"easeType", iTween.EaseType.easeInCubic
+		));     
+		iTween.MoveTo(gameObject, iTween.Hash(
+			"position", fisherman.transform,
+			"time", caughtTime,
+			"easeType", iTween.EaseType.linear,
+			"oncomplete", "OnCaught",
+			"oncompleteparams", fisherman
+		));
+	}
+	
+	public void Die() {
+		EnemySpawner.Instance.DestroyEnemy(gameObject);
+	}
+	
+	protected int SpeedModForScore(int score) {
+		int speed = score + 10;
+		if (speed > 50) {
+			speed = 50;
+		}
+		return speed;
+	}
+	
+	protected int ScoreMod(Frog frog) {
+		return SpeedModForScore(frog.score);
+	}
+	
+	protected void OnCaught(Fisherman fisherman) {
+		fisherman.FinishCatching(this);
+	}
 }
