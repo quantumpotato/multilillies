@@ -277,7 +277,6 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void UpgradeFloating() {
-		potentialFloatExperience = 0;
 		floatExperience = 0;
 		floatLevel += 1;
 	}
@@ -285,7 +284,6 @@ public class Frog : MonoBehaviour {
 	void DownGradeFloating() {
 		floatExperience = 0;
 		if (floatLevel > 0) {
-			floatLevelThreshhold /= 2;
 			floatLevel--;
 		}
 	}
