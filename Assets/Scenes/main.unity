@@ -2870,7 +2870,7 @@ GameObject:
   - 54: {fileID: 1044305043}
   - 136: {fileID: 1044305045}
   m_Layer: 9
-  m_Name: P3
+  m_Name: P4
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2967,7 +2967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3161d200b54dfaacad6c7e97cf84d, type: 1}
   m_Name: 
   speed: 0
-  playerNumber: 2
+  playerNumber: 3
   score: 0
   mistakes: 0
   floatExperience: 0
@@ -4211,11 +4211,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100034, guid: e00a9f3b9041c4580b3c67e564efd378, type: 2}
       propertyPath: m_Name
-      value: P4
+      value: P3
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: e00a9f3b9041c4580b3c67e564efd378, type: 2}
       propertyPath: playerNumber
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 100036, guid: e00a9f3b9041c4580b3c67e564efd378, type: 2}
       propertyPath: m_IsActive
@@ -4428,7 +4428,7 @@ GameObject:
   - 54: {fileID: 1743394899}
   - 136: {fileID: 1743394901}
   m_Layer: 9
-  m_Name: P4
+  m_Name: P3
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4525,7 +4525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3161d200b54dfaacad6c7e97cf84d, type: 1}
   m_Name: 
   speed: 0
-  playerNumber: 3
+  playerNumber: 2
   score: 0
   mistakes: 0
   floatExperience: 0
@@ -4864,8 +4864,8 @@ Transform:
   m_Children:
   - {fileID: 1642078574}
   - {fileID: 164401623}
-  - {fileID: 1044305042}
   - {fileID: 1743394898}
+  - {fileID: 1044305042}
   m_Father: {fileID: 0}
 --- !u!1 &1881055836
 GameObject:
@@ -4956,11 +4956,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100034, guid: e00a9f3b9041c4580b3c67e564efd378, type: 2}
       propertyPath: m_Name
-      value: P3
+      value: P4
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: e00a9f3b9041c4580b3c67e564efd378, type: 2}
       propertyPath: playerNumber
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: e00a9f3b9041c4580b3c67e564efd378, type: 2}
       propertyPath: m_IsActive
