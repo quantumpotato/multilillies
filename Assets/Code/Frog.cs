@@ -42,7 +42,7 @@ public class Frog : MonoBehaviour {
 		get {
 			int minScore = Frog.HighScore * 4;
 	
-			foreach (Frog f in Frog.Players) {
+			foreach (Frog f in PlayerManager.Instance.Frogs) {
 				if (f.score < minScore) {
 					minScore = f.score;
 				}
@@ -96,7 +96,7 @@ public class Frog : MonoBehaviour {
 	private Rect lowerLeftBounds;
 	private Rect upperRightBounds;
 	private Rect lowerRightBounds;
-	private IList<Rect> inputQuadrants;
+	private Rect[] inputQuadrants;
 	
 	private GameObject character;
 	private GameObject pad;
@@ -143,7 +143,7 @@ public class Frog : MonoBehaviour {
 		
 		SetFullFloatExperienceCircleScale();
 		
-		SetCharacterColor();
+		SetColor();
 	}
 	
 	void Update () {
@@ -177,11 +177,11 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void SetUpInputQuadrants() {
-		inputQuadrants = new List<Rect>();
-		inputQuadrants.Add(new Rect(0, 0, Screen.width/2, Screen.height/2));
-		inputQuadrants.Add(new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2));
-		inputQuadrants.Add(new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2));
-		inputQuadrants.Add(new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2));
+		inputQuadrants = new Rect[4];
+		inputQuadrants[0] = new Rect(0, 0, Screen.width/2, Screen.height/2);
+		inputQuadrants[1] = new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2);
+		inputQuadrants[2] = new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2);
+		inputQuadrants[3] = new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2);
 	}
 	
 	bool IsEnemy(GameObject other) {
@@ -406,24 +406,7 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	void SetCharacterColor() {
-		switch (playerNumber) {
-		case 0:
-			character.renderer.material.color = Color.yellow;
-			break;
-		case 1:
-			character.renderer.material.color = Color.red;
-			break;
-		case 2:
-			character.renderer.material.color = Color.green;
-			break;
-		case 3:
-			character.renderer.material.color = Color.white;
-			break;
-		default:
-			break;
-		}
+	void SetColor() {
+		character.renderer.material.color = PlayerManager.Instance.GetPlayerColor(playerNumber);
 	}
-	
-	
 }
