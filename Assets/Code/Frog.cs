@@ -42,7 +42,7 @@ public class Frog : MonoBehaviour {
 		get {
 			int minScore = Frog.HighScore * 4;
 	
-			foreach (Frog f in Frog.Players) {
+			foreach (Frog f in PlayerManager.Instance.Frogs) {
 				if (f.score < minScore) {
 					minScore = f.score;
 				}

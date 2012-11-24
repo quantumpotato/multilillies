@@ -4,6 +4,9 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 	
 	public static EnemySpawner Instance;
+	public static void Play() {
+		Instance.gameObject.SetActiveRecursively(true);
+	}
 	
 	public int desiredEnemyCount;
 	public GameObject logPrefab;
@@ -28,7 +31,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		foreach (Frog f in Frog.Players) {
+		foreach (Frog f in PlayerManager.Instance.Frogs) {
 			f.ScoreChanged += HandleFrogScoreChanged;
 		}
 	}
@@ -101,7 +104,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void CalculateEnemyWeights() {
-		int newScore = Frog.Players[playerIndex].score;
+		int newScore = PlayerManager.Instance.Frogs[playerIndex].score;
 		int heavyWeight = newScore / 2;
 		int lightWeight = newScore / 3;
 		int featherWeight = newScore / 10;
