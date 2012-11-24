@@ -7,10 +7,10 @@ public class Frog : MonoBehaviour {
 	public int playerNumber;
 	public int score;
 	public int mistakes;
-	public int floatExperience;
+	public float floatExperience;
 	public int floatLevel;
-	public int floatLevelThreshhold;
-	public int potentialFloatExperience;	
+	public float floatLevelThreshhold;
+	public float potentialFloatExperience;	
 	
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
@@ -77,20 +77,17 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	private int PotentialExperienceThreshhold {
-		get {
-			return 5;
-		}
-	}
-	
-	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
 	private float baseBoostingSpeed = 30.0f;
 	private float floatModifier = 1.5f;
-	
-	private int charge;
-	private int chargeReached;
+	private float maxCharge = 70;
+	private float charge;
+	private float chargeReached;
+	private float chargeIncreaseSpeed = 130;
+	private float chargeDecreaseSpeed = 280;
+	private float potentialFloatExperienceIncreaseSpeed = 200;
+	private float potentialExperienceThreshold = 30;
 	private bool wantsToBoost;
 	
 	private Vector3 startPosition;
@@ -99,7 +96,6 @@ public class Frog : MonoBehaviour {
 	private Rect lowerLeftBounds;
 	private Rect upperRightBounds;
 	private Rect lowerRightBounds;
-	
 	private IList<Rect> inputQuadrants;
 	
 	private GameObject character;
@@ -129,16 +125,12 @@ public class Frog : MonoBehaviour {
 			}
 		}
 	}
-	
-	private int maxCharge;
 		
 	#region MonoBehaviour
 	void Awake() {
 		SetUpInputQuadrants();
 		SetUpFloating();
 		startPosition = transform.position;
-		maxCharge = 70;
-		score = 0;
 	}
 
 	void Start () {
@@ -173,7 +165,7 @@ public class Frog : MonoBehaviour {
 	void SetUpFloating() {
 		floatExperience = 0;
 		potentialFloatExperience = 0;
-		floatLevelThreshhold = 50;
+		floatLevelThreshhold = 200;
 	}
 	
 	public void Die() {
@@ -265,8 +257,6 @@ public class Frog : MonoBehaviour {
 		} else if (moveState == MoveState.Boosting) {
 			wantsToBoost = true;	
 		}
-		
-		
 	}
 	
 	void BeginBoosting() {
@@ -302,11 +292,11 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void GainFloatExperience() {
-		if (potentialFloatExperience >= PotentialExperienceThreshhold) {
-			floatExperience += potentialFloatExperience - PotentialExperienceThreshhold;
-			print ("gained" + (potentialFloatExperience - PotentialExperienceThreshhold));
+		if (potentialFloatExperience >= potentialExperienceThreshold) {
+			floatExperience += potentialFloatExperience - potentialExperienceThreshold;
+			print ("gained " + floatExperience);
 		} else {
-			print("potential float exp" + potentialFloatExperience + "/" + PotentialExperienceThreshhold);	
+			print("potential float exp " + potentialFloatExperience + " / " + potentialExperienceThreshold);
 		}
 		if (floatExperience > floatLevelThreshhold) {
 			UpgradeFloating();
@@ -315,36 +305,36 @@ public class Frog : MonoBehaviour {
 	
 	void HandleState() {
 		if (moveState == MoveState.Charging) {
-			charge+= 3;
-			potentialFloatExperience++;			
-			if (charge >= maxCharge + 17) {
+			charge += (chargeIncreaseSpeed * Time.deltaTime);
+			potentialFloatExperience += (potentialFloatExperienceIncreaseSpeed * Time.deltaTime);
+			if (charge >= maxCharge) {
 				charge = maxCharge;
 				BeginBoosting();
 			}
 		} else if(moveState == MoveState.Boosting) {
-			charge-= 5;
+			charge -= (chargeDecreaseSpeed * Time.deltaTime);
 			if (charge <= 0) {
 				BeginFloating();
 				GainFloatExperience();
 			}
 		} else if (moveState == MoveState.Floating) {
 			if (wantsToBoost == true) {
-				BeginCharging();	
+				BeginCharging();
 			}
 		}
 	}
 	
 	float CurrentSpeed() {
-		float currentSpeed = Speed * Time.deltaTime;
+		float currentSpeed = Speed;
 		if (moveState == MoveState.Floating) {
-			currentSpeed = ModifiedFloatSpeed * Time.deltaTime;
+			currentSpeed = ModifiedFloatSpeed;
 		} else if (moveState == MoveState.Boosting) {
 //			if (ChargePercentage() < 0.5f) {
 //				currentSpeed = ((1 - ((float)charge / (float)chargeReached)) * currentSpeed) * Time.deltaTime;
 //			}
 		}
 		
-		return currentSpeed;
+		return currentSpeed * Time.deltaTime;
 	}
 	
 	void MoveForward() {
