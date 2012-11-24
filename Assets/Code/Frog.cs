@@ -143,7 +143,7 @@ public class Frog : MonoBehaviour {
 		
 		SetFullFloatExperienceCircleScale();
 		
-		SetCharacterColor();
+		SetColor();
 	}
 	
 	void Update () {
@@ -406,24 +406,7 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	void SetCharacterColor() {
-		switch (playerNumber) {
-		case 0:
-			character.renderer.material.color = Color.yellow;
-			break;
-		case 1:
-			character.renderer.material.color = Color.green;
-			break;
-		case 2:
-			character.renderer.material.color = Color.red;
-			break;
-		case 3:
-			character.renderer.material.color = Color.white;
-			break;
-		default:
-			break;
-		}
+	void SetColor() {
+		character.renderer.material.color = PlayerManager.Instance.GetPlayerColor(playerNumber);
 	}
-	
-	
 }

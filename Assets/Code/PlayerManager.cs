@@ -43,6 +43,21 @@ public class PlayerManager : MonoBehaviour {
 	}
 	#endregion
 	
+	public Color GetPlayerColor(int playerNumber) {
+		switch (playerNumber) {
+		case 0:
+			return Color.yellow;
+		case 1:
+			return Color.green;
+		case 2:
+			return Color.red;
+		case 3:
+			return Color.white;
+		default:
+			return Color.black;
+		}
+	}
+	
 	void DrawPlayerAreas() {
 		float textureWidth = 50;
 		float textureHeight = 50;
