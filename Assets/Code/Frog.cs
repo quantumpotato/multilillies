@@ -279,7 +279,6 @@ public class Frog : MonoBehaviour {
 	void UpgradeFloating() {
 		potentialFloatExperience = 0;
 		floatExperience = 0;
-		floatLevelThreshhold *= 2;	
 		floatLevel += 1;
 	}
 	
