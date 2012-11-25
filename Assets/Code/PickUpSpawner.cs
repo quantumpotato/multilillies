@@ -38,6 +38,17 @@ public class PickUpSpawner : MonoBehaviour {
 	}
 	#endregion
 	
+	public void DestroyPickUp(GameObject go) {
+		PickUp pickUp = go.GetComponent<PickUp>();
+		if (pickUp != null) {
+			DestroyPickUp(pickUp);
+		}
+	}
+	
+	public void DestroyPickUp(PickUp pickUp) {
+		GameObject.Destroy(pickUp.gameObject);
+	}
+	
 	void HandleFrogScoreChanged(Frog frog) {
 		// TODO
 	}
@@ -57,7 +68,7 @@ public class PickUpSpawner : MonoBehaviour {
 		int num = Random.Range (1, 100);
 		if (num <= 15) {
 			return summonFishermanPrefab;
-		} else if (num > 15 && num <= 40) {
+		} else if (num > 15 && num <= 100) {
 			return raiseDamPrefab;
 		}
 		return upgradeFloatingPrefab;

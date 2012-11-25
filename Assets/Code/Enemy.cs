@@ -2,6 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
+	public static bool IsEnemy(GameObject go) {
+		return go.GetComponent<Enemy>() != null;
+	}
+	
 	protected GameObject _core;
 	
 	protected float _speed;

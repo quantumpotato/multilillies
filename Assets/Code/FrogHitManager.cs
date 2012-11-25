@@ -21,7 +21,7 @@ public class FrogHitManager : MonoBehaviour {
 
 	void HandleFrogPickUpHit(Frog frog, PickUp pickUp) {
 		pickUp.ApplyTo(frog);
-		pickUp.Die();
+		PickUpSpawner.Instance.DestroyPickUp(pickUp);
 	}
 
 	void HandleFrogHit(Frog frog, Enemy enemy) {

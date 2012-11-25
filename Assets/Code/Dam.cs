@@ -42,9 +42,10 @@ public class Dam : MonoBehaviour {
 //	}
 	
 	void OnTriggerEnter(Collider other) {
-		Enemy enemy = other.gameObject.GetComponent<Enemy>();
-		if (enemy != null) {
-			EnemySpawner.Instance.DestroyEnemy(enemy.gameObject);
+		if (Enemy.IsEnemy(other.gameObject)) {
+			EnemySpawner.Instance.DestroyEnemy(other.gameObject);
+		} else if (PickUp.IsPickUp(other.gameObject)) {
+			PickUpSpawner.Instance.DestroyPickUp(other.gameObject);
 		}
 	}
 	#endregion
@@ -62,7 +63,7 @@ public class Dam : MonoBehaviour {
 	}
 	
 	IEnumerator WaitThenLower() {
-		yield return new WaitForSeconds(7);
+		yield return new WaitForSeconds(300);
 		Lower();
 	}
 	

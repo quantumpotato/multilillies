@@ -5,6 +5,10 @@ using System.Collections;
 public class PickUp : MonoBehaviour {
 	public float speed;
 	public string powerUpClassName;
+	
+	public static bool IsPickUp(GameObject go) {
+		return go.GetComponent<PickUp>() != null;
+	}
 
 	#region MonoBehaviour
 	void Update() {
@@ -16,10 +20,6 @@ public class PickUp : MonoBehaviour {
 		Type type = Type.GetType(powerUpClassName);
 		PowerUp powerUp = (PowerUp)Activator.CreateInstance(type);
 		powerUp.ApplyTo(frog);
-	}
-	
-	public void Die() {
-		Destroy(gameObject);
 	}
 	
 	void UpdatePosition() {

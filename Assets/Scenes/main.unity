@@ -5291,8 +5291,9 @@ MonoBehaviour:
   highestSpawnTickAmount: 150
   upgradeFloatingPrefab: {fileID: 100000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
     type: 2}
-  summonFishermanPrefab: {fileID: 0}
-  raiseDamPrefab: {fileID: 0}
+  summonFishermanPrefab: {fileID: 100000, guid: 8ac05d51de9b04aa4988ec4c98c0bcda,
+    type: 2}
+  raiseDamPrefab: {fileID: 100000, guid: fc07c1f8fa727418a8cebe75349db4e5, type: 2}
   maximumZ: 24
 --- !u!1 &2055275262
 GameObject:

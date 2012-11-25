@@ -159,9 +159,9 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		if (IsEnemy(other.gameObject)) {
+		if (Enemy.IsEnemy(other.gameObject)) {
 			FireHitNotification(other.gameObject);
-		} else if (IsPickUp(other.gameObject)) {
+		} else if (PickUp.IsPickUp(other.gameObject)) {
 			FirePickUpHitNotification(other.gameObject);
 		}
     }
@@ -193,15 +193,7 @@ public class Frog : MonoBehaviour {
 		inputQuadrants[2] = new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2);
 		inputQuadrants[3] = new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2);
 	}
-	
-	bool IsEnemy(GameObject other) {
-		return other.GetComponent<Enemy>() != null;
-	}
-	
-	bool IsPickUp(GameObject other) {
-		return other.GetComponent<PickUp>() != null;
-	}
-	
+
 	void DecreaseScore() {
 		score-= mistakes;
 		mistakes++;
