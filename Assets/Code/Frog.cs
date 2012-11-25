@@ -72,7 +72,7 @@ public class Frog : MonoBehaviour {
 	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
-	private float baseBoostingSpeed = 30.0f;
+	private float baseBoostingSpeed = 28.0f;
 	private float floatModifier = 1.5f;
 	private float maxCharge = 70;
 	private float charge;
@@ -108,7 +108,7 @@ public class Frog : MonoBehaviour {
 		get {
 			switch (moveState) {
 			case MoveState.Boosting:
-				return baseBoostingSpeed;
+				return ModifiedFloatSpeed + baseBoostingSpeed;
 			case MoveState.Floating:
 				return baseFloatingSpeed;
 			case MoveState.Charging:
@@ -388,6 +388,7 @@ public class Frog : MonoBehaviour {
 	}
 		
 	void SetPadColor() {
+		floatLevel = (int)FloatLevels.BlackLevel;
 		switch (floatLevel) {
 		case (int)FloatLevels.BlueLevel:
 			pad.renderer.material.color = Color.blue;
