@@ -283,9 +283,13 @@ public class Frog : MonoBehaviour {
 	
 	void DownGradeFloating() {
 		floatExperience = 0;
-		if (floatLevel > 0) {
-			floatLevel--;
+		
+		int levelsToDecrease = floatLevel > 0 ? 1 : 0;
+		if (floatLevel > redLevel) {
+			levelsToDecrease = floatLevel - redLevel;	
 		}
+		floatLevel -= levelsToDecrease;
+		
 	}
 	
 	void GainFloatExperience() {
