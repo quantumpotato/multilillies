@@ -388,7 +388,6 @@ public class Frog : MonoBehaviour {
 	}
 		
 	void SetPadColor() {
-		floatLevel = (int)FloatLevels.BlackLevel;
 		switch (floatLevel) {
 		case (int)FloatLevels.BlueLevel:
 			pad.renderer.material.color = Color.blue;
