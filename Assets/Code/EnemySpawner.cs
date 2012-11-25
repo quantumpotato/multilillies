@@ -11,12 +11,16 @@ public class EnemySpawner : MonoBehaviour {
 	public int desiredEnemyCount;
 	public GameObject logPrefab;
 	public GameObject fishPrefab;
+	public GameObject bigFishPrefab;
 	public GameObject sharkPrefab;
+	public GameObject fatLogPrefab;
 	
 	public int maximumZ;
 	public int logWeight;
 	public int fishWeight;
+	public int bigFishWeight;
 	public int sharkWeight;
+	public int fatLogWeight;
 	
 	private int playerIndex;
 	private int spawnTimer;
@@ -66,22 +70,26 @@ public class EnemySpawner : MonoBehaviour {
 	void SpawnEnemy() {
 		CalculateEnemyWeights();
 			
-		int weightTotal = logWeight + fishWeight + sharkWeight;
+		int weightTotal = logWeight + fishWeight + sharkWeight + bigFishWeight + fatLogWeight;
 		int spawnPossibility = Random.Range(0, weightTotal);
 		int logRequired = logWeight;
 		int sharkRequired = logRequired + sharkWeight;
 		int fishRequired = sharkRequired + fishWeight;
+		int bigFishRequired = fishRequired + bigFishWeight;
+		int fatLogRequired = bigFishRequired + fatLogWeight;
+		
 		
 		GameObject enemyPrefab = logPrefab;
 		if (spawnPossibility <= logRequired) {
 			enemyPrefab = logPrefab;
-			//print("chose log " + spawnPossibility + " which is under " + logRequired);
 		} else if (spawnPossibility < sharkRequired) {
 			enemyPrefab = sharkPrefab;
-		//	print("chose shark " + spawnPossibility + " which is under " + sharkRequired);
 		} else if (spawnPossibility < fishRequired) {
 			enemyPrefab = fishPrefab;
-		//	print("chose fish " + spawnPossibility + " which is under " + fishRequired);
+		} else if (spawnPossibility < bigFishRequired) {
+			enemyPrefab = bigFishPrefab;
+		} else if (spawnPossibility < fatLogRequired) {
+			enemyPrefab = fatLogPrefab;
 		} else {
 			print ("chose none " + spawnPossibility + " which is over" + fishRequired + "and over" + weightTotal);
 		}
@@ -108,9 +116,12 @@ public class EnemySpawner : MonoBehaviour {
 		int heavyWeight = newScore / 2;
 		int lightWeight = newScore / 3;
 		int featherWeight = newScore / 10;
+		int fatLogWeight = newScore / 11;
 		
-		logWeight = 3 + featherWeight;
+		logWeight = 3 + featherWeight;	
 		sharkWeight = lightWeight;
+		
 		fishWeight = heavyWeight;
+		bigFishWeight = fishWeight / 2;
 	}
 }
