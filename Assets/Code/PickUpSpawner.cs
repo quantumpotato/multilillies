@@ -68,7 +68,7 @@ public class PickUpSpawner : MonoBehaviour {
 		int num = Random.Range (1, 100);
 		if (num <= 15) {
 			return summonFishermanPrefab;
-		} else if (num > 15 && num <= 100) {
+		} else if (num > 15 && num <= 40) {
 			return raiseDamPrefab;
 		}
 		return upgradeFloatingPrefab;
