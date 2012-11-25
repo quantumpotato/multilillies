@@ -63,7 +63,7 @@ public class Dam : MonoBehaviour {
 	}
 	
 	IEnumerator WaitThenLower() {
-		yield return new WaitForSeconds(300);
+		yield return new WaitForSeconds(7);
 		Lower();
 	}
 	

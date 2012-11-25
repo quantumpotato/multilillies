@@ -141,10 +141,6 @@ public class Frog : MonoBehaviour {
 		
 		character = transform.FindChild("character").gameObject;
 		pad = transform.FindChild("pad").gameObject;
-		floatExperienceCircle = transform.FindChild("floatExperienceCircle").gameObject;
-		fullFloatExperienceCircle = transform.FindChild("fullFloatExperienceCircle").gameObject;
-		
-		SetFullFloatExperienceCircleScale();
 		
 		SetColor();
 	}
@@ -154,7 +150,6 @@ public class Frog : MonoBehaviour {
 		HandleInput();
 		HandleState();
 		SetPadScale();
-		SetFloatExperienceCircleScale();
 		SetPadColor();
 	}
 	
@@ -242,24 +237,6 @@ public class Frog : MonoBehaviour {
 		return (float)charge / (float)maxCharge;
 	}
 	
-	void SetFloatExperienceCircleScale() {
-		Vector3 scale = floatExperienceCircle.transform.localScale;
-		scale.x = FloatExperienceRadius();
-		scale.z = FloatExperienceRadius();
-		floatExperienceCircle.transform.localScale = scale;
-	}
-	
-	void SetFullFloatExperienceCircleScale() {
-		Vector3 scale = fullFloatExperienceCircle.transform.localScale;
-		scale.x = fullPadRadius + (fullPadRadius/2);
-		scale.z = fullPadRadius + (fullPadRadius/2);
-		fullFloatExperienceCircle.transform.localScale = scale;
-	}
-	
-	float FloatExperienceRadius() {
-		return fullPadRadius + FloatExperiencePercentage() * (fullPadRadius/2);
-	}
-	
 	void BeginCharging() {
 		if (moveState == MoveState.Floating) {
 			moveState = MoveState.Charging;
@@ -281,7 +258,6 @@ public class Frog : MonoBehaviour {
 	float FloatExperiencePercentage() {
 	 	return (float)floatExperience / (float)floatLevelThreshhold;	
 	}
-		
 
 	void BeginFloating() {
 		moveState = MoveState.Floating;
