@@ -115,6 +115,15 @@ public class Frog : MonoBehaviour {
 			}
 		}
 	}
+	
+	private enum FloatLevels {
+		GreenLevel,
+		BlueLevel,
+		YellowLevel,
+		MagentaLevel,
+		RedLevel,
+		BlackLevel
+	}
 		
 	#region MonoBehaviour
 	void Awake() {
@@ -275,23 +284,11 @@ public class Frog : MonoBehaviour {
 		floatExperience = 0;
 		
 		int levelsToDecrease = floatLevel > 0 ? 1 : 0;
-		if (floatLevel > redLevel) {
-			levelsToDecrease = floatLevel - redLevel;	
+		if (floatLevel > (int)FloatLevels.RedLevel) {
+			levelsToDecrease = floatLevel - (int)FloatLevels.RedLevel;	
 		}
 		floatLevel -= levelsToDecrease;
 		
-	}
-	
-	void GainFloatExperience() {
-		if (potentialFloatExperience >= potentialExperienceThreshold) {
-			floatExperience += potentialFloatExperience - potentialExperienceThreshold;
-			print ("gained " + floatExperience);
-		} else {
-			print("potential float exp " + potentialFloatExperience + " / " + potentialExperienceThreshold);
-		}
-		if (floatExperience > floatLevelThreshhold) {
-			UpgradeFloating();
-		}
 	}
 	
 	void HandleState() {
@@ -306,7 +303,6 @@ public class Frog : MonoBehaviour {
 			charge -= (chargeDecreaseSpeed * Time.deltaTime);
 			if (charge <= 0) {
 				BeginFloating();
-				GainFloatExperience();
 			}
 		} else if (moveState == MoveState.Floating) {
 			if (wantsToBoost == true) {
@@ -369,26 +365,30 @@ public class Frog : MonoBehaviour {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
-			score++;	
+			score++;
+			UpgradeFloating();
 			FireScoreChangedNotification();
 		}
 	}
 	
 	void SetPadColor() {
 		switch (floatLevel) {
-		case 0:
+		case (int)FloatLevels.GreenLevel:
+			pad.renderer.material.color = Color.green;
+			break;
+		case (int)FloatLevels.BlueLevel:
 			pad.renderer.material.color = Color.blue;
 			break;
-		case 1:
-			pad.renderer.material.color = Color.magenta;
-			break;
-		case 2:
+		case (int)FloatLevels.YellowLevel:
 			pad.renderer.material.color = Color.yellow;
 			break;
-		case 3:
+		case (int)FloatLevels.MagentaLevel:
+			pad.renderer.material.color = Color.magenta;
+			break;
+		case (int)FloatLevels.RedLevel:
 			pad.renderer.material.color = Color.red;
 			break;
-		case 4:
+		case (int)FloatLevels.BlackLevel:
 			pad.renderer.material.color = Color.black;
 			break;
 		default:
