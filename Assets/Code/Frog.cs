@@ -31,8 +31,8 @@ public class Frog : MonoBehaviour {
 	public static int TotalScore {
 		get {
 			int sum = 0;
-			foreach (Frog f in Players) {
-				sum += f.score;
+			foreach (Frog frog in PlayerManager.Instance.Frogs) {
+				sum += frog.score;
 			}
 			return sum;
 		}
@@ -58,16 +58,6 @@ public class Frog : MonoBehaviour {
 		}
 		set {
 			highScore = value;
-		}
-	}
-	
-	public static Frog[] players;
-	public static Frog[] Players{
-		get {
-			if (players == null) {
-				players = (Frog[])GameObject.FindObjectsOfType(typeof(Frog));
-			}	
-			return players;
 		}
 	}
 	
