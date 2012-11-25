@@ -2554,6 +2554,14 @@ Prefab:
       propertyPath: m_Name
       value: enemy spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: bigFishPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 5f11b30f2497a4dacb7ce28ca587ab12, type: 2}
+    - target: {fileID: 11400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: fatLogPrefab
+      value: 
+      objectReference: {fileID: 100002, guid: c424fb930539a4334b5add52eabb9897, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
   m_RootGameObject: {fileID: 1395234898}
@@ -5283,9 +5291,8 @@ MonoBehaviour:
   highestSpawnTickAmount: 150
   upgradeFloatingPrefab: {fileID: 100000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
     type: 2}
-  summonFishermanPrefab: {fileID: 100000, guid: 8ac05d51de9b04aa4988ec4c98c0bcda,
-    type: 2}
-  raiseDamPrefab: {fileID: 100000, guid: fc07c1f8fa727418a8cebe75349db4e5, type: 2}
+  summonFishermanPrefab: {fileID: 0}
+  raiseDamPrefab: {fileID: 0}
   maximumZ: 24
 --- !u!1 &2055275262
 GameObject:
