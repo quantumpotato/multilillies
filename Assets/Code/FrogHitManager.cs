@@ -15,7 +15,13 @@ public class FrogHitManager : MonoBehaviour {
 	public void Play() {
 		foreach (Frog frog in PlayerManager.Instance.Frogs) {
 			frog.Hit += HandleFrogHit;
+			frog.PickUpHit += HandleFrogPickUpHit;
 		}
+	}
+
+	void HandleFrogPickUpHit(Frog frog, PickUp pickUp) {
+		pickUp.ApplyTo(frog);
+		pickUp.Die();
 	}
 
 	void HandleFrogHit(Frog frog, Enemy enemy) {
