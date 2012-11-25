@@ -1470,50 +1470,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -.148547977, y: .0257873535, z: .124328226}
     m_Extent: {x: 1.03773248, y: .963847041, z: .730139256}
   m_DirtyAABB: 0
---- !u!1001 &635794086
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 884028530}
-    m_Modifications:
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -34.5466156
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -10.7526026
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 9.21251583
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-      propertyPath: m_Name
-      value: enemy spawner
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-  m_RootGameObject: {fileID: 1395234898}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &643238944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,6 +2603,50 @@ SkinnedMeshRenderer:
     m_Center: {x: -.148547977, y: .0257873535, z: .124328226}
     m_Extent: {x: 1.03773248, y: .963847041, z: .730139256}
   m_DirtyAABB: 0
+--- !u!1001 &996316708
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 884028530}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -34.5466156
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -10.7526026
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 9.21251583
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+      propertyPath: m_Name
+      value: enemy spawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
+  m_RootGameObject: {fileID: 1395234898}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1016919485
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,7 +3526,7 @@ Transform:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-  m_PrefabInternal: {fileID: 635794086}
+  m_PrefabInternal: {fileID: 996316708}
   serializedVersion: 3
   m_Component:
   - 4: {fileID: 1395234899}
@@ -3544,7 +3544,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
-  m_PrefabInternal: {fileID: 635794086}
+  m_PrefabInternal: {fileID: 996316708}
   m_GameObject: {fileID: 1395234898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -34.5466156, y: -10.7526026, z: 9.21251583}
@@ -3556,7 +3556,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 3f89261a472174a36a85f4ee7d13a2fa,
     type: 2}
-  m_PrefabInternal: {fileID: 635794086}
+  m_PrefabInternal: {fileID: 996316708}
   m_GameObject: {fileID: 1395234898}
   m_Enabled: 0
   m_CastShadows: 1
@@ -3575,7 +3575,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300000, guid: 3f89261a472174a36a85f4ee7d13a2fa,
     type: 2}
-  m_PrefabInternal: {fileID: 635794086}
+  m_PrefabInternal: {fileID: 996316708}
   m_GameObject: {fileID: 1395234898}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1395234902
@@ -3583,7 +3583,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 3f89261a472174a36a85f4ee7d13a2fa,
     type: 2}
-  m_PrefabInternal: {fileID: 635794086}
+  m_PrefabInternal: {fileID: 996316708}
   m_GameObject: {fileID: 1395234898}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3592,11 +3592,15 @@ MonoBehaviour:
   desiredEnemyCount: 20
   logPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
   fishPrefab: {fileID: 100000, guid: 1281dda02153b4aeebeb3ab7a62c8c83, type: 2}
+  bigFishPrefab: {fileID: 100000, guid: 5f11b30f2497a4dacb7ce28ca587ab12, type: 2}
   sharkPrefab: {fileID: 100026, guid: 9267ea8669b694ce28f6ffdc1e411bfa, type: 2}
+  fatLogPrefab: {fileID: 100002, guid: c424fb930539a4334b5add52eabb9897, type: 2}
   maximumZ: 24
   logWeight: 5
   fishWeight: 3
+  bigFishWeight: 0
   sharkWeight: 0
+  fatLogWeight: 0
 --- !u!1 &1408056250
 GameObject:
   m_ObjectHideFlags: 0

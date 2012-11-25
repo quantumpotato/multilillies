@@ -60,7 +60,8 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	protected int SpeedModForScore(int score) {
-		int speed = score + 10;
+		int speed = Random.Range (7, 10);
+		speed += (score / 3);
 		if (speed > 50) {
 			speed = 50;
 		}
