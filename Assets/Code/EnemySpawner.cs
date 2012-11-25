@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour {
 	
 	private int score;
 	
+	#region MonoBehaviour
 	void Awake() {
 		Instance = this;
 	}
@@ -34,10 +35,6 @@ public class EnemySpawner : MonoBehaviour {
 		foreach (Frog f in PlayerManager.Instance.Frogs) {
 			f.ScoreChanged += HandleFrogScoreChanged;
 		}
-	}
-
-	void HandleFrogScoreChanged(Frog frog) {
-		CalculateEnemyWeights();	
 	}
 	
 	// Update is called once per frame
@@ -49,13 +46,18 @@ public class EnemySpawner : MonoBehaviour {
 			}
 		}
 	}
+	#endregion
+
+	void HandleFrogScoreChanged(Frog frog) {
+		CalculateEnemyWeights();	
+	}
 	
 	public void DestroyEnemy(GameObject enemy) {
 		GameObject.Destroy(enemy);
 		actualEnemyCount--;
 	}
 	
-	private void cyclePlayerIndex() {
+	private void CyclePlayerIndex() {
 		//will need to check which players are active and if not increment and call itself
 		playerIndex++;
 		if (playerIndex > 3) { 
@@ -92,7 +94,7 @@ public class EnemySpawner : MonoBehaviour {
 		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, maximumZ));
 		actualEnemyCount++;
 		
-		cyclePlayerIndex();
+		CyclePlayerIndex();
 		
 
 		enemy.SetSpeedForLowestAndTeamScores(Frog.MinScore, Frog.TotalScore);
