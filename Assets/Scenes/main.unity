@@ -1354,6 +1354,89 @@ Transform:
   - {fileID: 1101260600}
   - {fileID: 2087769478}
   m_Father: {fileID: 2140416365}
+--- !u!1 &538427847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+  m_PrefabInternal: {fileID: 1573204956}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 538427848}
+  - 33: {fileID: 538427850}
+  - 23: {fileID: 538427849}
+  - 114: {fileID: 538427852}
+  - 65: {fileID: 538427851}
+  m_Layer: 0
+  m_Name: UpgradeFloatingPickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &538427848
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+  m_PrefabInternal: {fileID: 1573204956}
+  m_GameObject: {fileID: 538427847}
+  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
+  m_LocalPosition: {x: 2.44897032, y: 281.354614, z: -218.499649}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!23 &538427849
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1573204956}
+  m_GameObject: {fileID: 538427847}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 07a9b0ab862f35b418a8bdd847b00772, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!33 &538427850
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1573204956}
+  m_GameObject: {fileID: 538427847}
+  m_Mesh: {fileID: 4300000, guid: 18516af0cc6843b4b814779871f7831f, type: 3}
+--- !u!65 &538427851
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1573204956}
+  m_GameObject: {fileID: 538427847}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &538427852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1573204956}
+  m_GameObject: {fileID: 538427847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f03938d49604b99925169b82fb2abf, type: 1}
+  m_Name: 
+  speed: 10
+  powerUpClassName: UpgradeFloating
 --- !u!1 &577854510
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,6 +2384,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1395234899}
   - {fileID: 735948924}
   - {fileID: 1033474308}
   - {fileID: 756359971}
@@ -3433,6 +3517,78 @@ Transform:
   - {fileID: 778261636}
   - {fileID: 696767994}
   m_Father: {fileID: 1167157457}
+--- !u!1 &1395234898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 1395234899}
+  - 33: {fileID: 1395234901}
+  - 23: {fileID: 1395234900}
+  - 114: {fileID: 1395234902}
+  m_Layer: 0
+  m_Name: enemy spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1395234899
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1395234898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.5466156, y: -10.7526026, z: 9.21251583}
+  m_LocalScale: {x: .805218995, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 884028530}
+--- !u!23 &1395234900
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1395234898}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!33 &1395234901
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1395234898}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1395234902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1395234898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfbc3d9a6d74401eac80b9f21eda847, type: 1}
+  m_Name: 
+  desiredEnemyCount: 20
+  logPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
+  fishPrefab: {fileID: 100000, guid: 1281dda02153b4aeebeb3ab7a62c8c83, type: 2}
+  sharkPrefab: {fileID: 100026, guid: 9267ea8669b694ce28f6ffdc1e411bfa, type: 2}
+  maximumZ: 24
+  logWeight: 5
+  fishWeight: 3
+  sharkWeight: 0
 --- !u!1 &1408056250
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,6 +3915,46 @@ Transform:
   m_Children:
   - {fileID: 198159423}
   m_Father: {fileID: 1148535892}
+--- !u!1001 &1573204956
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.44897032
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 281.354614
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -218.499649
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .707106829
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fb6a99f76308549c19dc0a5b1657d8e8, type: 2}
+  m_RootGameObject: {fileID: 538427847}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &1590586885
 Prefab:
   m_ObjectHideFlags: 0
@@ -5060,7 +5256,7 @@ GameObject:
   - 23: {fileID: 2051165624}
   - 114: {fileID: 2051165626}
   m_Layer: 0
-  m_Name: spawner
+  m_Name: pickup spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5110,16 +5306,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2051165622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dfbc3d9a6d74401eac80b9f21eda847, type: 1}
+  m_Script: {fileID: 11500000, guid: 7ddce858551304ebcaa3e8fd848cb634, type: 1}
   m_Name: 
-  desiredEnemyCount: 20
-  logPrefab: {fileID: 100000, guid: af06b94e89db444e3bb65b7ea31a898e, type: 2}
-  fishPrefab: {fileID: 100000, guid: 1281dda02153b4aeebeb3ab7a62c8c83, type: 2}
-  sharkPrefab: {fileID: 100026, guid: 9267ea8669b694ce28f6ffdc1e411bfa, type: 2}
+  lowestSpawnTickAmount: 100
+  highestSpawnTickAmount: 150
+  upgradeFloatingPrefab: {fileID: 100000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
+    type: 2}
   maximumZ: 24
-  logWeight: 5
-  fishWeight: 3
-  sharkWeight: 0
 --- !u!1 &2055275262
 GameObject:
   m_ObjectHideFlags: 0

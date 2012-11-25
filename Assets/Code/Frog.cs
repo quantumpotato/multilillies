@@ -15,8 +15,11 @@ public class Frog : MonoBehaviour {
 	public delegate void ScoreChangedHandler(Frog frog);
 	public event ScoreChangedHandler ScoreChanged;
 	
-	public delegate void HitHandler(Frog frog, Enemy other);
+	public delegate void HitHandler(Frog frog, Enemy enemy);
 	public event HitHandler Hit;
+	
+	public delegate void PickUpHitHandler(Frog frog, PickUp pickUp);
+	public event PickUpHitHandler PickUpHit;
 	
 	private static bool surpassing;
 	public static bool Surpassing {
@@ -158,15 +161,11 @@ public class Frog : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (IsEnemy(other.gameObject)) {
 			FireHitNotification(other.gameObject);
+		} else if (IsPickUp(other.gameObject)) {
+			FirePickUpHitNotification(other.gameObject);
 		}
     }
 	#endregion
-	
-	void SetUpFloating() {
-		floatExperience = 0;
-		potentialFloatExperience = 0;
-		floatLevelThreshhold = 200;
-	}
 	
 	public void Die() {
 		ResetPosition();
@@ -174,6 +173,17 @@ public class Frog : MonoBehaviour {
 		DecreaseScore();
 		FireScoreChangedNotification();
 		DownGradeFloating();
+	}
+	
+	public void UpgradeFloating() {
+		floatExperience = 0;
+		floatLevel += 1;
+	}
+	
+	void SetUpFloating() {
+		floatExperience = 0;
+		potentialFloatExperience = 0;
+		floatLevelThreshhold = 200;
 	}
 	
 	void SetUpInputQuadrants() {
@@ -188,6 +198,10 @@ public class Frog : MonoBehaviour {
 		return other.GetComponent<Enemy>() != null;
 	}
 	
+	bool IsPickUp(GameObject other) {
+		return other.GetComponent<PickUp>() != null;
+	}
+	
 	void DecreaseScore() {
 		score-= mistakes;
 		mistakes++;
@@ -200,6 +214,12 @@ public class Frog : MonoBehaviour {
 	void FireHitNotification(GameObject other) {
 		if (Hit != null) {
 			Hit(this, other.GetComponent<Enemy>());
+		}
+	}
+	
+	void FirePickUpHitNotification(GameObject other) {
+		if (PickUpHit != null) {
+			PickUpHit(this, other.GetComponent<PickUp>());
 		}
 	}
 	
@@ -274,11 +294,6 @@ public class Frog : MonoBehaviour {
 	void BeginFloating() {
 		moveState = MoveState.Floating;
 		charge = 0;
-	}
-	
-	void UpgradeFloating() {
-		floatExperience = 0;
-		floatLevel += 1;
 	}
 	
 	void DownGradeFloating() {
@@ -362,7 +377,7 @@ public class Frog : MonoBehaviour {
 		potentialFloatExperience = 0;
 	}
 	
-	void HandleFrogBoundaryHit (GameObject other) {
+	void HandleFrogBoundaryHit(GameObject other) {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
