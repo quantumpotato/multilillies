@@ -11,6 +11,7 @@ public class PickUpSpawner : MonoBehaviour {
 	public int highestSpawnTickAmount;
 	public GameObject upgradeFloatingPrefab;
 	public GameObject summonFishermanPrefab;
+	public GameObject raiseDamPrefab;
 	public int maximumZ;
 	
 	private int spawnTimer;
@@ -54,8 +55,10 @@ public class PickUpSpawner : MonoBehaviour {
 	
 	GameObject DetermineRandomPrefab() {
 		int num = Random.Range (1, 100);
-		if (num <= 25) {
+		if (num <= 15) {
 			return summonFishermanPrefab;
+		} else if (num > 15 && num <= 40) {
+			return raiseDamPrefab;
 		}
 		return upgradeFloatingPrefab;
 	}
