@@ -36,7 +36,7 @@ public class Fisherman : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		DrawFishermanPickupButton();
+//		DrawFishermanPickupButton();
 		if (IsActive()) {
 			DrawEnemiesCaught();
 		}
@@ -71,21 +71,21 @@ public class Fisherman : MonoBehaviour {
 		CheckIfFinished();
 	}
 	
-	void DrawFishermanPickupButton() {
-		int width = 200;
-		int height = 50;
-		if (GUI.Button (new Rect(Screen.width - width - 5, 240, width, height), "Fisherman\n" + CurrentState)) {
-			OnFishermanButtonClick();
-		}
-	}
+//	void DrawFishermanPickupButton() {
+//		int width = 200;
+//		int height = 50;
+//		if (GUI.Button (new Rect(Screen.width - width - 5, 240, width, height), "Fisherman\n" + CurrentState)) {
+//			OnFishermanButtonClick();
+//		}
+//	}
 	
 	void DrawEnemiesCaught() {
 		GUI.Box(new Rect(Screen.width - 105, 60, 100, 23), enemiesCaught + " / " + enemiesToCatch);
 	}
 	
-	void OnFishermanButtonClick() {
-		StartSequence();
-	}
+//	void OnFishermanButtonClick() {
+//		StartSequence();
+//	}
 	
 	void MoveBackToStartPosition() {
 		ChangeState(State.MovingBackIntoStartPosition);
