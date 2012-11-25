@@ -117,11 +117,12 @@ public class Frog : MonoBehaviour {
 	}
 	
 	private enum FloatLevels {
-		GreenLevel,
 		BlueLevel,
+		GreenLevel,
 		YellowLevel,
-		MagentaLevel,
+		OrangeLevel,
 		RedLevel,
+		WhiteLevel,
 		BlackLevel
 	}
 		
@@ -370,27 +371,31 @@ public class Frog : MonoBehaviour {
 			FireScoreChangedNotification();
 		}
 	}
-	
+		
 	void SetPadColor() {
 		switch (floatLevel) {
-		case (int)FloatLevels.GreenLevel:
-			pad.renderer.material.color = Color.green;
-			break;
 		case (int)FloatLevels.BlueLevel:
 			pad.renderer.material.color = Color.blue;
+			break;
+		case (int)FloatLevels.GreenLevel:
+			pad.renderer.material.color = Color.green;
 			break;
 		case (int)FloatLevels.YellowLevel:
 			pad.renderer.material.color = Color.yellow;
 			break;
-		case (int)FloatLevels.MagentaLevel:
-			pad.renderer.material.color = Color.magenta;
+		case (int)FloatLevels.OrangeLevel:
+			pad.renderer.material.color = new Color(255.0f/255.0f, 140.0f/255.0f, 0, 1);
 			break;
 		case (int)FloatLevels.RedLevel:
 			pad.renderer.material.color = Color.red;
 			break;
+		case (int)FloatLevels.WhiteLevel:
+			pad.renderer.material.color = Color.white;
+			break;
 		case (int)FloatLevels.BlackLevel:
 			pad.renderer.material.color = Color.black;
 			break;
+			
 		default:
 			pad.renderer.material.color = Color.black;
 			break;
