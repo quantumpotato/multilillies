@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour {
 		int heavyWeight = newScore / 2;
 		int lightWeight = newScore / 3;
 		int featherWeight = newScore / 10;
-		int fatLogWeight = newScore / 11;
+		fatLogWeight = newScore / 11;
 		
 		logWeight = 3 + featherWeight;	
 		sharkWeight = lightWeight;
