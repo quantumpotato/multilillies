@@ -2,12 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 public class SinEnemy : ManuallyMovedEnemy {
-	private float ySpeed;
+	protected float ySpeed;
 	private float yDirection;
-	private int stateDuration;
-	private int stateDurationLeft;
+	protected int stateDuration;
+	protected int stateDurationLeft;
 	
-	private enum SinState {
+	protected enum SinState {
 		Oscilatting,
 		Resting
 	}
@@ -18,11 +18,24 @@ public class SinEnemy : ManuallyMovedEnemy {
 		stateDurationLeft = stateDuration;
 	}
 	
-	public override void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+	protected virtual void SetXSpeed(int lowest, int total) {
 		_speed = Random.Range (SpeedModForScore (lowest) / 2 + 2, SpeedModForScore(total) / 2 + 3);	
-		yDirection = 1;
+	}
+	
+	protected virtual void SetYSpeed(int lowest, int total) {
 		ySpeed = Random.Range (1,6);
+	}
+	
+	protected virtual void SetStateDuration(int lowest, int total) {
 		stateDuration = Random.Range (20, 40+lowest);
+	}
+		
+	public override void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+	    SetXSpeed(lowest, total);
+		yDirection = 1;
+		SetYSpeed(lowest, total);
+		SetStateDuration(lowest, total);
+		
 		
 		resetStateDurationLeft();
 	}
