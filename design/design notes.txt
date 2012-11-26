@@ -1,0 +1,47 @@
+- frog consumables
+  - limited duration
+  - acquired by player running over it
+  - adds to player inventory
+  - activated and consumed by player tapping it in inventory
+  - existence of rune causes chance of spawning
+- runes
+  - how to acquire
+    - collect pickup
+    - receive as reward
+    - buy in store
+  - equipped into castle
+    - 3 slots, so 3 can be active at a time
+    - can add more slots via upgrades?
+  - universal effect
+  - limited in duration?
+    - based on deaths?
+    - during round?
+    - goes from round to round?
+  - or lasts until world changes?
+- currency
+  - picked up in-game
+  - can be purchased in store
+  - used to
+    - unlock consumables pickups
+    - buy consumables
+    - buy runes
+    - buy texture packs
+      - new lilly pads?
+      - frog costumes?
+      - sand decals?
+- castle
+  - how runes are represented
+  - grows, becomes a store?
+  - cool animations?
+- wizard
+  - some consumables cause the wizard to do things
+    - fisherman behavior
+  - dances?
+- store
+  - appears in between levels / areas / phases
+  - allows per-player purchases and global purchases
+  - castle grows, becomes a store?
+
+- other questions
+  - are there runes that spawn consumables?
+
