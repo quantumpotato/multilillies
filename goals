@@ -1,0 +1,34 @@
+Limited Frogs for round division:
+-Each round can be a limited number of Frogs, say: 100.
+-When 100 frogs have gone into the river no more will spawn that round.
+-Frogs already crossing may complete crossing.
+
+Goals:
+-Cross N number of times
+-Cross N number of times in Y seconds
+-Cross N number of times in Z frogs
+-Cross N number of times with B boosts
+-Survive N consecutive seconds
+-Survive N consecutive seconds using a max of B boosts
+-N close calls with a log
+-N close calls with a fish
+-N close calls with a shark
+-N close calls with a log in Y seconds
+-N close calls with a fish in Y seconds
+-N close calls with a shark in Y seconds
+-N close calls with a log max B boosts
+-N close calls with a fish max B boosts
+-N close calls with a shark max B boosts
+-N close calls with a log in Z frogs
+-N close calls with a fish in Z frogs
+-N close calls with a shark in Z frogs
+-Collect N coins
+-Collect N coins in Y seconds
+-Collect N coins with a max of B boosts
+-
+
+Yo dawg, I heard you like upgrades. Now you can upgrade your upgrades so you can upgrade while you upgrade your upgrades.
+Yo dawg, I heard you like goals. Now you can combine goals with goals so you can goal while you GOOOOOOOOOOOOOOOOOOOOOAL
+
+Goals reward the player with powerups
+the same goals can be applied to the team and give the "Game" powerups 
