@@ -19,7 +19,7 @@ public class SinEnemy : ManuallyMovedEnemy {
 	}
 	
 	protected virtual void SetXSpeed(int lowest, int total) {
-		_speed = Random.Range (SpeedModForScore (lowest) / 2 + 2, SpeedModForScore(total) / 2 + 3);	
+		_speed = Random.Range (SpeedModForRating (lowest) / 2 + 2, SpeedModForRating(total) / 2 + 3);	
 	}
 	
 	protected virtual void SetYSpeed(int lowest, int total) {
@@ -30,7 +30,7 @@ public class SinEnemy : ManuallyMovedEnemy {
 		stateDuration = Random.Range (20, 40+lowest);
 	}
 		
-	public override void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+	public override void SetSpeedForLowestAndTeamRatings(int lowest, int total) {
 	    SetXSpeed(lowest, total);
 		yDirection = 1;
 		SetYSpeed(lowest, total);

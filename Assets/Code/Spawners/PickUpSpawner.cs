@@ -24,7 +24,7 @@ public class PickUpSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		foreach (Frog f in PlayerManager.Instance.Frogs) {
-			f.ScoreChanged += HandleFrogScoreChanged;
+			f.RatingChanged += HandleFrogRatingChanged;
 		}
 		
 		SetRandomSpawnTime();
@@ -49,7 +49,7 @@ public class PickUpSpawner : MonoBehaviour {
 		GameObject.Destroy(pickUp.gameObject);
 	}
 	
-	void HandleFrogScoreChanged(Frog frog) {
+	void HandleFrogRatingChanged(Frog frog) {
 		// TODO
 	}
 	

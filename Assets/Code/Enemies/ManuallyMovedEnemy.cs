@@ -8,13 +8,13 @@ public class ManuallyMovedEnemy : Enemy {
 	}
 	#endregion
 	
-	public override void SetSpeedForLowestAndTeamScores(int lowest, int total) {
-		_speed = Random.Range (SpeedModForScore (lowest), SpeedModForScore (total));	
+	public override void SetSpeedForLowestAndTeamRatings(int lowest, int total) {
+		_speed = Random.Range (SpeedModForRating (lowest), SpeedModForRating (total));	
 	}
 	
 	public override void SetSpeedForFrog(Frog frog) {
-		int scoreMod = ScoreMod (frog);
-		int speedMod = Random.Range (scoreMod, scoreMod * 2);
+		int ratingMod = RatingMod (frog);
+		int speedMod = Random.Range (ratingMod, ratingMod * 2);
 		_speed = speedMod;
 	}
 	

@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		foreach (Frog f in PlayerManager.Instance.Frogs) {
-			f.ScoreChanged += HandleFrogScoreChanged;
+			f.RatingChanged += HandleFrogRatingChanged;
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	#endregion
 
-	void HandleFrogScoreChanged(Frog frog) {
+	void HandleFrogRatingChanged(Frog frog) {
 		CalculateEnemyWeights();	
 	}
 	
@@ -105,8 +105,8 @@ public class EnemySpawner : MonoBehaviour {
 		CyclePlayerIndex();
 		
 
-		enemy.SetSpeedForLowestAndTeamScores(Frog.MinScore, Frog.TotalScore);
-		int lowestSpawnDelay = 15 - Frog.TotalScore;
+		enemy.SetSpeedForLowestAndTeamRatings(Frog.MinRating, Frog.TotalRating);
+		int lowestSpawnDelay = 15 - Frog.TotalRating;
 		if (lowestSpawnDelay < 5) {
 			lowestSpawnDelay = 5;
 		}
@@ -114,11 +114,11 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void CalculateEnemyWeights() {
-		int newScore = PlayerManager.Instance.Frogs[playerIndex].score;
-		int heavyWeight = newScore / 2;
-		int lightWeight = newScore / 3;
-		int featherWeight = newScore / 10;
-		fatLogWeight = newScore / 11;
+		int rating = PlayerManager.Instance.Frogs[playerIndex].rating;
+		int heavyWeight = rating / 2;
+		int lightWeight = rating / 3;
+		int featherWeight = rating / 10;
+		fatLogWeight = rating / 11;
 		
 		logWeight = 3 + featherWeight;	
 		sharkWeight = lightWeight;
