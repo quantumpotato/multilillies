@@ -13,7 +13,7 @@ harder:
 -Bird ally: bird encircles you, dives to grab a fish that would otherwise hit you
 -Logproof: Hop over logs instead of colliding with them. Tada.
 
-Game Runes:
+Game powerups:
 -Save our Trees: N%+ chance of spawning nothing when otherwise would spawn a log
 -Small log: Big logs have a N% chance of spawning as regular logs
 -Log Alert: get alerts N milliseconds before logs appear with a marker on the side of the screen
