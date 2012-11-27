@@ -22,7 +22,7 @@ public class Shark : ManuallyMovedEnemy {
 	#region monodevelop	
 	#endregion monodevelop
 	
-	override public void SetSpeedForLowestAndTeamScores(int lowest, int total) {
+	override public void SetSpeedForLowestAndTeamRatings(int lowest, int total) {
 		_speed = Random.Range((lowest / 2) + 2, (total / 2) + 3);
 		int maxDelay = 60;
 		stallBeforeBoosting = maxDelay - lowest;

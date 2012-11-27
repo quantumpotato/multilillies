@@ -5,15 +5,15 @@ using System.Collections.Generic;
 public class Frog : MonoBehaviour {
 	public float speed;
 	public int playerNumber;
-	public int score;
+	public int rating;
 	public int mistakes;
 	public float floatExperience;
 	public int floatLevel;
 	public float floatLevelThreshhold;
 	public float potentialFloatExperience;	
 	
-	public delegate void ScoreChangedHandler(Frog frog);
-	public event ScoreChangedHandler ScoreChanged;
+	public delegate void RatingChangedHandler(Frog frog);
+	public event RatingChangedHandler RatingChanged;
 	
 	public delegate void HitHandler(Frog frog, Enemy enemy);
 	public event HitHandler Hit;
@@ -31,36 +31,36 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	public static int TotalScore {
+	public static int TotalRating {
 		get {
 			int sum = 0;
 			foreach (Frog frog in PlayerManager.Instance.Frogs) {
-				sum += frog.score;
+				sum += frog.rating;
 			}
 			return sum;
 		}
 	}
 	
-	public static int MinScore {
+	public static int MinRating {
 		get {
-			int minScore = Frog.HighScore * 4;
+			int minRating = Frog.HighRating * 4;
 	
 			foreach (Frog f in PlayerManager.Instance.Frogs) {
-				if (f.score < minScore) {
-					minScore = f.score;
+				if (f.rating < minRating) {
+					minRating = f.rating;
 				}
 			}
-			return minScore;	
+			return minRating;	
 		}
 	}
 	
-	private static int highScore;
-	public static int HighScore {
+	private static int highRating;
+	public static int HighRating {
 		get {
-			return highScore;
+			return highRating;
 		}
 		set {
-			highScore = value;
+			highRating = value;
 		}
 	}
 	
@@ -165,8 +165,8 @@ public class Frog : MonoBehaviour {
 	public void Die() {
 		ResetPosition();
 		ResetState();	
-		DecreaseScore();
-		FireScoreChangedNotification();
+		DecreaseRating();
+		FireRatingChangedNotification();
 		DownGradeFloating();
 	}
 	
@@ -189,11 +189,11 @@ public class Frog : MonoBehaviour {
 		inputQuadrants[3] = new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2);
 	}
 
-	void DecreaseScore() {
-		score-= mistakes;
+	void DecreaseRating() {
+		rating-= mistakes;
 		mistakes++;
-		if (score <= 0) {
-			score = 0;
+		if (rating <= 0) {
+			rating = 0;
 			mistakes = 0;
 		}
 	}
@@ -210,12 +210,12 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
-	void FireScoreChangedNotification() {
-		if (ScoreChanged != null) {
-			ScoreChanged(this);
+	void FireRatingChangedNotification() {
+		if (RatingChanged != null) {
+			RatingChanged(this);
 		}
-		if (Frog.TotalScore > Frog.HighScore) {
-			Frog.HighScore = Frog.TotalScore;
+		if (Frog.TotalRating > Frog.HighRating) {
+			Frog.HighRating = Frog.TotalRating;
 			surpassing = true;
 		} else {
 			surpassing = false;
@@ -349,9 +349,9 @@ public class Frog : MonoBehaviour {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
-			score++;
+			rating++;
 			UpgradeFloating();
-			FireScoreChangedNotification();
+			FireRatingChangedNotification();
 		}
 	}
 		
