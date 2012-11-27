@@ -1,0 +1,37 @@
+Frog powerups
+easy:
+-Upgrade lillypad
+-Bubble shield (protects against all dangers) or until hit)
+-Brakes (drain brake timer before using boost)
+-Overcharge (drain overcharge timer before boostingw hen you hit max. You can "hold" the max charge for N seconds)
+-Crossing coin: earn coins from crossing (lasts N seconds)
+-Coin magnet: magnetize coins to you
+-Knockback shield: getting hit pushes you back but doesn't kill you
+-Fisherman: Wizard collects enemies that try to hit frogsw
+-Dam: Dam stays up for N milliseconds
+harder:
+-Bird ally: bird encircles you, dives to grab a fish that would otherwise hit you
+-Logproof: Hop over logs instead of colliding with them. Tada.
+
+Game Runes:
+-Save our Trees: N%+ chance of spawning nothing when otherwise would spawn a log
+-Small log: Big logs have a N% chance of spawning as regular logs
+-Log Alert: get alerts N milliseconds before logs appear with a marker on the side of the screen
+-Well-fed sharks: Sharks do not pause and hunt, only swim casually
+-Explosive Boosts: boosting sends a shockwave that kills players nearby!
+-Powerup spawn enhancer
+-Dam spawn enhancer
+-Fisherman spawn enhancer
+-Bubble spawner
+-Brakes spawner
+-Overcharge spawner
+-Crossing coin spawner
+-Coin magnet spawner
+-Knockback shield spawner
+
+Permanent Upgrades:
+-Rune slots in castle: from 1 to N
+-Inventory slots from 1 to 3
+-Ninja pad: addditional (upgrade from 1 to 10) degrees of black pad. Coin bonuses.
+
+ALL THE THINGS
