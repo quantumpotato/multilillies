@@ -124,6 +124,9 @@ public class EnemySpawner : MonoBehaviour {
 		sharkWeight = lightWeight;
 		
 		fishWeight = heavyWeight;
+		fishWeight = 100;
+		
 		bigFishWeight = fishWeight / 2;
+		bigFishWeight = 100;
 	}
 }
