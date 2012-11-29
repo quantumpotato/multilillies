@@ -189,7 +189,7 @@ public class Frog : MonoBehaviour {
 	
 	public void UpgradeFloating() {
 		floatExperience = 0;
-		if (floatLevel < FloatLevels.BlackLevel) {
+		if (floatLevel < (int)FloatLevels.BlackLevel) {
 			floatLevel += 1;
 		}
 	}
