@@ -368,7 +368,7 @@ public class Frog : MonoBehaviour {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
-			rating=rating*2+1;
+			rating++;
 			UpgradeFloating();
 			FireRatingChangedNotification();
 		}
