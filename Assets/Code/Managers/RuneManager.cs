@@ -15,6 +15,26 @@ public class RuneManager : MonoBehaviour {
 	public GameObject[] runePrefabs;
 	public Rune[] runes;
 	
+	private bool wellFedSharks;
+	public bool WellFedSharks {
+		get {
+			return wellFedSharks;
+		}
+		set {
+			wellFedSharks = value;
+		}
+	}
+	
+	private bool saveOurTrees;
+	public bool SaveOurTrees {
+		get {
+			return saveOurTrees;
+		}
+		set {
+			saveOurTrees = value;
+		}
+	}
+	
 	#region MonoBehaviour
 	void Awake() {
 		Instance = this;

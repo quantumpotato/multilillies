@@ -2,17 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class Shark : ManuallyMovedEnemy {
-	
-	private static bool wellFedSharks;
-	public static bool WellFedSharks {
-		get {
-			return wellFedSharks;
-		}
-		set {
-			wellFedSharks = value;
-		}
-	}
-	
 	public float attackRange;
 	
 	private bool attacking;
@@ -61,7 +50,7 @@ public class Shark : ManuallyMovedEnemy {
 	}
 	
 	void ScanForFrogs() {
-		if (!WellFedSharks) {
+		if (!RuneManager.Instance.WellFedSharks) {
 			foreach (Frog f in PlayerManager.Instance.Frogs) {
 				if (!attacking) {
 					float distance = Vector3.Distance(transform.position, f.transform.position);

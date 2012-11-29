@@ -1132,7 +1132,7 @@ MonoBehaviour:
   runeEntryWidth: 127
   runePrefabs:
   - {fileID: 100000, guid: 2dd89a3f877c944c9a7fd71ad621fe06, type: 2}
-  - {fileID: 0}
+  - {fileID: 100000, guid: acd329d44908e42d48cc5b8fc9e290ff, type: 2}
   - {fileID: 0}
   runes: []
 --- !u!1 &577854510

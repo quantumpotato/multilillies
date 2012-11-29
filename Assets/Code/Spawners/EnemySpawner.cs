@@ -108,16 +108,23 @@ public class EnemySpawner : MonoBehaviour {
 			print ("chose none " + spawnPossibility + " which is over" + fishRequired + "and over" + weightTotal);
 		}
 		
-		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
-		
-		Enemy enemy = enemyObject.GetComponent<Enemy>();
-		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + SpawnZ());
-		actualEnemyCount++;
+		bool shouldSpawnLog = true;
+		bool isLog = (enemyPrefab == logPrefab || enemyPrefab == fatLogPrefab);
+		if (isLog && RuneManager.Instance.SaveOurTrees) {
+			int rand = Random.Range(1,100);
+			shouldSpawnLog = (rand > 95 ? false : true);
+			print("spawn log: "  + shouldSpawnLog.ToString());
+		}
+		if ((isLog && shouldSpawnLog) || !isLog) {
+			// spawn enemy
+			GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
+			Enemy enemy = enemyObject.GetComponent<Enemy>();
+			enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + SpawnZ());
+			actualEnemyCount++;
+			enemy.SetSpeedForLowestAndTeamRatings(Frog.MinRating, Frog.TotalRating);
+		}
 		
 		CyclePlayerIndex();
-		
-
-		enemy.SetSpeedForLowestAndTeamRatings(Frog.MinRating, Frog.TotalRating);
 		int lowestSpawnDelay = 30 - Frog.TotalRating;
 		if (lowestSpawnDelay < 15) {
 			lowestSpawnDelay = 15;
