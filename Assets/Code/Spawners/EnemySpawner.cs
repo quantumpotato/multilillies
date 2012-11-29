@@ -73,7 +73,6 @@ public class EnemySpawner : MonoBehaviour {
 	
 	float SpawnZ() {
 		float distanceIncrement = Random.Range(1, maximumZ / 2);
-		print ("distanceIncrement" + distanceIncrement);
 		lastSpawnZ = lastSpawnZ - distanceIncrement;
 		if (lastSpawnZ < 2) {
 			lastSpawnZ += maximumZ;
