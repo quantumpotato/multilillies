@@ -1671,8 +1671,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 756359970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.8838882, y: -10.7228527, z: 19.0614052}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 104.950287, y: -10.7228527, z: 19.0614052}
+  m_LocalScale: {x: 44.2712059, y: 4.6131072, z: 4.6131072}
   m_Children: []
   m_Father: {fileID: 884028530}
 --- !u!23 &756359972
@@ -3278,6 +3278,7 @@ MonoBehaviour:
   bigFishWeight: 0
   sharkWeight: 0
   fatLogWeight: 0
+  actualEnemyCount: 0
 --- !u!1 &1408056250
 GameObject:
   m_ObjectHideFlags: 0
