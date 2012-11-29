@@ -106,15 +106,22 @@ public class EnemySpawner : MonoBehaviour {
 		
 
 		enemy.SetSpeedForLowestAndTeamRatings(Frog.MinRating, Frog.TotalRating);
-		int lowestSpawnDelay = 15 - Frog.TotalRating;
-		if (lowestSpawnDelay < 5) {
-			lowestSpawnDelay = 5;
+		int lowestSpawnDelay = 30 - Frog.TotalRating;
+		if (lowestSpawnDelay < 15) {
+			lowestSpawnDelay = 15;
+		}
+		if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
+			lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
 		}
 		spawnTimer = Random.Range(lowestSpawnDelay,15);
 	}
 	
 	void CalculateEnemyWeights() {
 		int rating = PlayerManager.Instance.Frogs[playerIndex].rating;
+		rating-= 10;
+		if (rating < 1) {
+			rating = 1;
+		}
 		int heavyWeight = rating / 2;
 		int lightWeight = rating / 3;
 		int featherWeight = rating / 10;
