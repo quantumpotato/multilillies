@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour {
 	private int spawnTimer;
 	
 	public int actualEnemyCount;
+	private int lowestSpawnDelay;
 	
 	private int score;
 	
@@ -80,17 +81,44 @@ public class EnemySpawner : MonoBehaviour {
 		return lastSpawnZ;
 	}
 	
-	void SpawnEnemy() {
-		CalculateEnemyWeights();
-			
+	void SetLowestSpawnDelay() {
+		lowestSpawnDelay = 15 - Frog.TotalRating;
+		if (lowestSpawnDelay < 5) {
+			lowestSpawnDelay = 5;
+		}
+	}
+	
+	void SetSpawnDelay() {
+		SetLowestSpawnDelay();
+		if (Frog.HighRating < 20) {
+			if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
+				lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
+			}
+		}
+	}
+	
+	void SetDesiredEnemyCount() {
+		desiredEnemyCount = Frog.TotalRating - 15;
+		if (desiredEnemyCount < 8) {
+			desiredEnemyCount = 8;
+		}
+		if (desiredEnemyCount > 20) {
+			desiredEnemyCount = 20;
+		}
+	}
+	
+	void SetSpawnTimer() {
+		spawnTimer = Random.Range(lowestSpawnDelay,15);
+	}
+	
+	GameObject NewEnemy() {
 		int weightTotal = logWeight + fishWeight + sharkWeight + bigFishWeight + fatLogWeight;
 		int spawnPossibility = Random.Range(0, weightTotal);
 		int logRequired = logWeight;
 		int sharkRequired = logRequired + sharkWeight;
 		int fishRequired = sharkRequired + fishWeight;
 		int bigFishRequired = fishRequired + bigFishWeight;
-		int fatLogRequired = bigFishRequired + fatLogWeight;
-		
+		int fatLogRequired = bigFishRequired + fatLogWeight;	
 		
 		GameObject enemyPrefab = logPrefab;
 		if (spawnPossibility <= logRequired) {
@@ -106,7 +134,10 @@ public class EnemySpawner : MonoBehaviour {
 		} else {
 			print ("chose none " + spawnPossibility + " which is over" + fishRequired + "and over" + weightTotal);
 		}
-		
+		return enemyPrefab;	
+	}
+	
+	void ConfigureEnemyPrefabForSpawningRules(GameObject enemyPrefab) {
 		bool shouldSpawnLog = true;
 		bool isLog = (enemyPrefab == logPrefab || enemyPrefab == fatLogPrefab);
 		if (isLog && RuneManager.Instance.SaveOurTrees) {
@@ -121,30 +152,17 @@ public class EnemySpawner : MonoBehaviour {
 			enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + SpawnZ());
 			enemy.SetSpeedForLowestAndTeamRatings(Frog.MinRating, Frog.TotalRating);
 		}
-		
-		
+	}
+	
+	void SpawnEnemy() {
+		CalculateEnemyWeights();
+		GameObject enemyPrefab = NewEnemy();	
+		ConfigureEnemyPrefabForSpawningRules(enemyPrefab);
 		
 		CyclePlayerIndex();
-		int lowestSpawnDelay = 15 - Frog.TotalRating;
-		if (lowestSpawnDelay < 5) {
-			lowestSpawnDelay = 5;
-		}
-		if (Frog.HighRating < 20) {
-			if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
-				lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
-			}
-		}
-		
-		desiredEnemyCount = Frog.TotalRating - 15;
-		if (desiredEnemyCount < 8) {
-			desiredEnemyCount = 8;
-		}
-		if (desiredEnemyCount > 20) {
-			desiredEnemyCount = 20;
-		}
-		
-		
-		spawnTimer = Random.Range(lowestSpawnDelay,15);
+		SetSpawnDelay();
+		SetDesiredEnemyCount();
+		SetSpawnTimer();
 	}
 	
 	void CalculateEnemyWeights() {
