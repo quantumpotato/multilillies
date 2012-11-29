@@ -60,8 +60,6 @@ public class EnemySpawner : MonoBehaviour {
 	
 	public void DestroyEnemy(GameObject enemy) {
 		GameObject.Destroy(enemy);
-		actualEnemyCount--;
-		print ("SUBTRACTING ENEMY COUNT" + actualEnemyCount);
 	}
 	
 	private void CyclePlayerIndex() {
@@ -121,8 +119,6 @@ public class EnemySpawner : MonoBehaviour {
 			GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
 			Enemy enemy = enemyObject.GetComponent<Enemy>();
 			enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + SpawnZ());
-			actualEnemyCount++;
-			print ("ADDING ENEMY COUNT:" + actualEnemyCount);
 			enemy.SetSpeedForLowestAndTeamRatings(Frog.MinRating, Frog.TotalRating);
 		}
 		
