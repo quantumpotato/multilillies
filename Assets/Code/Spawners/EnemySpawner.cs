@@ -98,7 +98,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void SetDesiredEnemyCount() {
-		desiredEnemyCount = Frog.TotalRating - 15;
+		desiredEnemyCount = Frog.TotalRating - 6;
 		if (desiredEnemyCount < 8) {
 			desiredEnemyCount = 8;
 		}
