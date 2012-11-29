@@ -59,10 +59,6 @@ public class Enemy : MonoBehaviour {
 		));
 	}
 	
-	public void Die() {
-		EnemySpawner.Instance.DestroyEnemy(gameObject);
-	}
-	
 	protected int SpeedModForRating(int rating) {
 		int speed = Random.Range (9, 12);
 		speed += (rating / 3);
