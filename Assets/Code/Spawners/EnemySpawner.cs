@@ -29,6 +29,8 @@ public class EnemySpawner : MonoBehaviour {
 	
 	private int score;
 	
+	private float lastSpawnZ;
+	
 	#region MonoBehaviour
 	void Awake() {
 		Instance = this;
@@ -69,6 +71,17 @@ public class EnemySpawner : MonoBehaviour {
 		}
 	}
 	
+	float SpawnZ() {
+		float distanceIncrement = Random.Range(1, maximumZ / 2);
+		print ("distanceIncrement" + distanceIncrement);
+		lastSpawnZ = lastSpawnZ - distanceIncrement;
+		if (lastSpawnZ < 2) {
+			lastSpawnZ += maximumZ;
+		}
+		
+		return lastSpawnZ;
+	}
+	
 	void SpawnEnemy() {
 		CalculateEnemyWeights();
 			
@@ -99,7 +112,7 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject enemyObject = (GameObject)Instantiate(enemyPrefab);
 		
 		Enemy enemy = enemyObject.GetComponent<Enemy>();
-		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, maximumZ));
+		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + SpawnZ());
 		actualEnemyCount++;
 		
 		CyclePlayerIndex();
