@@ -1088,6 +1088,53 @@ Transform:
   - {fileID: 1101260600}
   - {fileID: 2087769478}
   m_Father: {fileID: 2140416365}
+--- !u!1 &548549353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 548549354}
+  - 114: {fileID: 548549355}
+  m_Layer: 0
+  m_Name: RuneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &548549354
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548549353}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.57722473, y: -8.88677979, z: 14.6965332}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &548549355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548549353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aded99468d1ab4178827837817e4dab6, type: 1}
+  m_Name: 
+  boundingBoxWidth: 400
+  boundingBoxHeight: 40
+  distanceFromTop: 35
+  boundingBoxPadding: 5
+  runeEntryWidth: 127
+  runePrefabs:
+  - {fileID: 100000, guid: 2dd89a3f877c944c9a7fd71ad621fe06, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  runes: []
 --- !u!1 &577854510
 GameObject:
   m_ObjectHideFlags: 0

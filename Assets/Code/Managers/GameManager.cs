@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 		EnemySpawner.Instance.gameObject.SetActiveRecursively(false);
 		PickUpSpawner.Instance.gameObject.SetActiveRecursively(false);
+		RuneManager.Instance.gameObject.SetActiveRecursively(false);
 	}
 	#endregion
 	
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour {
 		EnemySpawner.Play();
 		PickUpSpawner.Play();
 		FrogHitManager.Instance.Play();
+		RuneManager.Play();
 		
 		Playing = true;
 	}
