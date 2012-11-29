@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour {
 	private int playerIndex;
 	private int spawnTimer;
 	
-	private int actualEnemyCount;
+	public int actualEnemyCount;
 	
 	private int score;
 	
@@ -61,6 +61,7 @@ public class EnemySpawner : MonoBehaviour {
 	public void DestroyEnemy(GameObject enemy) {
 		GameObject.Destroy(enemy);
 		actualEnemyCount--;
+		print ("SUBTRACTING ENEMY COUNT" + actualEnemyCount);
 	}
 	
 	private void CyclePlayerIndex() {
@@ -113,7 +114,7 @@ public class EnemySpawner : MonoBehaviour {
 		Enemy enemy = enemyObject.GetComponent<Enemy>();
 		enemy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + SpawnZ());
 		actualEnemyCount++;
-		
+		print ("ADDING ENEMY COUNT:" + actualEnemyCount);
 		CyclePlayerIndex();
 		
 
@@ -122,8 +123,10 @@ public class EnemySpawner : MonoBehaviour {
 		if (lowestSpawnDelay < 15) {
 			lowestSpawnDelay = 15;
 		}
-		if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
-			lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
+		if (Frog.HighRating < 20) {
+			if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
+				lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
+			}
 		}
 		spawnTimer = Random.Range(lowestSpawnDelay,15);
 	}
