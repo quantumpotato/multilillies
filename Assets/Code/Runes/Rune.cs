@@ -18,11 +18,29 @@ public abstract class Rune : MonoBehaviour {
 		}
 	}
 	
+	private bool applied;
+	public bool Applied {
+		get {
+			return applied;
+		}
+		set {
+			applied = value;
+		}
+	}
+	
 	public virtual void Apply() {
-		
+		applied = true;
 	}
 	
 	public virtual void Unapply() {
-		
+		applied = false;
+	}
+	
+	public void ToggleApplied() {
+		if (applied) {
+			Unapply();
+		} else {
+			Apply();
+		}
 	}
 }
