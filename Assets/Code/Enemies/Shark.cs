@@ -3,6 +3,16 @@ using System.Collections;
 
 public class Shark : ManuallyMovedEnemy {
 	
+	private static bool wellFedSharks;
+	public static bool WellFedSharks {
+		get {
+			return wellFedSharks;
+		}
+		set {
+			wellFedSharks = value;
+		}
+	}
+	
 	public float attackRange;
 	
 	private bool attacking;
@@ -19,7 +29,7 @@ public class Shark : ManuallyMovedEnemy {
 	
 	private SharkState state;
 	
-	#region monodevelop	
+	#region monodevelop
 	#endregion monodevelop
 	
 	override public void SetSpeedForLowestAndTeamRatings(int lowest, int total) {
@@ -51,23 +61,25 @@ public class Shark : ManuallyMovedEnemy {
 	}
 	
 	void ScanForFrogs() {
-		foreach (Frog f in PlayerManager.Instance.Frogs) {
-			if (!attacking) {
-				float distance = Vector3.Distance(transform.position, f.transform.position);
-				if (distance < attackRange) {
-					attacking = true;
-					direction = Random.Range(4, 8);
-
-					int Y = Random.Range(0, 4);
-					if (Y <= 1) {
-						direction = 0;
+		if (!WellFedSharks) {
+			foreach (Frog f in PlayerManager.Instance.Frogs) {
+				if (!attacking) {
+					float distance = Vector3.Distance(transform.position, f.transform.position);
+					if (distance < attackRange) {
+						attacking = true;
+						direction = Random.Range(4, 8);
+	
+						int Y = Random.Range(0, 4);
+						if (Y <= 1) {
+							direction = 0;
+						}
+						if (Y == 2) {
+							direction = -direction;
+						}
+							
+						//stall state delay
+						state = SharkState.Preparing;
 					}
-					if (Y == 2) {
-						direction = -direction;
-					}
-						
-					//stall state delay
-					state = SharkState.Preparing;
 				}
 			}
 		}
