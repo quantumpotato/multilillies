@@ -129,9 +129,9 @@ public class EnemySpawner : MonoBehaviour {
 		
 		
 		CyclePlayerIndex();
-		int lowestSpawnDelay = 30 - Frog.TotalRating;
-		if (lowestSpawnDelay < 15) {
-			lowestSpawnDelay = 15;
+		int lowestSpawnDelay = 15 - Frog.TotalRating;
+		if (lowestSpawnDelay < 5) {
+			lowestSpawnDelay = 5;
 		}
 		if (Frog.HighRating < 20) {
 			if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
