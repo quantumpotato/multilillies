@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   speed: 0
   playerNumber: 1
-  score: 0
+  rating: 0
   mistakes: 0
   floatExperience: 0
   floatLevel: 0
@@ -2255,7 +2255,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 9.21251583
+      value: 6.70660877
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f89261a472174a36a85f4ee7d13a2fa, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2515,7 +2515,7 @@ MonoBehaviour:
   m_Name: 
   speed: 0
   playerNumber: 3
-  score: 0
+  rating: 0
   mistakes: 0
   floatExperience: 0
   floatLevel: 0
@@ -3177,7 +3177,7 @@ Transform:
   m_PrefabInternal: {fileID: 996316708}
   m_GameObject: {fileID: 1395234898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.5466156, y: -10.7526026, z: 9.21251583}
+  m_LocalPosition: {x: -34.5466156, y: -10.7526026, z: 6.70660877}
   m_LocalScale: {x: .805218995, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 884028530}
@@ -3743,7 +3743,7 @@ MonoBehaviour:
   m_Name: 
   speed: 0
   playerNumber: 0
-  score: 0
+  rating: 0
   mistakes: 0
   floatExperience: 0
   floatLevel: 0
@@ -4185,7 +4185,7 @@ MonoBehaviour:
   m_Name: 
   speed: 0
   playerNumber: 2
-  score: 0
+  rating: 0
   mistakes: 0
   floatExperience: 0
   floatLevel: 0
