@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aded99468d1ab4178827837817e4dab6, type: 1}
   m_Name: 
   boundingBoxWidth: 400
-  boundingBoxHeight: 40
+  boundingBoxHeight: 47
   distanceFromTop: 35
   boundingBoxPadding: 5
   runeEntryWidth: 127

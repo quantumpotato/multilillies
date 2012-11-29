@@ -61,11 +61,16 @@ public class RuneManager : MonoBehaviour {
 		for (int i = 0; i < runes.Length; i++) {
 			Rune rune = runes[i];
 			string name = rune != null && rune.Name.Length > 0 ? rune.Name : "";
-			GUI.Box(new Rect(slotsStartPosition + (runeEntryWidth + boundingBoxPadding) * i + boundingBoxPadding,
+			string applied = rune != null && rune.Applied ? "(Active)" : "(Inactive)";
+			if (GUI.Button(new Rect(slotsStartPosition + (runeEntryWidth + boundingBoxPadding) * i + boundingBoxPadding,
 							distanceFromTop + boundingBoxPadding,
 							runeEntryWidth,
 							boundingBoxHeight - boundingBoxPadding*2),
-					name);
+					name + "\n" + applied)) {
+				if (rune != null) {
+					rune.ToggleApplied();
+				}
+			}
 		}
 	}
 }

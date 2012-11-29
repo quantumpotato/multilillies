@@ -10,10 +10,12 @@ public class WellFedSharksRune : Rune {
 	#endregion
 	
 	public override void Apply() {
+		base.Apply();
 		Shark.WellFedSharks = true;
 	}
 	
 	public override void Unapply() {
+		base.Unapply();
 		Shark.WellFedSharks = false;
 	}
 }
