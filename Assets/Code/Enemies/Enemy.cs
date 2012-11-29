@@ -24,6 +24,11 @@ public class Enemy : MonoBehaviour {
 	
 	protected virtual void Start() {
 		_core = transform.FindChild("core").gameObject;
+		EnemySpawner.Instance.actualEnemyCount++;
+	}
+	
+	void OnDestroy() {
+		EnemySpawner.Instance.actualEnemyCount--;
 	}
 	#endregion
 	
@@ -57,10 +62,6 @@ public class Enemy : MonoBehaviour {
 			"oncomplete", "OnCaught",
 			"oncompleteparams", fisherman
 		));
-	}
-	
-	public void Die() {
-		EnemySpawner.Instance.DestroyEnemy(gameObject);
 	}
 	
 	protected int SpeedModForRating(int rating) {
