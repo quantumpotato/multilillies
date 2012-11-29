@@ -134,6 +134,16 @@ public class EnemySpawner : MonoBehaviour {
 				lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
 			}
 		}
+		
+		desiredEnemyCount = Frog.TotalRating - 15;
+		if (desiredEnemyCount < 8) {
+			desiredEnemyCount = 8;
+		}
+		if (desiredEnemyCount > 20) {
+			desiredEnemyCount = 20;
+		}
+		
+		
 		spawnTimer = Random.Range(lowestSpawnDelay,15);
 	}
 	
