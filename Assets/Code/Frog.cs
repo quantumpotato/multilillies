@@ -31,11 +31,25 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	public static int NumberOfPlayers {
+		get {
+			int sum = 0;
+			foreach (Frog f in PlayerManager.Instance.Frogs) {
+				if (f.gameObject.active) {
+					sum++;
+				}
+			}
+			return sum;
+		}
+	}
+	
 	public static int TotalRating {
 		get {
 			int sum = 0;
 			foreach (Frog frog in PlayerManager.Instance.Frogs) {
-				sum += frog.rating;
+				if (frog.gameObject.active) {
+					sum += frog.rating;
+				}
 			}
 			return sum;
 		}
@@ -44,12 +58,15 @@ public class Frog : MonoBehaviour {
 	public static int MinRating {
 		get {
 			int minRating = Frog.HighRating * 4;
-	
+			
 			foreach (Frog f in PlayerManager.Instance.Frogs) {
-				if (f.rating < minRating) {
-					minRating = f.rating;
+				if (f.gameObject.active) {
+					if (f.rating < minRating) {
+						minRating = f.rating;
+					}
 				}
 			}
+			
 			return minRating;	
 		}
 	}
