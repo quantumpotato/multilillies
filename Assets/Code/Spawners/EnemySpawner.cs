@@ -83,8 +83,8 @@ public class EnemySpawner : MonoBehaviour {
 	
 	void SetLowestSpawnDelay() {
 		lowestSpawnDelay = 15 - Frog.TotalRating;
-		if (lowestSpawnDelay < 5) {
-			lowestSpawnDelay = 5;
+		if (lowestSpawnDelay < 2) {
+			lowestSpawnDelay = 2;
 		}
 	}
 	
