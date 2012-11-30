@@ -89,13 +89,13 @@ public class Frog : MonoBehaviour {
 	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
-	private float baseBoostingSpeed = 28.0f;
+	private float baseBoostingSpeed = 42.0f;
 	private float floatModifier = 1.5f;
 	private float maxCharge = 70;
 	private float charge;
 	private float chargeReached;
 	private float chargeIncreaseSpeed = 130;
-	private float chargeDecreaseSpeed = 280;
+	private float chargeDecreaseSpeed = 420;
 	private float potentialFloatExperienceIncreaseSpeed = 200;
 	private float potentialExperienceThreshold = 30;
 	private bool wantsToBoost;
