@@ -27,6 +27,7 @@ public class EnemySpawner : MonoBehaviour {
 	
 	public int actualEnemyCount;
 	private int lowestSpawnDelay;
+	private int highestSpawnDelay;
 	
 	private int score;
 	
@@ -83,17 +84,31 @@ public class EnemySpawner : MonoBehaviour {
 	
 	void SetLowestSpawnDelay() {
 		lowestSpawnDelay = 15 - Frog.TotalRating;
-		if (lowestSpawnDelay < 2) {
-			lowestSpawnDelay = 2;
+		if (lowestSpawnDelay < 5) {
+			lowestSpawnDelay = 5;
+		}
+	}
+	
+	bool EasyMode() {
+		return Frog.HighRating < 20 && Frog.MinRating < 11 - (Frog.NumberOfPlayers);
+	}
+	
+	void ModifySpawnDelayForEasyMode() {
+		if (EasyMode()) {
+			lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
 		}
 	}
 	
 	void SetSpawnDelay() {
 		SetLowestSpawnDelay();
-		if (Frog.HighRating < 20) {
-			if (Frog.MinRating < 11 - (Frog.NumberOfPlayers)) {
-				lowestSpawnDelay+= (150 - ((11 - Frog.NumberOfPlayers - Frog.MinRating) * 5));	
-			}
+		SetHighestSpawnDelay();
+		ModifySpawnDelayForEasyMode();
+	}
+	
+	void SetHighestSpawnDelay() {
+		highestSpawnDelay = 10;
+		if (EasyMode()) { 	
+			highestSpawnDelay = 30;
 		}
 	}
 	
@@ -102,13 +117,13 @@ public class EnemySpawner : MonoBehaviour {
 		if (desiredEnemyCount < 8) {
 			desiredEnemyCount = 8;
 		}
-		if (desiredEnemyCount > 20) {
-			desiredEnemyCount = 20;
+		if (desiredEnemyCount > 30) {
+			desiredEnemyCount = 30;
 		}
 	}
 	
 	void SetSpawnTimer() {
-		spawnTimer = Random.Range(lowestSpawnDelay,15);
+		spawnTimer = Random.Range(lowestSpawnDelay,highestSpawnDelay);
 	}
 	
 	GameObject NewEnemy() {
