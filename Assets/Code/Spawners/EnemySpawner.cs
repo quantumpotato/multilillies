@@ -81,16 +81,28 @@ public class EnemySpawner : MonoBehaviour {
 		
 		return lastSpawnZ;
 	}
+		
+	int LowestAllowedSpawnDelay() {
+		if (HardMode()) {
+		   return 1;	
+		}
+		
+		return 5;
+	}
 	
 	void SetLowestSpawnDelay() {
 		lowestSpawnDelay = 15 - Frog.TotalRating;
-		if (lowestSpawnDelay < 5) {
-			lowestSpawnDelay = 5;
+		if (lowestSpawnDelay < LowestAllowedSpawnDelay()) {
+			lowestSpawnDelay = LowestAllowedSpawnDelay();
 		}
 	}
 	
 	bool EasyMode() {
 		return Frog.HighRating < 20 && Frog.MinRating < 11 - (Frog.NumberOfPlayers);
+	}
+	
+	bool HardMode() {
+		return Frog.TotalRating > 50;
 	}
 	
 	void ModifySpawnDelayForEasyMode() {
