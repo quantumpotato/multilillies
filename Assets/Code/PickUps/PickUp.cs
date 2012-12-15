@@ -19,7 +19,7 @@ public class PickUp : MonoBehaviour {
 	public void ApplyTo(Frog frog) {
 		Type type = Type.GetType(powerUpClassName);
 		PowerUp powerUp = (PowerUp)Activator.CreateInstance(type);
-		powerUp.ApplyTo(frog);
+		frog.AddToInventory(powerUp);
 	}
 	
 	void UpdatePosition() {

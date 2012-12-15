@@ -81,6 +81,17 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	private PowerUp[] inventory;
+	public PowerUp[] Inventory {
+		get {
+			return inventory;
+		}
+		
+		set {
+			inventory = value;
+		}
+	}
+	
 	private float ModifiedFloatSpeed {
 		get {
 			return baseFloatingSpeed + floatLevel * floatModifier;
@@ -107,6 +118,7 @@ public class Frog : MonoBehaviour {
 	private Rect upperRightBounds;
 	private Rect lowerRightBounds;
 	private Rect[] inputQuadrants;
+	private Rect[] inventoryRects;
 	
 	private GameObject character;
 	private GameObject pad;
@@ -149,8 +161,10 @@ public class Frog : MonoBehaviour {
 	#region MonoBehaviour
 	void Awake() {
 		SetUpInputQuadrants();
+		SetUpInventoryRects();
 		SetUpFloating();
 		startPosition = transform.position;
+		Inventory = new PowerUp[3];
 	}
 
 	void Start () {
@@ -177,7 +191,21 @@ public class Frog : MonoBehaviour {
 			FirePickUpHitNotification(other.gameObject);
 		}
     }
+	
+	void OnGUI() {
+		DrawInventory();
+	}
 	#endregion
+	
+	public void AddToInventory(PowerUp powerUp) {
+		for (int i = 0; i < Inventory.Length; i++) {
+			PowerUp item = Inventory[i];
+			if (item == null) {
+				Inventory[i] = powerUp;
+				return;
+			}
+		}
+	}
 	
 	public void Die() {
 		ResetPosition();
@@ -206,6 +234,33 @@ public class Frog : MonoBehaviour {
 		inputQuadrants[1] = new Rect(Screen.width/2, 0, Screen.width/2, Screen.height/2);
 		inputQuadrants[2] = new Rect(0, Screen.height/2, Screen.width/2, Screen.height/2);
 		inputQuadrants[3] = new Rect(Screen.width/2, Screen.height/2, Screen.width/2, Screen.height/2);
+	}
+	
+	void SetUpInventoryRects() {
+		inventoryRects = new Rect[4];
+		int width = 400;
+		int height = 40;
+		int leftStart = 10;
+		int topStart = 100;
+		
+		inventoryRects[2] = new Rect(leftStart, topStart, width, height);
+		
+		if (playerNumber == 3) {
+			// upper right
+			leftStart = Screen.width - width - 5;
+			topStart = 100;
+			inventoryRects[3] = new Rect(leftStart, topStart, width, height);
+		} else if (playerNumber == 0) {
+			// lower left
+			leftStart = 10;
+			topStart = Screen.height - 100;
+			inventoryRects[0] = new Rect(leftStart, topStart, width, height);
+		} else if (playerNumber == 1) {
+			// lower right
+			leftStart = Screen.width - width - 5;
+			topStart = Screen.height - 100;
+			inventoryRects[1] = new Rect(leftStart, topStart, width, height);
+		}
 	}
 
 	void DecreaseRating() {
@@ -334,19 +389,25 @@ public class Frog : MonoBehaviour {
 	void HandleInput() {
 #if UNITY_EDITOR
 		if (Input.GetButtonDown("Fire1")) {
-	        if (inputQuadrants[playerNumber].Contains(Input.mousePosition)) {
+	        if (inputQuadrants[playerNumber].Contains(Input.mousePosition)
+				&& !inventoryRects[playerNumber].Contains(Input.mousePosition)) {
 				BeginCharging();
 			}
 		} else if (Input.GetButtonUp("Fire1")) {
-			if (inputQuadrants[playerNumber].Contains(Input.mousePosition)) {
+			if (inputQuadrants[playerNumber].Contains(Input.mousePosition)
+				&& !inventoryRects[playerNumber].Contains(Input.mousePosition)) {
 				BeginBoosting();
 			}
 		}
 #elif UNITY_IPHONE
 		foreach (Touch touch in Input.touches) {
-			if (touch.phase == TouchPhase.Began && inputQuadrants[playerNumber].Contains(touch.position)) {
+			if (touch.phase == TouchPhase.Began
+				&& inputQuadrants[playerNumber].Contains(touch.position)
+				&& !inventoryRects[playerNumber].Contains(touch.position)) {
 				BeginCharging();
-			} else if (touch.phase == TouchPhase.Ended && inputQuadrants[playerNumber].Contains(touch.position)) {
+			} else if (touch.phase == TouchPhase.Ended
+				&& inputQuadrants[playerNumber].Contains(touch.position)
+				&& !inventoryRects[playerNumber].Contains(touch.position)) {
 				BeginBoosting();
 			}
 		}
@@ -406,5 +467,24 @@ public class Frog : MonoBehaviour {
 	
 	void SetColor() {
 		character.renderer.material.color = PlayerManager.Instance.GetPlayerColor(playerNumber);
+	}
+	
+	void DrawInventory() {
+		Rect inventoryRect = inventoryRects[playerNumber];
+		GUI.Box(inventoryRect, "");
+		
+		int padding = 5;
+		int buttonWidth = (int)inventoryRect.width / Inventory.Length - (Inventory.Length * padding);
+		int buttonHeight = (int)inventoryRect.height - (padding * 2);
+		
+		for (int i = 0; i < Inventory.Length; i++) {
+			PowerUp item = Inventory[i];
+			if (item != null) {
+				if (GUI.Button(new Rect(inventoryRect.x + padding + (buttonWidth * i) + (i * padding), inventoryRect.y + padding, buttonWidth, buttonHeight), item.Name)) {
+					item.ApplyTo(this);
+					Inventory[i] = null;
+				}
+			}
+		}
 	}
 }
