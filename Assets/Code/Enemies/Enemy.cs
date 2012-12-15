@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 	
+	private int TopSpeed = 30;
+	
 	#region MonoBehaviour
 	protected virtual void Awake() {
 	}
@@ -66,9 +68,9 @@ public class Enemy : MonoBehaviour {
 	
 	protected int SpeedModForRating(int rating) {
 		int speed = Random.Range (9, 12);
-		speed += (rating / 3);
-		if (speed > 50) {
-			speed = 50;
+		speed += (rating / 4);
+		if (speed > TopSpeed) {
+			speed = TopSpeed;
 		}
 		return speed;
 	}
