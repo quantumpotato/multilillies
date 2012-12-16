@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GameGUI : MonoBehaviour {
 	void OnGUI () {
-		if (GameManager.Instance.Playing) {
+		if (GameManager.Instance.IsPlaying()) {
 			DrawScore();
 		}
 	}

@@ -3,6 +3,42 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour {
 	public static PlayerManager Instance;
+	public static void Play() {
+		foreach (Frog frog in Instance.Frogs) {
+			frog.Hit += Instance.HandleFrogHit;
+			frog.PickUpHit += Instance.HandleFrogPickUpHit;
+		}
+		Instance.lives = Instance.startLives;
+	}
+	public static void Stop() {
+		foreach (Frog frog in Instance.Frogs) {
+			frog.Hit -= Instance.HandleFrogHit;
+			frog.PickUpHit -= Instance.HandleFrogPickUpHit;
+			frog.rating = 0;
+			frog.gameObject.SetActiveRecursively(false);
+		}
+		Frog.HighRating = 0;
+	}
+	
+	public int lives;
+	public int Lives {
+		get {
+			return lives;
+		}
+		
+		set {
+			lives = value;
+			if (lives < 0) {
+				lives = 0;
+			}
+		}
+	}
+	
+	public delegate void LivesExpiredHandler();
+	public event LivesExpiredHandler LivesExpired;
+	
+	public delegate void FrogHitHandler(Frog frog, Enemy enemy);
+	public event FrogHitHandler FrogHit;
 	
 	GameObject[] frogObjects;
 	public GameObject[] FrogObjects {
@@ -18,11 +54,14 @@ public class PlayerManager : MonoBehaviour {
 		}
 	}
 	
+	int startLives;
+	
 	#region MonoBehaviour
 	void Awake() {
 		Instance = this;
 		frogObjects = new GameObject[4];
 		frogs = new Frog[4];
+		startLives = lives;
 	}
 	
 	void Start() {
@@ -40,6 +79,7 @@ public class PlayerManager : MonoBehaviour {
 
 	void OnGUI() {
 		DrawPlayerAreas();
+		DrawLives();
 	}
 	#endregion
 	
@@ -106,8 +146,29 @@ public class PlayerManager : MonoBehaviour {
 		}
 	}
 	
+	void DrawLives() {
+		if (GameManager.Instance.IsPlaying()) {
+			GUI.Box(new Rect(120, 20, 100, 35), "Lives: " + Lives.ToString());
+		}
+	}
+	
 	void StartPlayer(int num) {
 		frogObjects[num].SetActiveRecursively(true);
 		GameManager.Instance.Play();
+	}
+
+	void HandleFrogPickUpHit(Frog frog, PickUp pickUp) {
+		pickUp.ApplyTo(frog);
+		PickUpSpawner.Instance.DestroyPickUp(pickUp);
+	}
+
+	void HandleFrogHit(Frog frog, Enemy enemy) {
+		if (!Fisherman.Instance.CanCatchEnemies()) {
+			frog.Die();
+			lives--;
+		}
+		if (FrogHit != null) {
+			FrogHit(frog, enemy);
+		}
 	}
 }

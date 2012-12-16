@@ -7,6 +7,13 @@ public class EnemySpawner : MonoBehaviour {
 	public static void Play() {
 		Instance.gameObject.SetActiveRecursively(true);
 	}
+	public static void Stop() {
+		Instance.gameObject.SetActiveRecursively(false);
+		Enemy[] enemies = (Enemy[])FindObjectsOfType(typeof(Enemy));
+		for (int i = 0; i < enemies.Length; i++) {
+			Destroy(enemies[i].gameObject);
+		}
+	}
 	
 	public int desiredEnemyCount;
 	public GameObject logPrefab;
@@ -28,8 +35,6 @@ public class EnemySpawner : MonoBehaviour {
 	public int actualEnemyCount;
 	private int lowestSpawnDelay;
 	private int highestSpawnDelay;
-	
-	private int score;
 	
 	private float lastSpawnZ;
 	

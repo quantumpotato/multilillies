@@ -10,7 +10,7 @@ public class Frog : MonoBehaviour {
 	public float floatExperience;
 	public int floatLevel;
 	public float floatLevelThreshhold;
-	public float potentialFloatExperience;	
+	public float potentialFloatExperience;
 	
 	public delegate void RatingChangedHandler(Frog frog);
 	public event RatingChangedHandler RatingChanged;
