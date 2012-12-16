@@ -121,7 +121,7 @@ public class Fisherman : MonoBehaviour {
 	}
 	
 	void StartWaitingForCollision() {
-		FrogHitManager.Instance.FrogHit += CatchEnemy;
+		PlayerManager.Instance.FrogHit += CatchEnemy;
 		ChangeState(State.WaitingForCollision);
 	}
 	
@@ -129,7 +129,7 @@ public class Fisherman : MonoBehaviour {
 		if (enemiesCaught == enemiesToCatch) return;
 		ChangeState(State.Catching);
 		enemiesCaught++;
-		FrogHitManager.Instance.FrogHit -= CatchEnemy;
+		PlayerManager.Instance.FrogHit -= CatchEnemy;
 		enemy.GetCaughtBy(this);
 	}
 	
