@@ -11,6 +11,8 @@ public class Frog : MonoBehaviour {
 	public int floatLevel;
 	public float floatLevelThreshhold;
 	public float potentialFloatExperience;	
+	public int score;
+	public int scoreMultiplier;
 	
 	public delegate void RatingChangedHandler(Frog frog);
 	public event RatingChangedHandler RatingChanged;
@@ -37,6 +39,18 @@ public class Frog : MonoBehaviour {
 			foreach (Frog f in PlayerManager.Instance.Frogs) {
 				if (f.gameObject.active) {
 					sum++;
+				}
+			}
+			return sum;
+		}
+	}
+	
+	public static int TotalScore {
+		get {
+			int sum = 0;
+			foreach (Frog frog in PlayerManager.Instance.Frogs) {
+				if (frog.gameObject.active) {
+					sum+= frog.score;
 				}
 			}
 			return sum;
@@ -160,6 +174,7 @@ public class Frog : MonoBehaviour {
 		
 	#region MonoBehaviour
 	void Awake() {
+		scoreMultiplier = 1;
 		SetUpInputQuadrants();
 		SetUpInventoryRects();
 		SetUpFloating();
@@ -265,6 +280,7 @@ public class Frog : MonoBehaviour {
 
 	void DecreaseRating() {
 		rating-= mistakes;
+		scoreMultiplier = 1;
 		mistakes++;
 		if (rating <= 0) {
 			rating = 0;
@@ -430,6 +446,8 @@ public class Frog : MonoBehaviour {
 			ResetPosition();
 			ResetState();
 			rating = rating + 1;
+			score = score + scoreMultiplier;
+			scoreMultiplier++;
 			UpgradeFloating();
 			FireRatingChangedNotification();
 		}
