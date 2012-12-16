@@ -17,9 +17,13 @@ public class PickUp : MonoBehaviour {
 	#endregion
 	
 	public void ApplyTo(Frog frog) {
-		Type type = Type.GetType(powerUpClassName);
-		PowerUp powerUp = (PowerUp)Activator.CreateInstance(type);
-		frog.AddToInventory(powerUp);
+		if (powerUpClassName == "CoinPowerup") {
+			frog.CollectCoin();
+		} else {
+			Type type = Type.GetType(powerUpClassName);
+			PowerUp powerUp = (PowerUp)Activator.CreateInstance(type);
+			frog.AddToInventory(powerUp);
+		}
 	}
 	
 	void UpdatePosition() {

@@ -2611,6 +2611,18 @@ Prefab:
       propertyPath: lowestSpawnTickAmount
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
+      propertyPath: highestCoinSpawnTickAmount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 8905b0c961bde477abf66a8538945d9f, type: 2}
+    - target: {fileID: 11400000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
+      propertyPath: lowestCoinSpawnTickAmount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
   m_RootGameObject: {fileID: 2051165622}
@@ -4908,7 +4920,10 @@ MonoBehaviour:
   summonFishermanPrefab: {fileID: 100000, guid: 8ac05d51de9b04aa4988ec4c98c0bcda,
     type: 2}
   raiseDamPrefab: {fileID: 100000, guid: fc07c1f8fa727418a8cebe75349db4e5, type: 2}
+  coinPrefab: {fileID: 100000, guid: 8905b0c961bde477abf66a8538945d9f, type: 2}
   maximumZ: 24
+  lowestCoinSpawnTickAmount: 30
+  highestCoinSpawnTickAmount: 60
 --- !u!1 &2055275262
 GameObject:
   m_ObjectHideFlags: 0
