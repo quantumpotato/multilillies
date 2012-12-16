@@ -6,6 +6,9 @@ public class RuneManager : MonoBehaviour {
 	public static void Play() {
 		Instance.gameObject.SetActiveRecursively(true);
 	}
+	public static void Stop() {
+		Instance.gameObject.SetActiveRecursively(false);
+	}
 	
 	public float boundingBoxWidth;
 	public float boundingBoxHeight;

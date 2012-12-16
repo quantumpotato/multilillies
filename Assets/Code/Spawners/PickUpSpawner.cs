@@ -6,6 +6,13 @@ public class PickUpSpawner : MonoBehaviour {
 	public static void Play() {
 		Instance.gameObject.SetActiveRecursively(true);
 	}
+	public static void Stop() {
+		Instance.gameObject.SetActiveRecursively(false);
+		PickUp[] pickUps = (PickUp[])FindObjectsOfType(typeof(PickUp));
+		for (int i = 0; i < pickUps.Length; i++) {
+			Destroy(pickUps[i].gameObject);
+		}
+	}
 	
 	public int lowestSpawnTickAmount;
 	public int highestSpawnTickAmount;
