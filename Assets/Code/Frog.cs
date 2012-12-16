@@ -226,6 +226,7 @@ public class Frog : MonoBehaviour {
 	#endregion
 	
 	public void CollectCoin() {
+		print ("collecting coin" + score +"" + scoreMultiplier);
 		score = score + scoreMultiplier;
 		scoreMultiplier++;
 	}

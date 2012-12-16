@@ -175,7 +175,6 @@ public class EnemySpawner : MonoBehaviour {
 		if (isLog && RuneManager.Instance.SaveOurTrees) {
 			int rand = Random.Range(1,100);
 			shouldSpawnLog = (rand > 95 ? false : true);
-			print("spawn log: "  + shouldSpawnLog.ToString());
 		}
 		if ((isLog && shouldSpawnLog) || !isLog) {
 			// spawn enemy

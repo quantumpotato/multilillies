@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
-  m_LocalPosition: {x: 4.75693703, y: 277.70105, z: -216.68425}
+  m_LocalPosition: {x: -12.003315, y: 5.86904812, z: 62.2965813}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f03938d49604b99925169b82fb2abf, type: 1}
   m_Name: 
   speed: 10
-  powerUpClassName: RaiseDam
+  powerUpClassName: CoinPowerup
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
