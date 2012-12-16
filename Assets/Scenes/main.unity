@@ -553,6 +553,9 @@ MonoBehaviour:
   floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
+  score: 0
+  scoreMultiplier: 0
+  powerupQuantities: 
 --- !u!54 &164401626
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2558,6 +2561,9 @@ MonoBehaviour:
   floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
+  score: 0
+  scoreMultiplier: 0
+  powerupQuantities: 
 --- !u!1001 &1055931156
 Prefab:
   m_ObjectHideFlags: 0
@@ -2596,6 +2602,14 @@ Prefab:
     - target: {fileID: 100000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
       propertyPath: m_Name
       value: pickup spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
+      propertyPath: highestSpawnTickAmount
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
+      propertyPath: lowestSpawnTickAmount
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3f80a03aca6564942a2dbc275c5391cf, type: 2}
@@ -3787,6 +3801,9 @@ MonoBehaviour:
   floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
+  score: 0
+  scoreMultiplier: 0
+  powerupQuantities: 
 --- !u!1 &1643394719
 GameObject:
   m_ObjectHideFlags: 0
@@ -4229,6 +4246,9 @@ MonoBehaviour:
   floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
+  score: 0
+  scoreMultiplier: 0
+  powerupQuantities: 
 --- !u!1 &1748061743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,8 +4901,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ddce858551304ebcaa3e8fd848cb634, type: 1}
   m_Name: 
-  lowestSpawnTickAmount: 100
-  highestSpawnTickAmount: 150
+  lowestSpawnTickAmount: 300
+  highestSpawnTickAmount: 800
   upgradeFloatingPrefab: {fileID: 100000, guid: fb6a99f76308549c19dc0a5b1657d8e8,
     type: 2}
   summonFishermanPrefab: {fileID: 100000, guid: 8ac05d51de9b04aa4988ec4c98c0bcda,

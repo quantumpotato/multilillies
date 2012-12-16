@@ -10,7 +10,11 @@ public class Frog : MonoBehaviour {
 	public float floatExperience;
 	public int floatLevel;
 	public float floatLevelThreshhold;
-	public float potentialFloatExperience;
+	public float potentialFloatExperience;	
+	public int score;
+	public int scoreMultiplier;
+	
+	public int[] powerupQuantities;
 	
 	public delegate void RatingChangedHandler(Frog frog);
 	public event RatingChangedHandler RatingChanged;
@@ -30,13 +34,35 @@ public class Frog : MonoBehaviour {
 			surpassing = value;
 		}
 	}
-	
+	private static PowerUp[] inventoryPowerups;
+	public static PowerUp[] InventoryPowerups {
+		get {
+			if (inventoryPowerups != null) {
+				return inventoryPowerups;
+			}
+			inventoryPowerups = new PowerUp[]{new UpgradeFloating(), new RaiseDam(), new SummonFisherman()};
+			return inventoryPowerups;
+		}
+	}
+		
 	public static int NumberOfPlayers {
 		get {
 			int sum = 0;
 			foreach (Frog f in PlayerManager.Instance.Frogs) {
 				if (f.gameObject.active) {
 					sum++;
+				}
+			}
+			return sum;
+		}
+	}
+
+	public static int TotalScore {
+		get {
+			int sum = 0;
+			foreach (Frog frog in PlayerManager.Instance.Frogs) {
+				if (frog.gameObject.active) {
+					sum+= frog.score;
 				}
 			}
 			return sum;
@@ -160,11 +186,13 @@ public class Frog : MonoBehaviour {
 		
 	#region MonoBehaviour
 	void Awake() {
+		scoreMultiplier = 1;
 		SetUpInputQuadrants();
 		SetUpInventoryRects();
 		SetUpFloating();
 		startPosition = transform.position;
 		Inventory = new PowerUp[3];
+		powerupQuantities = new int[3];		
 	}
 
 	void Start () {
@@ -198,6 +226,15 @@ public class Frog : MonoBehaviour {
 	#endregion
 	
 	public void AddToInventory(PowerUp powerUp) {
+	    int powerUpIndex = 0;
+		for (int i = 0; i < InventoryPowerups.Length; i++) {
+			if (powerUp.Name == InventoryPowerups[i].Name) {
+				powerUpIndex = i;
+				break;
+			}
+		}
+		powerupQuantities[powerUpIndex]++;
+		
 		for (int i = 0; i < Inventory.Length; i++) {
 			PowerUp item = Inventory[i];
 			if (item == null) {
@@ -265,6 +302,7 @@ public class Frog : MonoBehaviour {
 
 	void DecreaseRating() {
 		rating-= mistakes;
+		scoreMultiplier = 1;
 		mistakes++;
 		if (rating <= 0) {
 			rating = 0;
@@ -430,6 +468,8 @@ public class Frog : MonoBehaviour {
 			ResetPosition();
 			ResetState();
 			rating = rating + 1;
+			score = score + scoreMultiplier;
+			scoreMultiplier++;
 			UpgradeFloating();
 			FireRatingChangedNotification();
 		}
@@ -469,6 +509,13 @@ public class Frog : MonoBehaviour {
 		character.renderer.material.color = PlayerManager.Instance.GetPlayerColor(playerNumber);
 	}
 	
+	void UsePowerup(int index) {
+		if (powerupQuantities[index] > 0) {
+			InventoryPowerups[index].ApplyTo(this);		
+			powerupQuantities[index]--;
+		}
+	}
+	
 	void DrawInventory() {
 		Rect inventoryRect = inventoryRects[playerNumber];
 		GUI.Box(inventoryRect, "");
@@ -477,13 +524,10 @@ public class Frog : MonoBehaviour {
 		int buttonWidth = (int)inventoryRect.width / Inventory.Length - (Inventory.Length * padding);
 		int buttonHeight = (int)inventoryRect.height - (padding * 2);
 		
-		for (int i = 0; i < Inventory.Length; i++) {
-			PowerUp item = Inventory[i];
-			if (item != null) {
-				if (GUI.Button(new Rect(inventoryRect.x + padding + (buttonWidth * i) + (i * padding), inventoryRect.y + padding, buttonWidth, buttonHeight), item.Name)) {
-					item.ApplyTo(this);
-					Inventory[i] = null;
-				}
+		for (int i = 0; i < InventoryPowerups.Length; i++) {
+			string powerupDisplay = InventoryPowerups[i].Name + "x" + powerupQuantities[i];
+			if (GUI.Button(new Rect(inventoryRect.x + padding + (buttonWidth * i) + (i * padding), inventoryRect.y + padding, buttonWidth, buttonHeight), powerupDisplay)) {
+				UsePowerup(i);
 			}
 		}
 	}

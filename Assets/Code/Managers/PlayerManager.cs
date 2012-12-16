@@ -104,11 +104,15 @@ public class PlayerManager : MonoBehaviour {
 		float buttonWidth = 100;
 		float buttonHeight = 50;
 		Texture2D texture = (Texture2D)Resources.Load("WhiteTexture");
+		float scoreWidth = 80;
+		float scoreHeight = 23;
 		
 		// top left = red
 		if (frogObjects[2].active) {
 			GUI.color = Color.red;
 			GUI.DrawTexture(new Rect(0,0,textureWidth,textureHeight), texture);
+			GUI.color = Color.white;
+			GUI.Box(new Rect (50, 0, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[2].score + " x" + PlayerManager.Instance.Frogs[2].scoreMultiplier);
 		} else {
 			if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(2);
@@ -119,6 +123,8 @@ public class PlayerManager : MonoBehaviour {
 		if (frogObjects[0].active) {
 			GUI.color = Color.yellow;
 			GUI.DrawTexture(new Rect(0,Screen.height - textureHeight,textureWidth,textureHeight), texture);
+			GUI.color = Color.white;
+			GUI.Box(new Rect (50, Screen.height - textureHeight / 2, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[0].score + " x" + PlayerManager.Instance.Frogs[0].scoreMultiplier);
 		} else {
 			if(GUI.Button(new Rect(0,Screen.height-buttonHeight,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(0);
@@ -129,6 +135,8 @@ public class PlayerManager : MonoBehaviour {
 		if (frogObjects[3].active) {
 			GUI.color = Color.white;
 			GUI.DrawTexture(new Rect(Screen.width - textureWidth,0,textureWidth,textureHeight), texture);
+			GUI.color = Color.white;
+			GUI.Box(new Rect (Screen.width - textureWidth - scoreWidth, 0, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[3].score + " x" + PlayerManager.Instance.Frogs[3].scoreMultiplier);
 		} else {
 			if(GUI.Button(new Rect(Screen.width - buttonWidth,0,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(3);
@@ -139,6 +147,8 @@ public class PlayerManager : MonoBehaviour {
 		if (frogObjects[1].active) {
 			GUI.color = Color.green;
 			GUI.DrawTexture(new Rect(Screen.width - textureWidth,Screen.height - textureHeight,textureWidth,textureHeight), texture);
+			GUI.color = Color.white;
+			GUI.Box(new Rect (Screen.width - textureWidth - scoreWidth, Screen.height - textureHeight / 2, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[1].score + " x" + PlayerManager.Instance.Frogs[1].scoreMultiplier);
 		} else {
 			if(GUI.Button(new Rect(Screen.width - buttonWidth,Screen.height - buttonHeight,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(1);
