@@ -19,9 +19,13 @@ public class PickUpSpawner : MonoBehaviour {
 	public GameObject upgradeFloatingPrefab;
 	public GameObject summonFishermanPrefab;
 	public GameObject raiseDamPrefab;
+	public GameObject coinPrefab;
 	public int maximumZ;
+	public int lowestCoinSpawnTickAmount;
+	public int highestCoinSpawnTickAmount;
 	
 	private int spawnTimer;
+	private int coinSpawnTimer;
 	
 	#region MonoBehaviour
 	void Awake() {
@@ -35,12 +39,18 @@ public class PickUpSpawner : MonoBehaviour {
 		}
 		
 		SetRandomSpawnTime();
+		SetRandomCoinSpawnTime();
 	}
 
 	void Update() {
 		spawnTimer--;
 		if (spawnTimer <= 0) {
 			SpawnPickup();
+		}
+		
+		coinSpawnTimer--;
+		if (coinSpawnTimer <= 0) {
+			SpawnCoin();
 		}
 	}
 	#endregion
@@ -60,11 +70,25 @@ public class PickUpSpawner : MonoBehaviour {
 		// TODO
 	}
 	
+	Vector3 PickupSpawnPosition() {
+		return new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, maximumZ));
+	}
+	
+	void SpawnCoin() {
+		GameObject coin = (GameObject)Instantiate(coinPrefab);
+		coin.transform.position = PickupSpawnPosition();
+		SetRandomCoinSpawnTime();
+	}
+	
 	void SpawnPickup() {
 		GameObject pickUpPrefab = DetermineRandomPrefab();
 		GameObject pickUpObject = (GameObject)Instantiate(pickUpPrefab);
-		pickUpObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Random.Range(2, maximumZ));
+		pickUpObject.transform.position = PickupSpawnPosition();
 		SetRandomSpawnTime();
+	}
+	
+	void SetRandomCoinSpawnTime() {
+		coinSpawnTimer = Random.Range (lowestCoinSpawnTickAmount, highestCoinSpawnTickAmount);
 	}
 	
 	void SetRandomSpawnTime() {

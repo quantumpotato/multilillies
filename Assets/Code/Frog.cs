@@ -225,6 +225,12 @@ public class Frog : MonoBehaviour {
 	}
 	#endregion
 	
+	public void CollectCoin() {
+		print ("collecting coin" + score +"" + scoreMultiplier);
+		score = score + scoreMultiplier;
+		scoreMultiplier++;
+	}
+	
 	public void AddToInventory(PowerUp powerUp) {
 	    int powerUpIndex = 0;
 		for (int i = 0; i < InventoryPowerups.Length; i++) {
@@ -462,14 +468,12 @@ public class Frog : MonoBehaviour {
 		moveState = MoveState.Floating;
 		potentialFloatExperience = 0;
 	}
-	
+		
 	void HandleFrogBoundaryHit(GameObject other) {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
 			rating = rating + 1;
-			score = score + scoreMultiplier;
-			scoreMultiplier++;
 			UpgradeFloating();
 			FireRatingChangedNotification();
 		}
