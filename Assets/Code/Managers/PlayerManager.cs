@@ -178,7 +178,7 @@ public class PlayerManager : MonoBehaviour {
 	void HandleFrogHit(Frog frog, Enemy enemy) {
 		if (!Fisherman.Instance.CanCatchEnemies()) {
 			frog.Die();
-			if (GameManager.Instance.isCoopMode()) { 
+			if (GameManager.Instance.IsCoopMode()) { 
 				lives--;	
 			}
 		}

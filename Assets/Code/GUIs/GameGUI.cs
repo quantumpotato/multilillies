@@ -18,7 +18,7 @@ public class GameGUI : MonoBehaviour {
 		if (GameManager.Instance.IsPlaying()) {
 			DrawScore();
 		}
-		if (GameManager.Instance.isCoopMode()) {
+		if (GameManager.Instance.IsCoopMode()) {
 			DrawLives();
 		}
 	}

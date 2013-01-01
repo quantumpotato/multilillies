@@ -35,11 +35,11 @@ public class GameManager : MonoBehaviour {
 	}
 	#endregion
 	
-	public bool isCoopMode() {
+	public bool IsCoopMode() {
 		return mode == GameMode.Cooperative;	
 	}
 	
-	public bool isCompetitiveMode() {
+	public bool IsCompetitiveMode() {
 		return mode == GameMode.Competitive;
 	}	
 	
