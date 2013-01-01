@@ -61,7 +61,10 @@ public class PlayerManager : MonoBehaviour {
 		Instance = this;
 		frogObjects = new GameObject[4];
 		frogs = new Frog[4];
-		startLives = lives;
+		lives = 40;
+		startLives = 40;
+		//QP: Where is this set? Didn't see it in scene.
+		//startLives = lives;
 	}
 	
 	void Start() {
@@ -175,7 +178,9 @@ public class PlayerManager : MonoBehaviour {
 	void HandleFrogHit(Frog frog, Enemy enemy) {
 		if (!Fisherman.Instance.CanCatchEnemies()) {
 			frog.Die();
-			lives--;
+			if (GameManager.Instance.isCoopMode()) { 
+				lives--;	
+			}
 		}
 		if (FrogHit != null) {
 			FrogHit(frog, enemy);

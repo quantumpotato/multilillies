@@ -268,7 +268,7 @@ public class Frog : MonoBehaviour {
 	}
 	
 	public void Die() {
-		coins = 0;
+		coins = 0;	
 		ResetFloatDirection();
 		ResetPosition();
 		ResetState();	
@@ -507,9 +507,10 @@ public class Frog : MonoBehaviour {
 	void HandleFrogBoundaryHit(GameObject other) {	
 		if (other == gameObject) {
 			if (FloatingNorthwards() && CloserToNorthShore()) {
+				rating++;
+				FireRatingChangedNotification();
 				ResetState();
 				ScoreFromCoinsDelivered();
-				FireRatingChangedNotification();
 				floatDirection = -floatDirection;
 			} else if (!FloatingNorthwards() && !CloserToNorthShore()) {
 				UpgradeFloating();

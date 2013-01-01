@@ -14,10 +14,17 @@ public class GameManager : MonoBehaviour {
 		GameOver
 	}
 	
+	public enum GameMode {
+		Cooperative,
+		Competitive
+	}
+	public GameMode mode;
+	
 	#region MonoBehaviour
 	void Awake() {
 		Instance = this;
 		state = StateType.MainMenu;
+		mode = GameMode.Cooperative;
 	}
 	
 	void Start() {
@@ -27,6 +34,14 @@ public class GameManager : MonoBehaviour {
 		PlayerManager.Instance.FrogHit += HandleFrogHit;
 	}
 	#endregion
+	
+	public bool isCoopMode() {
+		return mode == GameMode.Cooperative;	
+	}
+	
+	public bool isCompetitiveMode() {
+		return mode == GameMode.Competitive;
+	}	
 	
 	public bool IsMainMenu() {
 		return state == StateType.MainMenu;

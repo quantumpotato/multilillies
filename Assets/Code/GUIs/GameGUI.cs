@@ -18,6 +18,9 @@ public class GameGUI : MonoBehaviour {
 		if (GameManager.Instance.IsPlaying()) {
 			DrawScore();
 		}
+		if (GameManager.Instance.isCoopMode()) {
+			DrawLives();
+		}
 	}
 	
 	void Update() {
@@ -51,5 +54,11 @@ public class GameGUI : MonoBehaviour {
 		int width = 130;
 		int height = 23;
 		GUI.Box(new Rect (Screen.width/2-width/2,10,width,height), "" + displayedScore + " / " + Frog.HighRating);
+	}
+	
+	void DrawLives() {
+		int width = 50;
+		int height = 23;
+		GUI.Box (new Rect (Screen.width/2-width/2,Screen.height-40,width,height), "" + PlayerManager.Instance.lives);	
 	}
 }
