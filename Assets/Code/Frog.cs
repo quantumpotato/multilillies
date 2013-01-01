@@ -250,12 +250,18 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	void ResetScoreMultiplierToFloatLevel() {
+		scoreMultiplier = floatLevel + 1;
+	}
+		
 	public void Die() {
 		ResetPosition();
 		ResetState();	
+		DownGradeFloating();
+		ResetScoreMultiplierToFloatLevel();
 		DecreaseRating();
 		FireRatingChangedNotification();
-		DownGradeFloating();
+
 	}
 	
 	public void UpgradeFloating() {
@@ -308,7 +314,6 @@ public class Frog : MonoBehaviour {
 
 	void DecreaseRating() {
 		rating-= mistakes;
-		scoreMultiplier = 1;
 		mistakes++;
 		if (rating <= 0) {
 			rating = 0;
