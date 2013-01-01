@@ -13,6 +13,7 @@ public class Frog : MonoBehaviour {
 	public float potentialFloatExperience;	
 	public int score;
 	public int scoreMultiplier;
+	public int coins;
 	
 	public int[] powerupQuantities;
 	
@@ -186,7 +187,7 @@ public class Frog : MonoBehaviour {
 		
 	#region MonoBehaviour
 	void Awake() {
-		scoreMultiplier = 1;
+		scoref 1;
 		SetUpInputQuadrants();
 		SetUpInventoryRects();
 		SetUpFloating();
@@ -227,8 +228,7 @@ public class Frog : MonoBehaviour {
 	
 	public void CollectCoin() {
 		print ("collecting coin" + score +"" + scoreMultiplier);
-		score = score + scoreMultiplier;
-		scoreMultiplier++;
+		coins++;
 	}
 	
 	public void AddToInventory(PowerUp powerUp) {
@@ -473,12 +473,22 @@ public class Frog : MonoBehaviour {
 		moveState = MoveState.Floating;
 		potentialFloatExperience = 0;
 	}
-		
+	
+	void ScoreFromCoinsDelivered() {
+		score = score + (coins * scoreMultiplier);	
+		print("coins: " + coins + "scoreMultiplier" + scoreMultiplier)	;
+		coins = 0;
+	}
+	
+	void IncrementRating() {
+		rating = rating + 1;
+	}
+	
 	void HandleFrogBoundaryHit(GameObject other) {
 		if (other == gameObject) {
 			ResetPosition();
 			ResetState();
-			rating = rating + 1;
+			ScoreFromCoinsDelivered();
 			UpgradeFloating();
 			FireRatingChangedNotification();
 		}
