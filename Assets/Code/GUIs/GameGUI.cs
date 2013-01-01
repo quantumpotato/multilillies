@@ -59,6 +59,6 @@ public class GameGUI : MonoBehaviour {
 	void DrawLives() {
 		int width = 50;
 		int height = 23;
-		GUI.Box (new Rect (Screen.width/2-width/2,Screen.height-40,width,height), "" + PlayerManager.Instance.lives);	
+		GUI.Box (new Rect (Screen.width/2-width/2,Screen.height-40,width,height), "" + PlayerManager.Instance.livess);	
 	}
 }
