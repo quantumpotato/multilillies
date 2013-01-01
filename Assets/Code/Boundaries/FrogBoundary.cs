@@ -6,10 +6,16 @@ public class FrogBoundary : MonoBehaviour {
 	public delegate void HitHandler(GameObject other);
 	public event HitHandler Hit;
 	
-	public static FrogBoundary Instance;
+	
+	public static FrogBoundary NorthInstance;
+	public static FrogBoundary SouthInstance;
 	
 	void Awake () {
-		Instance = this;
+		if (transform.position.z > Frog.MiddleOfTheStreamZ) {
+			NorthInstance = this;
+		} else {
+			SouthInstance = this;
+		}
 	}
 
 	// Use this for initialization

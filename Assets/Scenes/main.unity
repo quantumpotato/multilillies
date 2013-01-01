@@ -305,6 +305,87 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 61193305}
   m_Enabled: 1
+--- !u!1 &97686874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+  m_PrefabInternal: {fileID: 1117565323}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 97686875}
+  - 33: {fileID: 97686877}
+  - 65: {fileID: 97686878}
+  - 23: {fileID: 97686876}
+  - 114: {fileID: 97686879}
+  m_Layer: 0
+  m_Name: player wall south boundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &97686875
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+  m_PrefabInternal: {fileID: 1117565323}
+  m_GameObject: {fileID: 97686874}
+  m_LocalRotation: {x: .00886899512, y: .687510669, z: .0127209937, w: .726008654}
+  m_LocalPosition: {x: 1.99142718, y: -9.71048737, z: 2.00116014}
+  m_LocalScale: {x: 1.00936902, y: 1, z: 1.09351289}
+  m_Children: []
+  m_Father: {fileID: 884028530}
+--- !u!23 &97686876
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: 97967ddb535c14792aac2b06591e32f3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1117565323}
+  m_GameObject: {fileID: 97686874}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!33 &97686877
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: 97967ddb535c14792aac2b06591e32f3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1117565323}
+  m_GameObject: {fileID: 97686874}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &97686878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 97967ddb535c14792aac2b06591e32f3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1117565323}
+  m_GameObject: {fileID: 97686874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.25999999, y: 2.79999995, z: 38.4399986}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &97686879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 97967ddb535c14792aac2b06591e32f3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1117565323}
+  m_GameObject: {fileID: 97686874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18306e888215f4b64a84008e98e6267c, type: 1}
+  m_Name: 
 --- !u!1 &104301257
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +636,8 @@ MonoBehaviour:
   potentialFloatExperience: 0
   score: 0
   scoreMultiplier: 0
+  coins: 0
+  floatDirection: 0
   powerupQuantities: 
 --- !u!54 &164401626
 Rigidbody:
@@ -1522,7 +1605,7 @@ GameObject:
   - 23: {fileID: 735948925}
   - 114: {fileID: 735948928}
   m_Layer: 0
-  m_Name: player wall boundary
+  m_Name: player wall north boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1980,7 +2063,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
       propertyPath: m_Name
-      value: player wall boundary
+      value: player wall north boundary
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
       propertyPath: m_LocalScale.x
@@ -2023,6 +2106,7 @@ Transform:
   - {fileID: 1395234899}
   - {fileID: 2051165623}
   - {fileID: 735948924}
+  - {fileID: 97686875}
   - {fileID: 1033474308}
   - {fileID: 756359971}
   m_Father: {fileID: 0}
@@ -2563,6 +2647,8 @@ MonoBehaviour:
   potentialFloatExperience: 0
   score: 0
   scoreMultiplier: 0
+  coins: 0
+  floatDirection: 0
   powerupQuantities: 
 --- !u!1001 &1055931156
 Prefab:
@@ -2681,6 +2767,58 @@ Transform:
   m_Children:
   - {fileID: 1284391138}
   m_Father: {fileID: 532717208}
+--- !u!1001 &1117565323
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 884028530}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.99142718
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -9.71048737
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 2.00116014
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: .00886899512
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .687510669
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: .0127209937
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .726008654
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_Name
+      value: player wall south boundary
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.00936902
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.09351289
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 97967ddb535c14792aac2b06591e32f3, type: 2}
+  m_RootGameObject: {fileID: 97686874}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1127244087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3815,6 +3953,8 @@ MonoBehaviour:
   potentialFloatExperience: 0
   score: 0
   scoreMultiplier: 0
+  coins: 0
+  floatDirection: 0
   powerupQuantities: 
 --- !u!1 &1643394719
 GameObject:
@@ -4260,6 +4400,8 @@ MonoBehaviour:
   potentialFloatExperience: 0
   score: 0
   scoreMultiplier: 0
+  coins: 0
+  floatDirection: 0
   powerupQuantities: 
 --- !u!1 &1748061743
 GameObject:
