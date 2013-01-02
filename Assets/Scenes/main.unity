@@ -638,6 +638,7 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
+  frogComponentName: frog
   powerupQuantities: 
 --- !u!54 &164401626
 Rigidbody:
@@ -2650,6 +2651,7 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
+  frogComponentName: frog
   powerupQuantities: 
 --- !u!1001 &1055931156
 Prefab:
@@ -3956,6 +3958,7 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
+  frogComponentName: frog
   powerupQuantities: 
 --- !u!1 &1643394719
 GameObject:
@@ -4403,6 +4406,7 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
+  frogComponentName: frog
   powerupQuantities: 
 --- !u!1 &1748061743
 GameObject:
