@@ -146,6 +146,13 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	private static Color[] frogColors = new Color[]{Color.yellow, Color.green, Color.red, Color.white};
+	public static Color[] FrogColors {
+		get {
+			return frogColors;
+		}
+	}
+	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
 	private float baseBoostingSpeed = 42.0f;
@@ -204,7 +211,7 @@ public class Frog : MonoBehaviour {
 		RedLevel,
 		WhiteLevel,
 		BlackLevel
-	}
+	}	
 		
 	#region MonoBehaviour
 	void Awake() {

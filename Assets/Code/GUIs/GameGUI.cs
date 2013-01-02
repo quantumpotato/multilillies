@@ -7,6 +7,10 @@ public class GameGUI : MonoBehaviour {
 	int updateScoreDisplayTimer;
 	int scoreDisplayTimerReset;
 	
+	int leftmostScoreColumnX = 800;
+	int scoreHorizontalMargin = 100;
+	
+	
 	#region MonoBehavior
 	
 	void Awake() {
@@ -21,6 +25,9 @@ public class GameGUI : MonoBehaviour {
 		if (GameManager.Instance.IsCoopMode()) {
 			DrawLives();
 			DrawTeamMultiplier();
+		} else {
+			DrawIndividualScores();
+			DrawIndividualMultipliers();	
 		}
 	}
 	
@@ -69,6 +76,32 @@ public class GameGUI : MonoBehaviour {
 		int width = 50;
 		int height = 23;
 		GUI.Box (new Rect (Screen.width/2+width/2,Screen.height-40,width,height), "X" + Frog.TeamScoreMultiplier);	
+	}
+	
+	#endregion
+	
+	#region competitive
+	
+	void DrawIndividualScores() {
+		int width = 70;
+		int height = 30;
+		int x = leftmostScoreColumnX;
+		GUIStyle style = new GUIStyle();
+		style.fontSize = 30;
+		GUI.backgroundColor = Color.clear;
+		for (int i = 0; i < 4; i++) {
+			style.normal.textColor = Frog.FrogColors[i];
+			Frog f = PlayerManager.Instance.Frogs[i];
+			if (f.gameObject.active) {
+				GUI.color = Frog.FrogColors[i];
+				GUI.Box (new Rect(x,Screen.height-40,width, height), "X" + f.scoreMultiplier, style);
+			}
+			x+= scoreHorizontalMargin;
+		}
+	}
+	
+	void DrawIndividualMultipliers() {
+		
 	}
 	
 	#endregion
