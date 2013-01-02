@@ -13,6 +13,8 @@ public class Frog : MonoBehaviour {
 	public float potentialFloatExperience;	
 	public int score;
 	public int scoreMultiplier;
+	public int coins;
+	public int floatDirection;
 	
 	public int[] powerupQuantities;
 	
@@ -118,6 +120,12 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	public static float MiddleOfTheStreamZ {
+		get {
+			return 17;
+		}
+	}
+	
 	private float ModifiedFloatSpeed {
 		get {
 			return baseFloatingSpeed + floatLevel * floatModifier;
@@ -187,6 +195,7 @@ public class Frog : MonoBehaviour {
 	#region MonoBehaviour
 	void Awake() {
 		scoreMultiplier = 1;
+		ResetFloatDirection();
 		SetUpInputQuadrants();
 		SetUpInventoryRects();
 		SetUpFloating();
@@ -196,7 +205,8 @@ public class Frog : MonoBehaviour {
 	}
 
 	void Start () {
-		FrogBoundary.Instance.Hit += HandleFrogBoundaryHit;
+		FrogBoundary.NorthInstance.Hit += HandleFrogBoundaryHit;
+		FrogBoundary.SouthInstance.Hit += HandleFrogBoundaryHit;		
 		
 		character = transform.FindChild("character").gameObject;
 		pad = transform.FindChild("pad").gameObject;
@@ -227,8 +237,7 @@ public class Frog : MonoBehaviour {
 	
 	public void CollectCoin() {
 		print ("collecting coin" + score +"" + scoreMultiplier);
-		score = score + scoreMultiplier;
-		scoreMultiplier++;
+		coins++;
 	}
 	
 	public void AddToInventory(PowerUp powerUp) {
@@ -253,8 +262,14 @@ public class Frog : MonoBehaviour {
 	void ResetScoreMultiplierToFloatLevel() {
 		scoreMultiplier = floatLevel + 1;
 	}
-		
+	
+	void ResetFloatDirection() {
+		floatDirection = 1;
+	}
+	
 	public void Die() {
+		coins = 0;	
+		ResetFloatDirection();
 		ResetPosition();
 		ResetState();	
 		DownGradeFloating();
@@ -269,6 +284,7 @@ public class Frog : MonoBehaviour {
 		if (floatLevel < (int)FloatLevels.BlackLevel) {
 			floatLevel += 1;
 		}
+		scoreMultiplier++;
 	}
 	
 	void SetUpFloating() {
@@ -422,13 +438,9 @@ public class Frog : MonoBehaviour {
 		float currentSpeed = Speed;
 		if (moveState == MoveState.Floating) {
 			currentSpeed = ModifiedFloatSpeed;
-		} else if (moveState == MoveState.Boosting) {
-//			if (ChargePercentage() < 0.5f) {
-//				currentSpeed = ((1 - ((float)charge / (float)chargeReached)) * currentSpeed) * Time.deltaTime;
-//			}
 		}
 		
-		return currentSpeed * Time.deltaTime;
+		return currentSpeed * Time.deltaTime * floatDirection;
 	}
 	
 	void MoveForward() {
@@ -473,14 +485,39 @@ public class Frog : MonoBehaviour {
 		moveState = MoveState.Floating;
 		potentialFloatExperience = 0;
 	}
-		
-	void HandleFrogBoundaryHit(GameObject other) {
+	
+	void ScoreFromCoinsDelivered() {
+		score = score + (coins * scoreMultiplier);	
+		print("coins: " + coins + "scoreMultiplier" + scoreMultiplier)	;
+		coins = 0;
+	}
+	
+	void IncrementRating() {
+		rating = rating + 1;
+	}
+	
+	bool FloatingNorthwards() {
+		return floatDirection == 1;
+	}
+	
+	bool CloserToNorthShore() {
+		return transform.position.z > Frog.MiddleOfTheStreamZ;
+	}
+	
+	void HandleFrogBoundaryHit(GameObject other) {	
 		if (other == gameObject) {
-			ResetPosition();
-			ResetState();
-			rating = rating + 1;
-			UpgradeFloating();
-			FireRatingChangedNotification();
+			if (FloatingNorthwards() && CloserToNorthShore()) {
+				rating++;
+				FireRatingChangedNotification();
+				ResetState();
+				ScoreFromCoinsDelivered();
+				floatDirection = -floatDirection;
+			} else if (!FloatingNorthwards() && !CloserToNorthShore()) {
+				UpgradeFloating();
+				floatDirection = -floatDirection;
+			} else {
+				print ("unknown case" + FloatingNorthwards() + "" + CloserToNorthShore());
+			}
 		}
 	}
 		
