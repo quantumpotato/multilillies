@@ -162,7 +162,8 @@ public class Frog : MonoBehaviour {
 	private enum MoveState {
 		Floating,
 		Charging,
-		Boosting
+		Boosting,
+		Drifting
 	}
 	
 	private MoveState moveState;
@@ -176,6 +177,8 @@ public class Frog : MonoBehaviour {
 				return baseFloatingSpeed;
 			case MoveState.Charging:
 				return 0;
+			case MoveState.Drifting:
+				return 6;
 			default:
 				return 0;
 			}
@@ -206,16 +209,17 @@ public class Frog : MonoBehaviour {
 
 	void Start () {
 		FrogBoundary.NorthInstance.Hit += HandleFrogBoundaryHit;
-		FrogBoundary.SouthInstance.Hit += HandleFrogBoundaryHit;		
+		FrogBoundary.SouthInstance.Hit += HandleFrogBoundaryHit;
 		
 		character = transform.FindChild("character").gameObject;
 		pad = transform.FindChild("pad").gameObject;
+		frog = transform.FindChild("root").gameObject;
 		
 		SetColor();
 	}
 	
 	void Update () {
-		MoveForward();
+		Move();
 		HandleInput();
 		HandleState();
 		SetPadScale();
@@ -223,10 +227,12 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		if (Enemy.IsEnemy(other.gameObject)) {
-			FireHitNotification(other.gameObject);
-		} else if (PickUp.IsPickUp(other.gameObject)) {
-			FirePickUpHitNotification(other.gameObject);
+		if (!IsDrifting()) {
+			if (Enemy.IsEnemy(other.gameObject)) {
+				FireHitNotification(other.gameObject);
+			} else if (PickUp.IsPickUp(other.gameObject)) {
+				FirePickUpHitNotification(other.gameObject);
+			}
 		}
     }
 	
@@ -234,6 +240,22 @@ public class Frog : MonoBehaviour {
 		DrawInventory();
 	}
 	#endregion
+	
+	public void Drift() {
+		coins = 0;
+		ResetState();
+		DownGradeFloating();
+		ResetScoreMultiplierToFloatLevel();
+		DecreaseRating();
+		FireRatingChangedNotification();
+		floatDirection = -1;
+		moveState = MoveState.Drifting;
+		character.SetActiveRecursively(false);
+	}
+	
+	public bool IsDrifting() {
+		return moveState == MoveState.Drifting;
+	}
 	
 	public void CollectCoin() {
 		print ("collecting coin" + score +"" + scoreMultiplier);
@@ -265,18 +287,6 @@ public class Frog : MonoBehaviour {
 	
 	void ResetFloatDirection() {
 		floatDirection = 1;
-	}
-	
-	public void Die() {
-		coins = 0;	
-		ResetFloatDirection();
-		ResetPosition();
-		ResetState();	
-		DownGradeFloating();
-		ResetScoreMultiplierToFloatLevel();
-		DecreaseRating();
-		FireRatingChangedNotification();
-
 	}
 	
 	public void UpgradeFloating() {
@@ -443,36 +453,38 @@ public class Frog : MonoBehaviour {
 		return currentSpeed * Time.deltaTime * floatDirection;
 	}
 	
-	void MoveForward() {
+	void Move() {
 		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + CurrentSpeed());
 	}
 	
 	void HandleInput() {
+		if (!IsDrifting()) {
 #if UNITY_EDITOR
-		if (Input.GetButtonDown("Fire1")) {
-	        if (inputQuadrants[playerNumber].Contains(Input.mousePosition)
-				&& !inventoryRects[playerNumber].Contains(Input.mousePosition)) {
-				BeginCharging();
+			if (Input.GetButtonDown("Fire1")) {
+		        if (inputQuadrants[playerNumber].Contains(Input.mousePosition)
+					&& !inventoryRects[playerNumber].Contains(Input.mousePosition)) {
+					BeginCharging();
+				}
+			} else if (Input.GetButtonUp("Fire1")) {
+				if (inputQuadrants[playerNumber].Contains(Input.mousePosition)
+					&& !inventoryRects[playerNumber].Contains(Input.mousePosition)) {
+					BeginBoosting();
+				}
 			}
-		} else if (Input.GetButtonUp("Fire1")) {
-			if (inputQuadrants[playerNumber].Contains(Input.mousePosition)
-				&& !inventoryRects[playerNumber].Contains(Input.mousePosition)) {
-				BeginBoosting();
-			}
-		}
 #elif UNITY_IPHONE
-		foreach (Touch touch in Input.touches) {
-			if (touch.phase == TouchPhase.Began
-				&& inputQuadrants[playerNumber].Contains(touch.position)
-				&& !inventoryRects[playerNumber].Contains(touch.position)) {
-				BeginCharging();
-			} else if (touch.phase == TouchPhase.Ended
-				&& inputQuadrants[playerNumber].Contains(touch.position)
-				&& !inventoryRects[playerNumber].Contains(touch.position)) {
-				BeginBoosting();
+			foreach (Touch touch in Input.touches) {
+				if (touch.phase == TouchPhase.Began
+					&& inputQuadrants[playerNumber].Contains(touch.position)
+					&& !inventoryRects[playerNumber].Contains(touch.position)) {
+					BeginCharging();
+				} else if (touch.phase == TouchPhase.Ended
+					&& inputQuadrants[playerNumber].Contains(touch.position)
+					&& !inventoryRects[playerNumber].Contains(touch.position)) {
+					BeginBoosting();
+				}
 			}
-		}
 #endif
+		}
 	}
 	
 	void ResetPosition() {
@@ -513,7 +525,12 @@ public class Frog : MonoBehaviour {
 				ScoreFromCoinsDelivered();
 				floatDirection = -floatDirection;
 			} else if (!FloatingNorthwards() && !CloserToNorthShore()) {
-				UpgradeFloating();
+				if (IsDrifting()) {
+					character.SetActiveRecursively(true);
+					moveState = MoveState.Floating;
+				} else {
+					UpgradeFloating();
+				}
 				floatDirection = -floatDirection;
 			} else {
 				print ("unknown case" + FloatingNorthwards() + "" + CloserToNorthShore());
@@ -573,7 +590,9 @@ public class Frog : MonoBehaviour {
 		for (int i = 0; i < InventoryPowerups.Length; i++) {
 			string powerupDisplay = InventoryPowerups[i].Name + "x" + powerupQuantities[i];
 			if (GUI.Button(new Rect(inventoryRect.x + padding + (buttonWidth * i) + (i * padding), inventoryRect.y + padding, buttonWidth, buttonHeight), powerupDisplay)) {
-				UsePowerup(i);
+				if (!IsDrifting()) {
+					UsePowerup(i);
+				}
 			}
 		}
 	}
