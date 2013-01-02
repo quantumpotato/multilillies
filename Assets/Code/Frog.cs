@@ -213,7 +213,6 @@ public class Frog : MonoBehaviour {
 		
 		character = transform.FindChild("character").gameObject;
 		pad = transform.FindChild("pad").gameObject;
-		frog = transform.FindChild("root").gameObject;
 		
 		SetColor();
 	}
@@ -241,7 +240,7 @@ public class Frog : MonoBehaviour {
 	}
 	#endregion
 	
-	public void Drift() {
+	public void BeginDrifting() {
 		coins = 0;
 		ResetState();
 		DownGradeFloating();
