@@ -83,6 +83,10 @@ public class GameGUI : MonoBehaviour {
 	#region competitive
 	
 	void DrawIndividualScores() {
+		
+	}
+	
+	void DrawIndividualMultipliers() {
 		int width = 70;
 		int height = 30;
 		int x = leftmostScoreColumnX;
@@ -98,10 +102,6 @@ public class GameGUI : MonoBehaviour {
 			}
 			x+= scoreHorizontalMargin;
 		}
-	}
-	
-	void DrawIndividualMultipliers() {
-		
 	}
 	
 	#endregion
