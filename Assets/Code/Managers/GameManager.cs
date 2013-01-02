@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	void Awake() {
 		Instance = this;
 		state = StateType.MainMenu;
-		mode = GameMode.Cooperative;
+		mode = GameMode.Competitive;
 	}
 	
 	void Start() {
