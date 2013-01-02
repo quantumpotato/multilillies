@@ -20,6 +20,7 @@ public class GameGUI : MonoBehaviour {
 		}
 		if (GameManager.Instance.IsCoopMode()) {
 			DrawLives();
+			DrawTeamMultiplier();
 		}
 	}
 	
@@ -56,9 +57,19 @@ public class GameGUI : MonoBehaviour {
 		GUI.Box(new Rect (Screen.width/2-width/2,10,width,height), "" + displayedScore + " / " + Frog.HighRating);
 	}
 	
+	#region coop
+	
 	void DrawLives() {
+		int width = 80;
+		int height = 23;
+		GUI.Box (new Rect (Screen.width/2-width-50/2,Screen.height-40,width,height), "Frogs: " + PlayerManager.Instance.lives);	
+	}
+	
+	void DrawTeamMultiplier() {
 		int width = 50;
 		int height = 23;
-		GUI.Box (new Rect (Screen.width/2-width/2,Screen.height-40,width,height), "" + PlayerManager.Instance.lives);	
+		GUI.Box (new Rect (Screen.width/2+width/2,Screen.height-40,width,height), "X" + Frog.TeamScoreMultiplier);	
 	}
+	
+	#endregion
 }
