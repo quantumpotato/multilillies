@@ -2,14 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class FrogBoundary : MonoBehaviour {
-	
 	public delegate void HitHandler(GameObject other);
 	public event HitHandler Hit;
-	
 	
 	public static FrogBoundary NorthInstance;
 	public static FrogBoundary SouthInstance;
 	
+	#region MonoBehaviour
 	void Awake () {
 		if (transform.position.z > Frog.MiddleOfTheStreamZ) {
 			NorthInstance = this;
@@ -17,20 +16,11 @@ public class FrogBoundary : MonoBehaviour {
 			SouthInstance = this;
 		}
 	}
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 	
 	void OnTriggerEnter(Collider other) {
 		if (Hit != null) {
 			Hit(other.gameObject);
 		}
 	}
+	#endregion
 }

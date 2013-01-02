@@ -269,7 +269,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 136: {fileID: 13600000}
   m_Layer: 9
-  m_Name: Frog
+  m_Name: FrogAndPad
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,12 +603,18 @@ MonoBehaviour:
   m_Name: 
   speed: 0
   playerNumber: 0
-  score: 0
+  rating: 0
   mistakes: 0
   floatExperience: 0
   floatLevel: 0
   floatLevelThreshhold: 0
   potentialFloatExperience: 0
+  score: 0
+  scoreMultiplier: 0
+  coins: 0
+  floatDirection: 0
+  frogComponentName: frog
+  powerupQuantities: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
