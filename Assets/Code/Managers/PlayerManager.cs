@@ -176,14 +176,16 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	void HandleFrogHit(Frog frog, Enemy enemy) {
-		if (!Fisherman.Instance.CanCatchEnemies()) {
-			frog.Die();
-			if (GameManager.Instance.IsCoopMode()) { 
-				lives--;	
+		if (!frog.IsDrifting()) {
+			if (!Fisherman.Instance.CanCatchEnemies()) {
+				frog.BeginDrifting();
+				if (GameManager.Instance.IsCoopMode()) { 
+					lives--;	
+				}
 			}
-		}
-		if (FrogHit != null) {
-			FrogHit(frog, enemy);
+			if (FrogHit != null) {
+				FrogHit(frog, enemy);
+			}
 		}
 	}
 }
