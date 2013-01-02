@@ -132,6 +132,20 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	public static int TeamScoreMultiplier {
+		get {
+			int teamMultiplier = 0;
+			
+			foreach (Frog f in PlayerManager.Instance.Frogs) {
+				if (f.gameObject.active) {
+					teamMultiplier+= f.scoreMultiplier;
+				}
+			}
+				
+			return teamMultiplier;
+		}
+	}
+	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
 	private float baseBoostingSpeed = 42.0f;
@@ -235,8 +249,16 @@ public class Frog : MonoBehaviour {
 	}
 	#endregion
 	
+	int FrogScoreMultiplier() {
+		if (GameManager.Instance.IsCompetitiveMode()) {
+			return scoreMultiplier;	
+		}
+		
+		return Frog.TeamScoreMultiplier;
+	}
+	
 	public void CollectCoin() {
-		print ("collecting coin" + score +"" + scoreMultiplier);
+		print ("collecting coin" + score +"" + FrogScoreMultiplier());
 		coins++;
 	}
 	
@@ -487,8 +509,8 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void ScoreFromCoinsDelivered() {
-		score = score + (coins * scoreMultiplier);	
-		print("coins: " + coins + "scoreMultiplier" + scoreMultiplier)	;
+		score = score + (coins * FrogScoreMultiplier());
+		print("coins: " + coins + "scoreMultiplier" + FrogScoreMultiplier());
 		coins = 0;
 	}
 	
