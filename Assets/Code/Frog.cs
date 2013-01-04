@@ -21,6 +21,9 @@ public class Frog : MonoBehaviour {
 	public delegate void RatingChangedHandler(Frog frog);
 	public event RatingChangedHandler RatingChanged;
 	
+	public delegate void ScoreChangedHandler(Frog frog);
+	public event ScoreChangedHandler ScoreChanged;
+	
 	public delegate void HitHandler(Frog frog, Enemy enemy);
 	public event HitHandler Hit;
 	
@@ -543,7 +546,14 @@ public class Frog : MonoBehaviour {
 	
 	void ScoreFromCoinsDelivered() {
 		score = score + (coins * FrogScoreMultiplier());
-		print("coins: " + coins + "scoreMultiplier" + FrogScoreMultiplier());
+		//print("coins: " + coins + "scoreMultiplier" + FrogScoreMultiplier());
+		
+		if (coins > 0) {
+			if (ScoreChanged != null) {
+				ScoreChanged(this);
+			}
+		}
+		
 		coins = 0;
 	}
 	

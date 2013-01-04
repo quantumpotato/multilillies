@@ -638,7 +638,6 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
-  frogComponentName: frog
   powerupQuantities: 
 --- !u!54 &164401626
 Rigidbody:
@@ -1423,7 +1422,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b513725616ef4239a4dad715d1ce0f9, type: 1}
   m_Name: 
-  mode: 0
+  mode: 1
+  competitiveModeScoreGoal: 20
 --- !u!114 &683399640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2651,7 +2651,6 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
-  frogComponentName: frog
   powerupQuantities: 
 --- !u!1001 &1055931156
 Prefab:
@@ -3958,7 +3957,6 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
-  frogComponentName: frog
   powerupQuantities: 
 --- !u!1 &1643394719
 GameObject:
@@ -4406,7 +4404,6 @@ MonoBehaviour:
   scoreMultiplier: 0
   coins: 0
   floatDirection: 0
-  frogComponentName: frog
   powerupQuantities: 
 --- !u!1 &1748061743
 GameObject:

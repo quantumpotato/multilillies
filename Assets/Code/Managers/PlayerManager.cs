@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour {
 		foreach (Frog frog in Instance.Frogs) {
 			frog.Hit += Instance.HandleFrogHit;
 			frog.PickUpHit += Instance.HandleFrogPickUpHit;
+			frog.ScoreChanged += Instance.HandleFrogScoreChanged;
 		}
 		Instance.lives = Instance.startLives;
 	}
@@ -39,6 +40,9 @@ public class PlayerManager : MonoBehaviour {
 	
 	public delegate void FrogHitHandler(Frog frog, Enemy enemy);
 	public event FrogHitHandler FrogHit;
+	
+	public delegate void FrogScoreChangedHandler(Frog frog);
+	public event FrogScoreChangedHandler FrogScoreChanged;
 	
 	GameObject[] frogObjects;
 	public GameObject[] FrogObjects {
@@ -208,6 +212,12 @@ public class PlayerManager : MonoBehaviour {
 			if (FrogHit != null) {
 				FrogHit(frog, enemy);
 			}
+		}
+	}
+	
+	void HandleFrogScoreChanged(Frog frog) {
+		if (FrogScoreChanged != null) {
+			FrogScoreChanged(frog);
 		}
 	}
 }
