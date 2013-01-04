@@ -180,12 +180,7 @@ public class Frog : MonoBehaviour {
 	private GameObject floatExperienceCircle;
 	private GameObject fullFloatExperienceCircle;
 	
-	private enum VitalityState {
-		Alive,
-		Dead
-	}
-	
-	private VitalityState vitalityState;
+	private bool alive;
 	
 	private enum MoveState {
 		Floating,
@@ -247,7 +242,7 @@ public class Frog : MonoBehaviour {
 		
 		SetColor();
 		
-		vitalityState = VitalityState.Alive;
+		alive = true;
 	}
 	
 	void Update () {
@@ -282,11 +277,11 @@ public class Frog : MonoBehaviour {
 	}
 	
 	public bool IsAlive() {
-		return vitalityState == VitalityState.Alive;
+		return alive;
 	}
 	
 	public bool IsDead() {
-		return vitalityState == VitalityState.Dead;
+		return !alive;
 	}
 	
 	public void BeginDrifting() {
@@ -652,13 +647,13 @@ public class Frog : MonoBehaviour {
 		character.SetActiveRecursively(true);
 		pad.SetActiveRecursively(true);
 		moveState = MoveState.Floating;
-		vitalityState = VitalityState.Alive;
+		alive = true;
 	}
 	
 	void WaitForRespawn() {
 		character.SetActiveRecursively(false);
 		pad.SetActiveRecursively(false);
 		moveState = MoveState.Idle;
-		vitalityState = VitalityState.Dead;
+		alive = false;
 	}
 }
