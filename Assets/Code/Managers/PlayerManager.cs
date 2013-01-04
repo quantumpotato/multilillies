@@ -82,7 +82,6 @@ public class PlayerManager : MonoBehaviour {
 
 	void OnGUI() {
 		DrawPlayerAreas();
-		DrawLives();
 	}
 	#endregion
 	
@@ -156,12 +155,6 @@ public class PlayerManager : MonoBehaviour {
 			if(GUI.Button(new Rect(Screen.width - buttonWidth,Screen.height - buttonHeight,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(1);
 			}
-		}
-	}
-	
-	void DrawLives() {
-		if (GameManager.Instance.IsPlaying()) {
-			GUI.Box(new Rect(120, 20, 100, 35), "Lives: " + Lives.ToString());
 		}
 	}
 	
