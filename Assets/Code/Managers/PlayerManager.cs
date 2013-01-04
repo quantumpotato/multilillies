@@ -111,10 +111,17 @@ public class PlayerManager : MonoBehaviour {
 		
 		// top left = red
 		if (frogObjects[2].active) {
-			GUI.color = Color.red;
-			GUI.DrawTexture(new Rect(0,0,textureWidth,textureHeight), texture);
-			GUI.color = Color.white;
-			GUI.Box(new Rect (50, 0, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[2].score + " x" + PlayerManager.Instance.Frogs[2].scoreMultiplier);
+			if (frogs[2].IsAlive()) {
+				GUI.color = Color.red;
+				GUI.DrawTexture(new Rect(0,0,textureWidth,textureHeight), texture);
+				GUI.color = Color.white;
+				GUI.Box(new Rect (50, 0, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[2].score + " x" + PlayerManager.Instance.Frogs[2].scoreMultiplier);
+			} else if (frogs[2].IsDead()) {
+				GUI.color = Color.white;
+				if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Respawn")) {
+					RespawnPlayer(2);
+				}
+			}
 		} else {
 			if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(2);
@@ -123,10 +130,16 @@ public class PlayerManager : MonoBehaviour {
 		
 		// bottom left = yellow
 		if (frogObjects[0].active) {
-			GUI.color = Color.yellow;
-			GUI.DrawTexture(new Rect(0,Screen.height - textureHeight,textureWidth,textureHeight), texture);
-			GUI.color = Color.white;
-			GUI.Box(new Rect (50, Screen.height - textureHeight / 2, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[0].score + " x" + PlayerManager.Instance.Frogs[0].scoreMultiplier);
+			if (frogs[0].IsAlive()) {
+				GUI.color = Color.yellow;
+				GUI.DrawTexture(new Rect(0,Screen.height - textureHeight,textureWidth,textureHeight), texture);
+				GUI.color = Color.white;
+				GUI.Box(new Rect (50, Screen.height - textureHeight / 2, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[0].score + " x" + PlayerManager.Instance.Frogs[0].scoreMultiplier);
+			} else if (frogs[0].IsDead()) {
+				if(GUI.Button(new Rect(0,Screen.height-buttonHeight,buttonWidth, buttonHeight), "Respawn")) {
+					RespawnPlayer(0);
+				}
+			}
 		} else {
 			if(GUI.Button(new Rect(0,Screen.height-buttonHeight,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(0);
@@ -135,10 +148,16 @@ public class PlayerManager : MonoBehaviour {
 		
 		// top right = white
 		if (frogObjects[3].active) {
-			GUI.color = Color.white;
-			GUI.DrawTexture(new Rect(Screen.width - textureWidth,0,textureWidth,textureHeight), texture);
-			GUI.color = Color.white;
-			GUI.Box(new Rect (Screen.width - textureWidth - scoreWidth, 0, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[3].score + " x" + PlayerManager.Instance.Frogs[3].scoreMultiplier);
+			if (frogs[3].IsAlive()) {
+				GUI.color = Color.white;
+				GUI.DrawTexture(new Rect(Screen.width - textureWidth,0,textureWidth,textureHeight), texture);
+				GUI.color = Color.white;
+				GUI.Box(new Rect (Screen.width - textureWidth - scoreWidth, 0, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[3].score + " x" + PlayerManager.Instance.Frogs[3].scoreMultiplier);
+			} else if (frogs[3].IsDead()) {
+				if(GUI.Button(new Rect(Screen.width - buttonWidth,0,buttonWidth, buttonHeight), "Respawn")) {
+					RespawnPlayer(3);
+				}
+			}
 		} else {
 			if(GUI.Button(new Rect(Screen.width - buttonWidth,0,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(3);
@@ -147,10 +166,16 @@ public class PlayerManager : MonoBehaviour {
 		
 		// bottom right = green
 		if (frogObjects[1].active) {
-			GUI.color = Color.green;
-			GUI.DrawTexture(new Rect(Screen.width - textureWidth,Screen.height - textureHeight,textureWidth,textureHeight), texture);
-			GUI.color = Color.white;
-			GUI.Box(new Rect (Screen.width - textureWidth - scoreWidth, Screen.height - textureHeight / 2, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[1].score + " x" + PlayerManager.Instance.Frogs[1].scoreMultiplier);
+			if (frogs[1].IsAlive()) {
+				GUI.color = Color.green;
+				GUI.DrawTexture(new Rect(Screen.width - textureWidth,Screen.height - textureHeight,textureWidth,textureHeight), texture);
+				GUI.color = Color.white;
+				GUI.Box(new Rect (Screen.width - textureWidth - scoreWidth, Screen.height - textureHeight / 2, scoreWidth, scoreHeight), "" + PlayerManager.Instance.Frogs[1].score + " x" + PlayerManager.Instance.Frogs[1].scoreMultiplier);
+			} else if (frogs[1].IsDead()) {
+				if(GUI.Button(new Rect(Screen.width - buttonWidth,Screen.height - buttonHeight,buttonWidth, buttonHeight), "Respawn")) {
+					RespawnPlayer(1);
+				}
+			}
 		} else {
 			if(GUI.Button(new Rect(Screen.width - buttonWidth,Screen.height - buttonHeight,buttonWidth, buttonHeight), "Play")) {
 				StartPlayer(1);
@@ -161,6 +186,10 @@ public class PlayerManager : MonoBehaviour {
 	void StartPlayer(int num) {
 		frogObjects[num].SetActiveRecursively(true);
 		GameManager.Instance.Play();
+	}
+	
+	void RespawnPlayer(int num) {
+		frogs[num].Respawn();
 	}
 
 	void HandleFrogPickUpHit(Frog frog, PickUp pickUp) {

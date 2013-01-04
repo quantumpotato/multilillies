@@ -180,11 +180,19 @@ public class Frog : MonoBehaviour {
 	private GameObject floatExperienceCircle;
 	private GameObject fullFloatExperienceCircle;
 	
+	private enum VitalityState {
+		Alive,
+		Dead
+	}
+	
+	private VitalityState vitalityState;
+	
 	private enum MoveState {
 		Floating,
 		Charging,
 		Boosting,
-		Drifting
+		Drifting,
+		Idle
 	}
 	
 	private MoveState moveState;
@@ -200,6 +208,8 @@ public class Frog : MonoBehaviour {
 				return 0;
 			case MoveState.Drifting:
 				return 6;
+			case MoveState.Idle:
+				return 0;
 			default:
 				return 0;
 			}
@@ -236,6 +246,8 @@ public class Frog : MonoBehaviour {
 		pad = transform.FindChild("pad").gameObject;
 		
 		SetColor();
+		
+		vitalityState = VitalityState.Alive;
 	}
 	
 	void Update () {
@@ -267,6 +279,14 @@ public class Frog : MonoBehaviour {
 		}
 		
 		return Frog.TeamScoreMultiplier;
+	}
+	
+	public bool IsAlive() {
+		return vitalityState == VitalityState.Alive;
+	}
+	
+	public bool IsDead() {
+		return vitalityState == VitalityState.Dead;
 	}
 	
 	public void BeginDrifting() {
@@ -554,8 +574,11 @@ public class Frog : MonoBehaviour {
 				floatDirection = -floatDirection;
 			} else if (!FloatingNorthwards() && !CloserToNorthShore()) {
 				if (IsDrifting()) {
-					character.SetActiveRecursively(true);
-					moveState = MoveState.Floating;
+					if (GameManager.Instance.IsCoopMode()) {
+						WaitForRespawn();
+					} else if (GameManager.Instance.IsCompetitiveMode()) {
+						Respawn();
+					}
 				} else {
 					UpgradeFloating();
 				}
@@ -623,5 +646,19 @@ public class Frog : MonoBehaviour {
 				}
 			}
 		}
+	}
+	
+	public void Respawn() {
+		character.SetActiveRecursively(true);
+		pad.SetActiveRecursively(true);
+		moveState = MoveState.Floating;
+		vitalityState = VitalityState.Alive;
+	}
+	
+	void WaitForRespawn() {
+		character.SetActiveRecursively(false);
+		pad.SetActiveRecursively(false);
+		moveState = MoveState.Idle;
+		vitalityState = VitalityState.Dead;
 	}
 }
