@@ -132,6 +132,27 @@ public class Frog : MonoBehaviour {
 		}
 	}
 	
+	public static int TeamScoreMultiplier {
+		get {
+			int teamMultiplier = 0;
+			
+			foreach (Frog f in PlayerManager.Instance.Frogs) {
+				if (f.gameObject.active) {
+					teamMultiplier+= f.scoreMultiplier;
+				}
+			}
+				
+			return teamMultiplier;
+		}
+	}
+	
+	private static Color[] frogColors = new Color[]{Color.yellow, Color.green, Color.red, Color.white};
+	public static Color[] FrogColors {
+		get {
+			return frogColors;
+		}
+	}
+	
 	private float fullPadRadius = 2.0f;
 	private float baseFloatingSpeed = 2.0f;
 	private float baseBoostingSpeed = 42.0f;
@@ -193,7 +214,7 @@ public class Frog : MonoBehaviour {
 		RedLevel,
 		WhiteLevel,
 		BlackLevel
-	}
+	}	
 		
 	#region MonoBehaviour
 	void Awake() {
@@ -240,6 +261,14 @@ public class Frog : MonoBehaviour {
 	}
 	#endregion
 	
+	int FrogScoreMultiplier() {
+		if (GameManager.Instance.IsCompetitiveMode()) {
+			return scoreMultiplier;	
+		}
+		
+		return Frog.TeamScoreMultiplier;
+	}
+	
 	public void BeginDrifting() {
 		coins = 0;
 		ResetState();
@@ -257,7 +286,7 @@ public class Frog : MonoBehaviour {
 	}
 	
 	public void CollectCoin() {
-		print ("collecting coin" + score +"" + scoreMultiplier);
+		print ("collecting coin" + score +"" + FrogScoreMultiplier());
 		coins++;
 	}
 	
@@ -498,8 +527,8 @@ public class Frog : MonoBehaviour {
 	}
 	
 	void ScoreFromCoinsDelivered() {
-		score = score + (coins * scoreMultiplier);	
-		print("coins: " + coins + "scoreMultiplier" + scoreMultiplier)	;
+		score = score + (coins * FrogScoreMultiplier());
+		print("coins: " + coins + "scoreMultiplier" + FrogScoreMultiplier());
 		coins = 0;
 	}
 	
