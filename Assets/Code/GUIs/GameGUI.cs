@@ -20,10 +20,8 @@ public class GameGUI : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-		if (GameManager.Instance.IsPlaying()) {
-			DrawScore();
-		}
 		if (GameManager.Instance.IsCoopMode()) {
+			DrawScore();
 			DrawLives();
 			DrawTeamMultiplier();
 		} else {
