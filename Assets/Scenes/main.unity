@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b513725616ef4239a4dad715d1ce0f9, type: 1}
   m_Name: 
   mode: 1
-  competitiveModeScoreGoal: 20
+  competitiveModeScoreGoal: 2500
 --- !u!114 &683399640
 MonoBehaviour:
   m_ObjectHideFlags: 0
