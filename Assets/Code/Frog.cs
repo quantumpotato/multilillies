@@ -21,6 +21,9 @@ public class Frog : MonoBehaviour {
 	public delegate void RatingChangedHandler(Frog frog);
 	public event RatingChangedHandler RatingChanged;
 	
+	public delegate void ScoreChangedHandler(Frog frog);
+	public event ScoreChangedHandler ScoreChanged;
+	
 	public delegate void HitHandler(Frog frog, Enemy enemy);
 	public event HitHandler Hit;
 	
@@ -180,11 +183,14 @@ public class Frog : MonoBehaviour {
 	private GameObject floatExperienceCircle;
 	private GameObject fullFloatExperienceCircle;
 	
+	private bool alive;
+	
 	private enum MoveState {
 		Floating,
 		Charging,
 		Boosting,
-		Drifting
+		Drifting,
+		Idle
 	}
 	
 	private MoveState moveState;
@@ -200,6 +206,8 @@ public class Frog : MonoBehaviour {
 				return 0;
 			case MoveState.Drifting:
 				return 6;
+			case MoveState.Idle:
+				return 0;
 			default:
 				return 0;
 			}
@@ -236,6 +244,8 @@ public class Frog : MonoBehaviour {
 		pad = transform.FindChild("pad").gameObject;
 		
 		SetColor();
+		
+		alive = true;
 	}
 	
 	void Update () {
@@ -267,6 +277,14 @@ public class Frog : MonoBehaviour {
 		}
 		
 		return Frog.TeamScoreMultiplier;
+	}
+	
+	public bool IsAlive() {
+		return alive;
+	}
+	
+	public bool IsDead() {
+		return !alive;
 	}
 	
 	public void BeginDrifting() {
@@ -528,7 +546,14 @@ public class Frog : MonoBehaviour {
 	
 	void ScoreFromCoinsDelivered() {
 		score = score + (coins * FrogScoreMultiplier());
-		print("coins: " + coins + "scoreMultiplier" + FrogScoreMultiplier());
+		//print("coins: " + coins + "scoreMultiplier" + FrogScoreMultiplier());
+		
+		if (coins > 0) {
+			if (ScoreChanged != null) {
+				ScoreChanged(this);
+			}
+		}
+		
 		coins = 0;
 	}
 	
@@ -554,8 +579,11 @@ public class Frog : MonoBehaviour {
 				floatDirection = -floatDirection;
 			} else if (!FloatingNorthwards() && !CloserToNorthShore()) {
 				if (IsDrifting()) {
-					character.SetActiveRecursively(true);
-					moveState = MoveState.Floating;
+					if (GameManager.Instance.IsCoopMode()) {
+						WaitForRespawn();
+					} else if (GameManager.Instance.IsCompetitiveMode()) {
+						Respawn();
+					}
 				} else {
 					UpgradeFloating();
 				}
@@ -623,5 +651,19 @@ public class Frog : MonoBehaviour {
 				}
 			}
 		}
+	}
+	
+	public void Respawn() {
+		character.SetActiveRecursively(true);
+		pad.SetActiveRecursively(true);
+		moveState = MoveState.Floating;
+		alive = true;
+	}
+	
+	void WaitForRespawn() {
+		character.SetActiveRecursively(false);
+		pad.SetActiveRecursively(false);
+		moveState = MoveState.Idle;
+		alive = false;
 	}
 }

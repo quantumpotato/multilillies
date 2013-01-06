@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 	}
 	public GameMode mode;
 	
+	public int competitiveModeScoreGoal;
+	
 	#region MonoBehaviour
 	void Awake() {
 		Instance = this;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour {
 		PickUpSpawner.Instance.gameObject.SetActiveRecursively(false);
 		RuneManager.Instance.gameObject.SetActiveRecursively(false);
 		PlayerManager.Instance.FrogHit += HandleFrogHit;
+		PlayerManager.Instance.FrogScoreChanged += HandleFrogScoreChanged;
 	}
 	#endregion
 	
@@ -80,6 +83,12 @@ public class GameManager : MonoBehaviour {
 	
 	void HandleFrogHit(Frog frog, Enemy enemy) {
 		if (PlayerManager.Instance.Lives == 0) {
+			GameOver();
+		}
+	}
+	
+	void HandleFrogScoreChanged(Frog frog) {
+		if (IsCompetitiveMode() && frog.score >= competitiveModeScoreGoal) {
 			GameOver();
 		}
 	}
