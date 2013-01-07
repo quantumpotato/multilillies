@@ -20,6 +20,12 @@ public class GameGUI : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+		if (!GameManager.Instance.IsPlaying()) {
+			if (GUI.Button(new Rect(15, 200, 150, 40), "Mode: " + (GameManager.Instance.IsCompetitiveMode() ? "Competitive" : "Cooperative"))) {
+				GameManager.Instance.ToggleMode();
+			}
+		}
+		
 		if (GameManager.Instance.IsCoopMode()) {
 			DrawScore();
 			DrawLives();
